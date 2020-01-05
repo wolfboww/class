@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class CollisionController : MonoBehaviour
 {
+    private Animator anim;
     private Rigidbody2D rig;
     private MoveController ctr;
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         rig = GetComponent<Rigidbody2D>();
         ctr = GetComponent<MoveController>();
     }
@@ -19,7 +21,7 @@ public class CollisionController : MonoBehaviour
         {
             case "Enemy":
                 if (!IfBullet.bemask)
-                    Dead();
+                    Death();
                 break;
             case "Bounce":
                 if (!ctr.isJump)
@@ -36,11 +38,11 @@ public class CollisionController : MonoBehaviour
         switch (collision.transform.tag)
         {
             case "Trap":
-                if (!ctr.isJump)
-                    Dead();
+                //if (!ctr.isJump)
+                    Death();
                 break;
             case "Injurant":
-                Dead();
+                Death();
                 break;
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
@@ -60,9 +62,10 @@ public class CollisionController : MonoBehaviour
         }
     }
 
-    private void Dead()
+    private void Death()
     {
-        //播放死亡动画
-        transform.position = GameController.Instance.revivePoint.position;
+        anim.speed = 1;
+        anim.SetTrigger("Dead");
+        rig.constraints = RigidbodyConstraints2D.FreezePosition;
     }
 }

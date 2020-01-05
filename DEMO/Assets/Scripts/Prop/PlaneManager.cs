@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlaneManager : MonoBehaviour
 {
-
     private BoxCollider2D collider;
     // Start is called before the first frame update
     void Start()
@@ -12,15 +11,9 @@ public class PlaneManager : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.position.y - collision.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2 >= transform.position.y + collider.bounds.size.y / 2)
+        if (collision.transform.position.y >= transform.position.y + collider.bounds.extents.y)
             collider.isTrigger = false;
     }
 }

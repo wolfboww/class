@@ -7,6 +7,7 @@ public class MoveController : MonoBehaviour
     public float moveSpeed = 2;
     public float jumpForce = 200;
     public float bounceForce = 1;
+    public GameObject[] bullets;
 
     [HideInInspector]
     public bool isJump = false;
@@ -15,14 +16,13 @@ public class MoveController : MonoBehaviour
     private Transform groundCheck;
     private Rigidbody2D rig;
     private Animator anim;
+    private BoxCollider2D col;
+
+    private float time = 0;
+    private float checkRadius = 0.1f;
     private Vector3 Scale;
     private float scaleX;
-
-    public GameObject[] bullets;
-    int bulletIndex;
-    Timer timer;
-
-    float time = 0;
+    private int bulletIndex;
     void Start()
     {
         groundCheck = transform.Find("GroundCheck");
@@ -31,13 +31,18 @@ public class MoveController : MonoBehaviour
 
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        col = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         float H = Input.GetAxis("Horizontal");
-        anim.SetFloat("Speed", H);
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDead"))
+            anim.SetFloat("Speed", H);
+        else
+            H = 0;
+
         if (H != 0)
         {
             Scale.x = (H > 0 ? 1 : -1) * scaleX;
@@ -46,9 +51,20 @@ public class MoveController : MonoBehaviour
         }
 
         isJump = !Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Plane"));
+        //isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, LayerMask.NameToLayer("Plane"));
+
         anim.SetBool("Stand", !isJump);
         if (anim.GetBool("Stand") && anim.speed == 0)
             anim.speed = 1;
+
+        //Debug.DrawLine(transform.position, groundCheck.position, Color.red);
+        //Debug.DrawLine(transform.position +
+        //new Vector3(-col.bounds.extents.x, col.bounds.extents.y), groundCheck.position, Color.blue);
+        //Debug.DrawLine(transform.position +
+        //new Vector3(col.bounds.extents.x, col.bounds.extents.y), groundCheck.position, Color.white);
+        //Debug.DrawLine(transform.position +
+        //new Vector3(col.bounds.extents.x, col.bounds.extents.y), transform.position + new Vector3(-col.bounds.extents.x, col.bounds.extents.y), Color.yellow);
+
 
         if (!isJump)
         {
