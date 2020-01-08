@@ -57,8 +57,8 @@ public class PacMan : MonoBehaviour
             targetPos = pathPoint[index].position;
         }
 
-        if (GameController.Instance.player.transform.parent == transform)//判断主角被抓住
-            caught = true;
+        //判断主角被抓住
+        caught = GameController.Instance.player.transform.parent == transform ? true : false;
     }
 
     public void MoveDir(Dir dir)

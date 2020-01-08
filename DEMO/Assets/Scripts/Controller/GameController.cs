@@ -11,7 +11,8 @@ public class GameController : MonoBehaviour
     [HideInInspector]
     public GameObject player;
 
-    private int MapNumber = 0;
+    private int mapNumber = 0;
+    private Transform bulletsList;
     private Transform mask;
 
 
@@ -19,23 +20,30 @@ public class GameController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        bulletsList = transform.Find("BulletsList");
         mask = player.transform.Find("Mask");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Maps[MapNumber].transform.Find("StartPoint") != revivePoint)
-            revivePoint = Maps[MapNumber].transform.Find("StartPoint");
+        foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
+        {
+            if (bullet.transform.parent != bulletsList)
+                bullet.transform.SetParent(bulletsList);
+        }
     }
 
     public void ChangeMap()
     {
-        MapNumber++;
-        Maps[MapNumber].SetActive(true);
-        for (int i = 0; i < Maps[MapNumber].transform.Find("Boundary").childCount; i++)
+        mapNumber++;
+        Maps[mapNumber].SetActive(true);
+        Maps[mapNumber - 1].SetActive(false);
+        for (int i = 0; i < Maps[mapNumber].transform.Find("Boundary").childCount; i++)
             Camera.main.GetComponent<CameraController>().boundary[i]
-                = Maps[MapNumber].transform.Find("Boundary").GetChild(i);
+                = Maps[mapNumber].transform.Find("Boundary").GetChild(i);
+        revivePoint = Maps[mapNumber].transform.Find("StartPoint");
     }
 
     public void Mask(bool be, Sprite sprite)
@@ -49,7 +57,10 @@ public class GameController : MonoBehaviour
         if (be)
             mask.gameObject.AddComponent<PolygonCollider2D>();
         else
+        {
             Destroy(mask.GetComponent<PolygonCollider2D>());
+            player.transform.eulerAngles = Vector3.zero;
+        }
     }
 
     public static GameController _instance;

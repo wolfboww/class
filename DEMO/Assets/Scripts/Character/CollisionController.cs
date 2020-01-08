@@ -39,7 +39,7 @@ public class CollisionController : MonoBehaviour
         {
             case "Trap":
                 //if (!ctr.isJump)
-                    Death();
+                Death();
                 break;
             case "Injurant":
                 Death();
@@ -47,10 +47,7 @@ public class CollisionController : MonoBehaviour
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 if (collision.gameObject == ColliNameManager.Instance.Art)
-                {
-                    ColliNameManager.Instance.MapPacMan.GetComponent<Animator>().SetTrigger("Open");
                     ColliNameManager.Instance.MapPacMan.GetComponent<PacMan>().speed = 10;//给吃豆人速度
-                }
                 break;
             case "Boundary":
                 GameController.Instance.ChangeMap();
@@ -58,7 +55,6 @@ public class CollisionController : MonoBehaviour
                     if (!item.activeInHierarchy)
                         item.gameObject.SetActive(true);
                 break;
-
         }
     }
 
@@ -66,6 +62,6 @@ public class CollisionController : MonoBehaviour
     {
         anim.speed = 1;
         anim.SetTrigger("Dead");
-        rig.constraints = RigidbodyConstraints2D.FreezePosition;
+        rig.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }

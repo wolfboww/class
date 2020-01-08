@@ -22,6 +22,7 @@ public class Bean : MonoBehaviour
             if (ColliNameManager.Instance.MapPacMan.GetComponent<PacMan>().caught)
             {
                 GameController.Instance.ChangeMap();
+                GameController.Instance.player.transform.SetParent(null);
                 GameController.Instance.player.transform.position
                     = GameController.Instance.revivePoint.position;
             }
@@ -42,4 +43,5 @@ public class Bean : MonoBehaviour
         }
         return true;
     }
+
 }

@@ -15,6 +15,10 @@ public class BulletController : MonoBehaviour
     {
         dir = transform.parent.parent.localScale.x > 0 ? Vector2.right : Vector2.left;
         transform.parent.DetachChildren();
+
+        Vector3 scale = transform.localScale;
+        scale.x *= scale.x > 0 ? 1 : -1;
+        transform.localScale = scale;
     }
 
     void Update()
