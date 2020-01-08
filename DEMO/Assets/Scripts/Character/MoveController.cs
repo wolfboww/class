@@ -19,7 +19,7 @@ public class MoveController : MonoBehaviour
     private BoxCollider2D col;
 
     private float time = 0;
-    private float checkRadius = 0.1f;
+    private float checkRadius = 0.5f;
     private Vector3 Scale;
     private float scaleX;
     private int bulletIndex;
@@ -50,21 +50,10 @@ public class MoveController : MonoBehaviour
             transform.Translate(new Vector2(H, 0) * Time.deltaTime * moveSpeed);
         }
 
-        isJump = !Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Plane"));
-        //isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, LayerMask.NameToLayer("Plane"));
-
+        isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
         anim.SetBool("Stand", !isJump);
         if (anim.GetBool("Stand") && anim.speed == 0)
             anim.speed = 1;
-
-        //Debug.DrawLine(transform.position, groundCheck.position, Color.red);
-        //Debug.DrawLine(transform.position +
-        //new Vector3(-col.bounds.extents.x, col.bounds.extents.y), groundCheck.position, Color.blue);
-        //Debug.DrawLine(transform.position +
-        //new Vector3(col.bounds.extents.x, col.bounds.extents.y), groundCheck.position, Color.white);
-        //Debug.DrawLine(transform.position +
-        //new Vector3(col.bounds.extents.x, col.bounds.extents.y), transform.position + new Vector3(-col.bounds.extents.x, col.bounds.extents.y), Color.yellow);
-
 
         if (!isJump)
         {
