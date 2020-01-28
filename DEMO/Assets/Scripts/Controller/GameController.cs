@@ -6,7 +6,7 @@ public class GameController : MonoBehaviour
 {
     public GameObject[] Maps;
 
-    [HideInInspector]
+    //[HideInInspector]
     public Transform revivePoint;
     [HideInInspector]
     public GameObject player;

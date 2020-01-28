@@ -17,7 +17,7 @@ public class RotateButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rotate && rotateObj.localEulerAngles.z <= 20)
+        if (rotate && rotateObj.localEulerAngles.z <= 30)
             rotateObj.Rotate(Vector3.forward, 22 * Time.deltaTime);
     }
 
