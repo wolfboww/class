@@ -10,6 +10,9 @@ public class ColliNameManager : MonoBehaviour
     //收集品
     public GameObject Art;
 
+    //Button
+    public GameObject DesTrapButton;
+    public GameObject RotateButton;
 
     /// ////////////////////
     public static ColliNameManager _instance;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Plat : MonoBehaviour
+public class Translate : MonoBehaviour
 {
     public float moveSpeed = 1f;
     private Vector3 moveto;

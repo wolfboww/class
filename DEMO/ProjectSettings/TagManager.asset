@@ -14,6 +14,7 @@ TagManager:
   - Mask
   - Injurant
   - Boundary
+  - Button
   layers:
   - Default
   - TransparentFX

@@ -30,6 +30,12 @@ public class CollisionController : MonoBehaviour
                     rig.AddForce(Vector2.up * ctr.jumpForce);
                 }
                 break;
+            case "Button":
+                if (collision.gameObject == ColliNameManager.Instance.RotateButton)
+                    collision.transform.GetComponent<Rotate>().enabled = true;
+                else if (collision.gameObject == ColliNameManager.Instance.DesTrapButton)
+                    collision.gameObject.GetComponentInChildren<DestroyController>().enabled = true;
+                break;
         }
     }
 
@@ -38,8 +44,14 @@ public class CollisionController : MonoBehaviour
         switch (collision.transform.tag)
         {
             case "Trap":
-                //if (!ctr.isJump)
-                Death();
+                if (!ctr.isJump)
+                    Death();
+                else    //被踩蘑菇
+                {
+                    Animator eAnim = collision.gameObject.GetComponent<Animator>();
+                    eAnim.SetTrigger("Dead");
+                    collision.GetComponent<DestroyController>().enabled = true;
+                }
                 break;
             case "Injurant":
                 Death();
