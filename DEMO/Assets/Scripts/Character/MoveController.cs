@@ -43,7 +43,7 @@ public class MoveController : MonoBehaviour
         else
             H = 0;
 
-        if (H != 0)
+        if (!H.Equals(0))
         {
             Scale.x = (H > 0 ? 1 : -1) * scaleX;
             transform.localScale = Scale;
@@ -58,35 +58,48 @@ public class MoveController : MonoBehaviour
         if (!isJump)
         {
             anim.ResetTrigger("Jump");
-            anim.ResetTrigger("JumpDouble");
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            anim.SetTrigger("Jump");
             if (!isJump)
             {
-                anim.SetTrigger("Jump");
-                rig.AddForce(Vector2.up * jumpForce);
+                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
+                anim.SetFloat("JumpState", 1);
                 isDoubleJump = false;
                 isJump = true;
             }
-            else
+            else if (!isDoubleJump)
             {
-                if (isDoubleJump)
-                    return;
-                else
-                {
-                    anim.speed = 1;
-                    anim.SetTrigger("JumpDouble");
-                    isDoubleJump = true;
-                    rig.AddForce(Vector2.up * jumpForce * 0.5f);
-                }
+                anim.speed = 1;
+                isDoubleJump = true;
+                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
+                anim.SetFloat("JumpState", 2);
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
-            anim.SetTrigger("Shoot");
+        if (Input.GetMouseButtonDown(0))    // 射击and跳射
+        {
+            if (anim.GetBool("GetGun") &&
+                anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.PlayerJump"))
+            {
+                anim.SetFloat("JumpState", 0);
+                gameObject.GetComponent<AnimatorController>().Shoot();
+            }
+            else
+                anim.SetTrigger("Shoot");
+        }
         else if (Input.GetMouseButtonUp(0))
+        {
             anim.ResetTrigger("Shoot");
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.PlayerJump"))
+            {
+                if (!isDoubleJump)
+                    anim.SetFloat("JumpState", 1);
+                else
+                    anim.SetFloat("JumpState", 2);
+            }
+        }
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0)//换弹
         {
