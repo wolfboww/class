@@ -52,54 +52,7 @@ public class MoveController : MonoBehaviour
 
         isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
         anim.SetBool("Stand", !isJump);
-        if (anim.GetBool("Stand") && anim.speed == 0)
-            anim.speed = 1;
-
-        if (!isJump)
-        {
-            anim.ResetTrigger("Jump");
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            anim.SetTrigger("Jump");
-            if (!isJump)
-            {
-                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
-                anim.SetFloat("JumpState", 1);
-                isDoubleJump = false;
-                isJump = true;
-            }
-            else if (!isDoubleJump)
-            {
-                anim.speed = 1;
-                isDoubleJump = true;
-                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
-                anim.SetFloat("JumpState", 2);
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0))    // 射击and跳射
-        {
-            if (anim.GetBool("GetGun") &&
-                anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.PlayerJump"))
-            {
-                anim.SetFloat("JumpState", 0);
-                gameObject.GetComponent<AnimatorController>().Shoot();
-            }
-            else
-                anim.SetTrigger("Shoot");
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            anim.ResetTrigger("Shoot");
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.PlayerJump"))
-            {
-                if (!isDoubleJump)
-                    anim.SetFloat("JumpState", 1);
-                else
-                    anim.SetFloat("JumpState", 2);
-            }
-        }
+        JumpController();
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0)//换弹
         {
@@ -123,6 +76,46 @@ public class MoveController : MonoBehaviour
                 BeNotMask();
         }
     }
+
+    public void JumpController()  //跳跃and射击
+    {
+        if (!isJump)
+        {
+            anim.ResetTrigger("Jump");
+            anim.ResetTrigger("DoubleJump");
+            isDoubleJump = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            anim.SetTrigger("Jump");
+            if (!isJump)
+            {
+                isJump = true;
+                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
+            }
+            else if (!isDoubleJump)
+            {
+                isDoubleJump = true;
+                anim.SetTrigger("DoubleJump");
+                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0))    // 射击and跳射
+        {
+            if (anim.GetBool("GetGun"))
+            {
+                anim.SetFloat("Shoot", 1);
+                gameObject.GetComponent<AnimatorController>().Shoot();
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            anim.SetFloat("Shoot", 0);
+        }
+
+    }
+
     public void Nextbullet()//下一个武器
     {
         bulletIndex++;

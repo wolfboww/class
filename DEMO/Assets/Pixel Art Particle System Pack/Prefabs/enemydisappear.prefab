@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 198000013114811210}
   - component: {fileID: 199000010752757458}
   - component: {fileID: 5709579597722579925}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: enemydisappear
   m_TagString: Bullet
   m_Icon: {fileID: 0}

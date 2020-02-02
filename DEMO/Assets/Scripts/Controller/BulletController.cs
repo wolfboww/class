@@ -13,8 +13,7 @@ public class BulletController : MonoBehaviour
     public GameObject prefabpartical;
     void Start()
     {
-        dir = transform.parent.parent.localScale.x > 0 ? Vector2.right : Vector2.left;
-        transform.parent.DetachChildren();
+        dir = GameController.Instance.player.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
 
         Vector3 scale = transform.localScale;
         scale.x *= scale.x > 0 ? 1 : -1;
@@ -36,7 +35,7 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Instantiate(prefabpartical,gameObject.transform.position,gameObject.transform.rotation);
+        Instantiate(prefabpartical, gameObject.transform.position, gameObject.transform.rotation);
         col = true;
     }
 }

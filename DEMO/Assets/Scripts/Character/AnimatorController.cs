@@ -23,11 +23,6 @@ public class AnimatorController : MonoBehaviour
         Instantiate(bullet, weaponPoint);
     }
 
-    public void AnimSpeed(float speed)
-    {
-        anim.speed = speed;
-    }
-
     public void Dead()
     {
         anim.ResetTrigger("Dead");
