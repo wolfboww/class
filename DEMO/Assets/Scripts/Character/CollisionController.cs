@@ -36,6 +36,9 @@ public class CollisionController : MonoBehaviour
                 else if (collision.gameObject == ColliNameManager.Instance.DesTrapButton)
                     collision.gameObject.GetComponentInChildren<DestroyController>().enabled = true;
                 break;
+            case "Bullet":
+                Death();
+                break;
         }
     }
 
@@ -59,7 +62,7 @@ public class CollisionController : MonoBehaviour
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 if (collision.gameObject == ColliNameManager.Instance.Art)
-                    ColliNameManager.Instance.MapPacMan.GetComponent<PacMan>().speed = 10;//给吃豆人速度
+                    ColliNameManager.Instance.MapPacMan.GetComponent<PacMan>().speed = 5;//给吃豆人速度
                 break;
             case "Boundary":
                 GameController.Instance.ChangeMap();
