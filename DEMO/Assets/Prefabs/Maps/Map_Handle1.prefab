@@ -217,11 +217,10 @@ GameObject:
   - component: {fileID: 2774919872551819812}
   - component: {fileID: 2774919872551819808}
   - component: {fileID: 2774919872551819815}
-  - component: {fileID: 2774919872551819814}
   - component: {fileID: 2774919872551819813}
   m_Layer: 0
   m_Name: "\u67AA\u9053\u5177"
-  m_TagString: Untagged
+  m_TagString: Collection
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -298,7 +297,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -342,18 +341,6 @@ PolygonCollider2D:
       - {x: -0.89, y: -1.4599999}
       - {x: -0.87, y: -1.05}
       - {x: -0.37, y: -0.44}
---- !u!114 &2774919872551819814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2774919872551819819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f62ea363c1a6141b9fccf6a83d28a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2774919872551819813
 MonoBehaviour:
   m_ObjectHideFlags: 0

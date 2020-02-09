@@ -7,7 +7,7 @@ public class MoveController : MonoBehaviour
     public float moveSpeed = 2;
     public float jumpForce = 200;
     public float bounceForce = 1;
-    public GameObject[] bullets;
+    public List<GameObject> bullets;
 
     [HideInInspector]
     public bool isJump = false;
@@ -113,13 +113,12 @@ public class MoveController : MonoBehaviour
         {
             anim.SetFloat("Shoot", 0);
         }
-
     }
 
     public void Nextbullet()//下一个武器
     {
         bulletIndex++;
-        if (bulletIndex > bullets.Length - 1)
+        if (bulletIndex > bullets.Count - 1)
             bulletIndex = 0;
         SetActivebullet(bulletIndex);
     }
@@ -128,12 +127,13 @@ public class MoveController : MonoBehaviour
     {
         bulletIndex--;
         if (bulletIndex < 0)
-            bulletIndex = bullets.Length - 1;
+            bulletIndex = bullets.Count - 1;
         SetActivebullet(bulletIndex);
     }
     public void SetActivebullet(int i)//设置子弹
     {
-        GetComponent<AnimatorController>().bullet = bullets[i];
+        if (!bullets.Equals(0))
+            GetComponent<AnimatorController>().bullet = bullets[i];
     }
     public void BeNotMask()
     {

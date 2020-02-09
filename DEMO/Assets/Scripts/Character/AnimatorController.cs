@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AnimatorController : MonoBehaviour
 {
+    [HideInInspector]
     public GameObject bullet;
 
     private Animator anim;
@@ -20,7 +21,8 @@ public class AnimatorController : MonoBehaviour
 
     public void Shoot()
     {
-        Instantiate(bullet, weaponPoint);
+        if (bullet)
+            Instantiate(bullet, weaponPoint);
     }
 
     public void Dead()

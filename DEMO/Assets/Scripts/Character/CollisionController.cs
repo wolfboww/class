@@ -63,6 +63,11 @@ public class CollisionController : MonoBehaviour
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 if (collision.gameObject == ColliNameManager.Instance.Art)
                     ColliNameManager.Instance.MapPacMan.GetComponent<PacMan>().speed = 5;//给吃豆人速度
+                else if (collision.gameObject == ColliNameManager.Instance.Gun)
+                {
+                    GetComponent<Animator>().SetBool("GetGun", true);
+                    GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.ElseBullet);
+                }
                 break;
             case "Boundary":
                 GameController.Instance.ChangeMap();

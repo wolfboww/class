@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class ColliNameManager : MonoBehaviour
 {
-    //GameObject
+    [Header("GameObject")]
+    public GameObject Gun;
+    public GameObject Art;
     public GameObject MapPacMan;
 
-    //收集品
-    public GameObject Art;
-
-    //Button
+    [Header("Button")]
     public GameObject DesTrapButton;
     public GameObject RotateButton;
+
+    [Header("Bullet")]
+    public GameObject ElseBullet;
+    public GameObject IfBullet;
 
     /// ////////////////////
     public static ColliNameManager _instance;
