@@ -16,7 +16,6 @@ public class MoveController : MonoBehaviour
     private Transform groundCheck;
     private Rigidbody2D rig;
     private Animator anim;
-    private BoxCollider2D col;
 
     private float time = 0;
     private float checkRadius = 0.5f;
@@ -31,7 +30,6 @@ public class MoveController : MonoBehaviour
 
         rig = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        col = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -54,17 +52,6 @@ public class MoveController : MonoBehaviour
         anim.SetBool("Stand", !isJump);
         JumpController();
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)//换弹
-        {
-            //UI
-            Nextbullet();
-        }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            //UI
-            Previousbullet();
-        }
-
         if (Input.GetMouseButtonDown(1))//取消伪装
         {
             BeNotMask();
@@ -75,6 +62,17 @@ public class MoveController : MonoBehaviour
             if (time >= 3)
                 BeNotMask();
         }
+
+        if (!Input.GetAxis("Mouse ScrollWheel").Equals(0))
+        {
+            bulletIndex = Input.GetAxis("Mouse ScrollWheel") > 0 ? bulletIndex + 1 : bulletIndex - 1;
+            if (bulletIndex > bullets.Count - 1)
+                bulletIndex = 0;
+            if (bulletIndex < 0)
+                bulletIndex = bullets.Count - 1;
+        }
+        if (bullets.Count != 0)
+            GetComponent<AnimatorController>().bullet = bullets[bulletIndex];
     }
 
     public void JumpController()  //跳跃and射击
@@ -115,26 +113,6 @@ public class MoveController : MonoBehaviour
         }
     }
 
-    public void Nextbullet()//下一个武器
-    {
-        bulletIndex++;
-        if (bulletIndex > bullets.Count - 1)
-            bulletIndex = 0;
-        SetActivebullet(bulletIndex);
-    }
-
-    public void Previousbullet()//上一个武器
-    {
-        bulletIndex--;
-        if (bulletIndex < 0)
-            bulletIndex = bullets.Count - 1;
-        SetActivebullet(bulletIndex);
-    }
-    public void SetActivebullet(int i)//设置子弹
-    {
-        if (!bullets.Equals(0))
-            GetComponent<AnimatorController>().bullet = bullets[i];
-    }
     public void BeNotMask()
     {
         GameController.Instance.Mask(false, null);

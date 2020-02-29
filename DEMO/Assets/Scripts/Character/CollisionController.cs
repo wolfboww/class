@@ -35,8 +35,18 @@ public class CollisionController : MonoBehaviour
                     collision.transform.GetComponent<Rotate>().enabled = true;
                 else if (collision.gameObject == ColliNameManager.Instance.DesTrapButton)
                     collision.gameObject.GetComponentInChildren<DestroyController>().enabled = true;
+                else
+                {
+                    foreach (var item in ColliNameManager.Instance.AnimBoundary)
+                    {
+                        if (collision.gameObject == item)
+                            collision.gameObject.GetComponent<Animator>().SetTrigger("Do");
+                    }
+                }
                 break;
             case "Bullet":
+                if (collision.gameObject.GetComponent<BulletController>().playerBullet)
+                    return;
                 Death();
                 break;
         }
@@ -62,7 +72,10 @@ public class CollisionController : MonoBehaviour
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 if (collision.gameObject == ColliNameManager.Instance.Art)
+                {
                     ColliNameManager.Instance.MapPacMan.GetComponent<PacMan>().speed = 5;//给吃豆人速度
+                    GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
+                }
                 else if (collision.gameObject == ColliNameManager.Instance.Gun)
                 {
                     GetComponent<Animator>().SetBool("GetGun", true);

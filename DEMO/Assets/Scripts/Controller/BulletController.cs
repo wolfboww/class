@@ -6,6 +6,7 @@ public class BulletController : MonoBehaviour
 {
     public float speed;
     public float desTime;
+    public bool playerBullet = false;
 
     private Vector2 dir = Vector2.right;
     private bool col = false;

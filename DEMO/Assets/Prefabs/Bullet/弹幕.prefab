@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1103514936516570203}
   - component: {fileID: 3927720850185740832}
   - component: {fileID: 4417890223586469816}
+  - component: {fileID: 6170197214686201280}
+  - component: {fileID: 4643443721559309799}
   m_Layer: 10
   m_Name: "\u5F39\u5E55"
   m_TagString: Bullet
@@ -28,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5142345806913478924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,12 +98,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!61 &4417890223586469816
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,12 +121,42 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.02, y: 0.12}
+    oldSize: {x: 0.12, y: 0.02}
     newSize: {x: 0.02, y: 0.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.12}
+  m_Size: {x: 0.12, y: 0.02}
   m_EdgeRadius: 0
+--- !u!114 &6170197214686201280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5142345806913478924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d364f90ff0ca7409e59b959329a5da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  desTime: 4
+  playerBullet: 0
+  prefabpartical: {fileID: 0}
+--- !u!114 &4643443721559309799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5142345806913478924}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9b02bb54388ca458f1690283e22957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desTime: 0
+  prefabpartical: {fileID: 0}

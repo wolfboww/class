@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public Transform revivePoint;
     [HideInInspector]
     public GameObject player;
-
+    
     private int mapNumber = 0;
     private Transform bulletsList;
     private Transform mask;
@@ -22,7 +22,9 @@ public class GameController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         bulletsList = transform.Find("BulletsList");
         mask = player.transform.Find("Mask");
-
+        //ChangeMap();
+        //ChangeMap();
+        player.transform.position = revivePoint.position;
     }
 
     // Update is called once per frame
@@ -55,7 +57,10 @@ public class GameController : MonoBehaviour
         mask.GetComponent<SpriteRenderer>().sprite = sprite;
 
         if (be)
+        {
             mask.gameObject.AddComponent<PolygonCollider2D>();
+            player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        }
         else
         {
             Destroy(mask.GetComponent<PolygonCollider2D>());

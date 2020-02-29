@@ -121,8 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d364f90ff0ca7409e59b959329a5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 40
   desTime: 4
+  playerBullet: 0
   prefabpartical: {fileID: 1000012657451766, guid: 4451d4c0de3db0346b0ac628f0c87e4a,
     type: 3}
 --- !u!114 &2994336653250323056

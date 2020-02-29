@@ -124,6 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   desTime: 4
+  playerBullet: 1
   prefabpartical: {fileID: 1000012657451766, guid: 4451d4c0de3db0346b0ac628f0c87e4a,
     type: 3}
 --- !u!114 &3893124741400417998

@@ -8,6 +8,7 @@ public class ColliNameManager : MonoBehaviour
     public GameObject Gun;
     public GameObject Art;
     public GameObject MapPacMan;
+    public GameObject[] AnimBoundary;
 
     [Header("Button")]
     public GameObject DesTrapButton;

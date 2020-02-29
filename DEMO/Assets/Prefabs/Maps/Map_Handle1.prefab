@@ -2549,7 +2549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2774919872968108587}
-  - component: {fileID: 2774919872968108580}
+  - component: {fileID: 329858351}
   m_Layer: 0
   m_Name: 2
   m_TagString: Untagged
@@ -2571,7 +2571,7 @@ Transform:
   m_Father: {fileID: 2774919874199542629}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
---- !u!114 &2774919872968108580
+--- !u!114 &329858351
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2580,13 +2580,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2774919872968108586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3c4f88a68ef4c2f9347ee6e78fe811, type: 3}
+  m_Script: {fileID: 11500000, guid: c629888712e56824b8f86624b0941551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabbullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b,
-    type: 3}
-  fireRate: 0.5
-  speed: 1
+  bullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b, type: 3}
+  speed: 0.5
 --- !u!1 &2774919872969472872
 GameObject:
   m_ObjectHideFlags: 0
@@ -7881,7 +7879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2774919874026162031}
-  - component: {fileID: 2774919874026162024}
+  - component: {fileID: 40286789}
   m_Layer: 0
   m_Name: 3
   m_TagString: Untagged
@@ -7903,7 +7901,7 @@ Transform:
   m_Father: {fileID: 2774919874199542629}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
---- !u!114 &2774919874026162024
+--- !u!114 &40286789
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7912,13 +7910,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2774919874026162030}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3c4f88a68ef4c2f9347ee6e78fe811, type: 3}
+  m_Script: {fileID: 11500000, guid: c629888712e56824b8f86624b0941551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabbullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b,
-    type: 3}
-  fireRate: 0.5
-  speed: 1
+  bullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b, type: 3}
+  speed: 0.5
 --- !u!1 &2774919874033209702
 GameObject:
   m_ObjectHideFlags: 0
@@ -11434,7 +11430,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2774919874491176825}
-  - component: {fileID: 2774919874491176826}
+  - component: {fileID: 764920311}
   m_Layer: 0
   m_Name: 1
   m_TagString: Untagged
@@ -11456,7 +11452,7 @@ Transform:
   m_Father: {fileID: 2774919874199542629}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -135}
---- !u!114 &2774919874491176826
+--- !u!114 &764920311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11465,13 +11461,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2774919874491176824}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe3c4f88a68ef4c2f9347ee6e78fe811, type: 3}
+  m_Script: {fileID: 11500000, guid: c629888712e56824b8f86624b0941551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabbullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b,
-    type: 3}
-  fireRate: 0.5
-  speed: 1
+  bullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b, type: 3}
+  speed: 0.5
 --- !u!1 &2774919874495027044
 GameObject:
   m_ObjectHideFlags: 0
