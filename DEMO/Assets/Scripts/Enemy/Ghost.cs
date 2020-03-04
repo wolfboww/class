@@ -12,7 +12,7 @@ public class Ghost : MonoBehaviour
 
     public float ghostType;
     public bool canDead;
-    //[HideInInspector]
+    [HideInInspector]
     public Status status = Status.Die;
 
     private AIPath aiPath;
@@ -21,6 +21,7 @@ public class Ghost : MonoBehaviour
     private int dir = 0;
     private int life;
     private int iNum;
+    private float reBackTime = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,8 @@ public class Ghost : MonoBehaviour
     {
         if (life <= 0 && canDead)
             status = Status.Die;
+        else if (life < 3 && !canDead)
+            status = Status.Escape;
 
         StatusController();
         MoveDir();
@@ -49,6 +52,7 @@ public class Ghost : MonoBehaviour
                 GetComponent<AIPath>().enabled = true;
                 break;
             case Status.Escape:
+                StartCoroutine(Escape());
                 break;
             case Status.Die:
                 GetComponent<AIPath>().enabled = false;
@@ -80,6 +84,38 @@ public class Ghost : MonoBehaviour
 
         GetComponent<SpriteRenderer>().flipX = dir == 1 ? true : false;
         anim.SetInteger("Dir", dir);
+    }
+
+    IEnumerator Escape()
+    {
+        yield return GetComponent<AIDestinationSetter>().target = EscapePos();
+        life = GhostManager.ghostLife;
+        status = Status.Attack;
+        yield return new WaitForSeconds(reBackTime);
+        yield return GetComponent<AIDestinationSetter>().target
+            = GameController.Instance.player.transform;
+        StopCoroutine(Escape());
+    }
+
+    private Transform EscapePos()
+    {
+        float[] distance = new float[4];
+        for (int i = 0; i < distance.Length; i++)
+            distance[i] = Vector2.Distance(transform.position,
+                GhostManager.Instance.escapePos[i].position);
+
+        int index = 0;
+        float maxDis = distance[0];
+        for (int i = 0; i < distance.Length; i++)
+        {
+            if (distance[i] > maxDis)
+            {
+                maxDis = distance[i];
+                index = i;
+            }
+        }
+
+        return GhostManager.Instance.escapePos[index];
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

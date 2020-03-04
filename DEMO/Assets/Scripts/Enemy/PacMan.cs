@@ -11,10 +11,10 @@ public class PacMan : MonoBehaviour
     public Transform path;
     public float speed;
 
+    private int pathLength = 18;
     private Dir dir = Dir.right;
     private Transform[] pathPoint;
 
-    private int index;
     private Vector3 originPos;
     private Vector3 targetPos;
 
@@ -22,13 +22,12 @@ public class PacMan : MonoBehaviour
 
     void Start()
     {
-        pathPoint = new Transform[path.childCount];
-        for (int i = 0; i < pathPoint.Length; i++)
+        pathPoint = new Transform[pathLength];
+        for (int i = 0; i < pathLength; i++)
         {
             pathPoint[i] = path.GetChild(i);
         }
 
-        index = 0;
         originPos = transform.position;
         targetPos = pathPoint[0].position;
     }
@@ -39,26 +38,26 @@ public class PacMan : MonoBehaviour
 
         MoveDir(dir);
 
-        if (index < pathPoint.Length)
-        {
-            if (Vector3.Distance(transform.position, pathPoint[index].position) > 0.1f)
-                transform.position = Vector3.MoveTowards(transform.position, pathPoint[index].position, speed * Time.deltaTime);
-            else
-            {
-                index++;
-                originPos = pathPoint[index - 1].position;
-                targetPos = pathPoint[index].position;
-            }
-        }
-        else
-        {
-            index = 0;
-            originPos = pathPoint[pathPoint.Length - 1].position;
-            targetPos = pathPoint[index].position;
-        }
+        //if (index < pathPoint.Length)
+        //{
+        //    if (Vector3.Distance(transform.position, pathPoint[index].position) > 0.1f)
+        //        transform.position = Vector3.MoveTowards(transform.position, pathPoint[index].position, speed * Time.deltaTime);
+        //    else
+        //    {
+        //        index++;
+        //        originPos = pathPoint[index - 1].position;
+        //        targetPos = pathPoint[index].position;
+        //    }
+        //}
+        //else
+        //{
+        //    index = 0;
+        //    originPos = pathPoint[pathPoint.Length - 1].position;
+        //    targetPos = pathPoint[index].position;
+        //}
 
         //判断主角被抓住
-        caught = GameController.Instance.player.transform.parent == transform ? true : false;
+        caught = GameController.Instance.player.transform.parent == transform.GetChild(0) ? true : false;
     }
 
     public void MoveDir(Dir dir)
@@ -71,22 +70,19 @@ public class PacMan : MonoBehaviour
         switch (dir)
         {
             case Dir.up:
-                transform.localEulerAngles = new Vector3(0, 0, 90);
-                GetComponent<SpriteRenderer>().flipX = false;
+                transform.GetChild(0).localEulerAngles = new Vector3(0, 0, 90);
                 break;
             case Dir.down:
-                transform.localEulerAngles = new Vector3(0, 0, -90);
-                GetComponent<SpriteRenderer>().flipX = false;
+                transform.GetChild(0).localEulerAngles = new Vector3(0, 0, -90);
                 break;
             case Dir.left:
-                transform.localEulerAngles = Vector3.zero;
-                GetComponent<SpriteRenderer>().flipX = true;
+                transform.GetChild(0).localEulerAngles = Vector3.zero;
                 break;
             case Dir.right:
-                transform.localEulerAngles = Vector3.zero;
-                GetComponent<SpriteRenderer>().flipX = false;
+                transform.GetChild(0).localEulerAngles = Vector3.zero;
                 break;
         }
+        GetComponentInChildren<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -96,7 +92,7 @@ public class PacMan : MonoBehaviour
         else if (collision.transform.tag == "Player")
         {
             if (collision.transform.Find("Mask").GetComponent<SpriteRenderer>().sprite != null)
-                collision.transform.SetParent(transform);
+                collision.transform.SetParent(transform.GetChild(0));
         }
     }
 }

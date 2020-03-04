@@ -11,26 +11,28 @@ public class GhostManager : MonoBehaviour
         public bool isUsed;
         public float timer;
     }
+
+    [HideInInspector]
+    public static int ghostLife = 3;
     [HideInInspector]
     public GPos[] initialPos = new GPos[3];
     [HideInInspector]
-    public static int ghostLife = 3;
-    public GameObject enemy;
+    public Transform[] escapePos = new Transform[4];
     public float reBornTime;
-
-    private GameObject[] gObj = new GameObject[3];
 
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < 3; i++)
         {
-            gObj[i] = enemy.transform.GetChild(0).gameObject;
             initialPos[i].number = i;
             initialPos[i].pos = transform.GetChild(i);
             initialPos[i].isUsed = false;
             initialPos[i].timer = -1;
         }
+
+        for (int i = 0; i < 4; i++)
+            escapePos[i] = transform.GetChild(3).GetChild(i);
     }
 
     // Update is called once per frame
@@ -40,7 +42,7 @@ public class GhostManager : MonoBehaviour
         {
             int i = item.number;
             if (initialPos[i].timer >= 0 && initialPos[i].timer < reBornTime)
-                initialPos[i].timer += 0.1f;
+                initialPos[i].timer += Time.deltaTime;
             else if (initialPos[i].timer >= reBornTime)
                 initialPos[i].isUsed = false;
         }
