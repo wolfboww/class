@@ -21,14 +21,12 @@ public class Ghost : MonoBehaviour
     private int dir = 0;
     private int life;
     private int iNum;
-    private float reBackTime = 3;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         aiPath = GetComponent<AIPath>();
-        anim.SetFloat("Type", ghostType);
         life = GhostManager.ghostLife;
     }
 
@@ -40,6 +38,7 @@ public class Ghost : MonoBehaviour
         else if (life < 3 && !canDead)
             status = Status.Escape;
 
+        anim.SetFloat("Type", ghostType);
         StatusController();
         MoveDir();
     }
@@ -91,7 +90,7 @@ public class Ghost : MonoBehaviour
         yield return GetComponent<AIDestinationSetter>().target = EscapePos();
         life = GhostManager.ghostLife;
         status = Status.Attack;
-        yield return new WaitForSeconds(reBackTime);
+        yield return new WaitForSeconds(GhostManager.Instance.reBackTime);
         yield return GetComponent<AIDestinationSetter>().target
             = GameController.Instance.player.transform;
         StopCoroutine(Escape());

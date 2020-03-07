@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Bean : MonoBehaviour
 {
+    private PacMan pacMan;
     private GameObject[] beans;
 
     void Start()
     {
+        pacMan = ColliNameManager.Instance.MapPacMan.GetComponentInChildren<PacMan>();
         beans = new GameObject[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -19,19 +21,18 @@ public class Bean : MonoBehaviour
     {
         if (ActiveBean())
         {
-            if (ColliNameManager.Instance.MapPacMan.GetComponent<PacMan>().caught)
-            {
-                GameController.Instance.ChangeMap();
-                GameController.Instance.player.transform.SetParent(null);
-                GameController.Instance.player.transform.position
-                    = GameController.Instance.revivePoint.position;
-            }
-            else
-            {
-                foreach (var item in beans)
-                    item.SetActive(true);
-            }
+            GameController.Instance.ChangeMap();
+            GameController.Instance.player.transform.SetParent(null);
+            GameController.Instance.player.transform.position
+                = GameController.Instance.revivePoint.position;
         }
+    }
+
+    public void ReStart()
+    {
+        foreach (var item in beans)
+            item.SetActive(true);
+        pacMan.InitialBean();
     }
 
     private bool ActiveBean()

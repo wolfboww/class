@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Pathfinding;
 public class CollisionController : MonoBehaviour
 {
     private Animator anim;
@@ -73,7 +73,7 @@ public class CollisionController : MonoBehaviour
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 if (collision.gameObject == ColliNameManager.Instance.Art)
                 {
-                    ColliNameManager.Instance.MapPacMan.GetComponent<PacMan>().speed = 5;//给吃豆人速度
+                    ColliNameManager.Instance.MapPacMan.GetComponent<AIPath>().enabled =true;
                     GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
                 }
                 else if (collision.gameObject == ColliNameManager.Instance.Gun)

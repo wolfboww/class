@@ -9,17 +9,22 @@ public class PlatAuto : MonoBehaviour
         X, Y, GameObject
     }
     public Dir dir = Dir.X;
-    public Transform targetObj;
-
     public float maxDis;
     public float Speed;
 
+    private Transform targetObj;
     private float dis;
     private Vector2 targetPos;
+    private void Start()
+    {
+        targetObj = transform.parent.Find("Ball(Clone)");
+    }
+
 
     // Update is called once per frame
     void Update()
     {
+        targetObj = transform.parent.Find("Ball(Clone)");
         Distance();
 
         if (dis < maxDis)

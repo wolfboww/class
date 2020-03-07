@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class PacMan : MonoBehaviour
 {
@@ -9,90 +10,85 @@ public class PacMan : MonoBehaviour
         up, down, left, right
     }
     public Transform path;
-    public float speed;
+    public Transform rePos;
+    [HideInInspector]
+    public Dir dir = Dir.right;
 
-    private int pathLength = 18;
-    private Dir dir = Dir.right;
-    private Transform[] pathPoint;
-
-    private Vector3 originPos;
-    private Vector3 targetPos;
-
-    public bool caught = false;
+    private AIPath aiPath;
+    private List<Transform> pathPoint = new List<Transform>();
+    private List<Transform> leftPoint = new List<Transform>();
 
     void Start()
     {
-        pathPoint = new Transform[pathLength];
-        for (int i = 0; i < pathLength; i++)
-        {
-            pathPoint[i] = path.GetChild(i);
-        }
-
-        originPos = transform.position;
-        targetPos = pathPoint[0].position;
+        aiPath = GetComponentInParent<AIPath>();
+        InitialBean();
     }
 
     void Update()
     {
-        if (pathPoint == null) return;
-
-        MoveDir(dir);
-
-        //if (index < pathPoint.Length)
-        //{
-        //    if (Vector3.Distance(transform.position, pathPoint[index].position) > 0.1f)
-        //        transform.position = Vector3.MoveTowards(transform.position, pathPoint[index].position, speed * Time.deltaTime);
-        //    else
-        //    {
-        //        index++;
-        //        originPos = pathPoint[index - 1].position;
-        //        targetPos = pathPoint[index].position;
-        //    }
-        //}
-        //else
-        //{
-        //    index = 0;
-        //    originPos = pathPoint[pathPoint.Length - 1].position;
-        //    targetPos = pathPoint[index].position;
-        //}
-
-        //判断主角被抓住
-        caught = GameController.Instance.player.transform.parent == transform.GetChild(0) ? true : false;
+        MoveDir();
     }
 
-    public void MoveDir(Dir dir)
+    public void MoveDir()
     {
-        if (Mathf.Abs(originPos.x - targetPos.x) < 5)
-            dir = originPos.y - targetPos.y > 0 ? Dir.down : Dir.up;
-        else if (Mathf.Abs(originPos.y - targetPos.y) < 5)
-            dir = originPos.x - targetPos.x > 0 ? Dir.left : Dir.right;
+        if (aiPath.desiredVelocity.x <= -2f)
+            dir = Dir.left;
+        else if (aiPath.desiredVelocity.x >= 2f)
+            dir = Dir.right;
+
+        if (aiPath.desiredVelocity.y >= 2f)
+            dir = Dir.up;
+        else if (aiPath.desiredVelocity.y <= -2f)
+            dir = Dir.down;
 
         switch (dir)
         {
             case Dir.up:
-                transform.GetChild(0).localEulerAngles = new Vector3(0, 0, 90);
+                transform.localEulerAngles = new Vector3(0, 0, 90);
                 break;
             case Dir.down:
-                transform.GetChild(0).localEulerAngles = new Vector3(0, 0, -90);
+                transform.localEulerAngles = new Vector3(0, 0, -90);
                 break;
             case Dir.left:
-                transform.GetChild(0).localEulerAngles = Vector3.zero;
-                break;
             case Dir.right:
-                transform.GetChild(0).localEulerAngles = Vector3.zero;
+                transform.localEulerAngles = Vector3.zero;
                 break;
         }
-        GetComponentInChildren<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
+        GetComponent<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    public void InitialBean()
     {
-        if (collision.transform.tag == "Bean" || collision.transform.tag == "Mask")
-            collision.gameObject.SetActive(false);
-        else if (collision.transform.tag == "Player")
+        for (int i = 0; i < path.childCount; i++)
+            pathPoint.Add(path.GetChild(i));
+        StartCoroutine(FindTarget());
+    }
+
+    IEnumerator FindTarget()
+    {
+        while (pathPoint.Count > 0)
         {
-            if (collision.transform.Find("Mask").GetComponent<SpriteRenderer>().sprite != null)
-                collision.transform.SetParent(transform.GetChild(0));
+            int index = Random.Range(0, pathPoint.Count);
+            Transform target = pathPoint[index];
+            yield return new WaitUntil(() => target.gameObject.activeInHierarchy);
+            GetComponentInParent<AIDestinationSetter>().target = target;
+            yield return new WaitWhile(() => target.gameObject.activeInHierarchy);
+            yield return 0;
+            pathPoint = new List<Transform>();
+            for (int i = 0; i < path.childCount; i++)
+                if (path.GetChild(i).gameObject.activeInHierarchy)
+                    pathPoint.Add(path.GetChild(i));
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.name == "Mask")
+            collision.transform.parent.SetParent(transform);
+
+        if (collision.transform.tag == "Enemy")
+            GhostManager.Instance.gameOver = true;
+        else if (collision.transform.tag == "Bean" || collision.transform.tag == "Mask")
+            collision.gameObject.SetActive(false);
     }
 }
