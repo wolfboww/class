@@ -7,13 +7,13 @@ public class Ghost : MonoBehaviour
 {
     public enum Status
     {
-        Attack, Escape, Die, None
+        Attack, Escape, Die, Return, None
     }
 
     public float ghostType;
     public bool canDead;
-    [HideInInspector]
-    public Status status = Status.Die;
+    //[HideInInspector]
+    public Status status = Status.None;
 
     private AIPath aiPath;
     private Animator anim;
@@ -60,9 +60,9 @@ public class Ghost : MonoBehaviour
                 GhostManager.Instance.initialPos[iNum].timer = 0;
                 GhostManager.Instance.initialPos[iNum].isUsed = true;
                 life = GhostManager.ghostLife;
-                status = Status.None;
+                status = Status.Return;
                 break;
-            case Status.None:
+            case Status.Return:
                 if (!GhostManager.Instance.initialPos[iNum].isUsed)
                     status = Status.Attack;
                 break;
@@ -90,7 +90,7 @@ public class Ghost : MonoBehaviour
         yield return GetComponent<AIDestinationSetter>().target = EscapePos();
         life = GhostManager.ghostLife;
         status = Status.Attack;
-        yield return new WaitForSeconds(GhostManager.Instance.reBackTime);
+        yield return new WaitForSeconds(GhostManager.Instance.reBackTime * 2);
         yield return GetComponent<AIDestinationSetter>().target
             = GameController.Instance.player.transform;
         StopCoroutine(Escape());

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 public class CollisionController : MonoBehaviour
 {
     private Animator anim;
@@ -72,10 +71,7 @@ public class CollisionController : MonoBehaviour
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 if (collision.gameObject == ColliNameManager.Instance.Art)
-                {
-                    ColliNameManager.Instance.MapPacMan.GetComponent<AIPath>().enabled =true;
                     GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
-                }
                 else if (collision.gameObject == ColliNameManager.Instance.Gun)
                 {
                     GetComponent<Animator>().SetBool("GetGun", true);

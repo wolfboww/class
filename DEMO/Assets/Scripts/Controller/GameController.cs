@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
             Camera.main.GetComponent<CameraController>().boundary[i]
                 = Maps[mapNumber].transform.Find("Boundary").GetChild(i);
         revivePoint = Maps[mapNumber].transform.Find("StartPoint");
+
     }
 
     public void Mask(bool be, Sprite sprite)

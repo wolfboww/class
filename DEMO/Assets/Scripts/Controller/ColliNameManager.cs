@@ -18,6 +18,10 @@ public class ColliNameManager : MonoBehaviour
     public GameObject ElseBullet;
     public GameObject IfBullet;
 
+    [Header("Camera")]
+    public Camera MainCamera;
+    public Camera SecondCamera;
+
     /// ////////////////////
     public static ColliNameManager _instance;
     public static ColliNameManager Instance

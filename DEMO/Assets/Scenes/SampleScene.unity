@@ -484,6 +484,12 @@ Transform:
   m_Father: {fileID: 2129886237}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1396104199 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1396104199, guid: 9f13401d9a2835d4e9eca3916b533099,
+    type: 3}
+  m_PrefabInstance: {fileID: 821222488938816479}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1397776152
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397776152}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 162.4, y: -84.8, z: 0}
+  m_LocalPosition: {x: 161.2, y: -84, z: 0}
   m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 1211151886}
@@ -990,6 +996,8 @@ MonoBehaviour:
     type: 3}
   IfBullet: {fileID: 1549626832037591205, guid: bae5d070e8f533148ab0c09e3d49d40d,
     type: 3}
+  MainCamera: {fileID: 519420031}
+  SecondCamera: {fileID: 1396104199}
 --- !u!1001 &821222488938816479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1001,6 +1009,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Map_Pac-Man
+      objectReference: {fileID: 0}
+    - target: {fileID: 2788346450694719355, guid: 9f13401d9a2835d4e9eca3916b533099,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2788346450694719353, guid: 9f13401d9a2835d4e9eca3916b533099,
         type: 3}
