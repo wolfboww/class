@@ -8,6 +8,7 @@ public class ShootButton : MonoBehaviour
     {
         transPlat, rotatePlat, DesPlat, ActivePlat, AnimPlat, None
     }
+    public int life;
     public GameObject targetObj;
     public Target target = Target.None;
 
@@ -26,7 +27,7 @@ public class ShootButton : MonoBehaviour
     {
         if (collision.transform.tag == "Bullet")
         {
-            if (anim)
+            if (anim && shootNum == life)
                 anim.SetTrigger("Get");
             switch (target)
             {
@@ -37,7 +38,7 @@ public class ShootButton : MonoBehaviour
                     targetObj.GetComponent<Rotate>().enabled = true;
                     break;
                 case Target.DesPlat:
-                    if (shootNum < 5)
+                    if (shootNum < life)
                         shootNum++;
                     else
                         targetObj.GetComponent<DestroyController>().enabled = true;

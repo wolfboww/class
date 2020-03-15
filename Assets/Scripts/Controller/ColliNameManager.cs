@@ -22,6 +22,7 @@ public class ColliNameManager : MonoBehaviour
     public Camera MainCamera;
     public Camera SecondCamera;
 
+
     /// ////////////////////
     public static ColliNameManager _instance;
     public static ColliNameManager Instance

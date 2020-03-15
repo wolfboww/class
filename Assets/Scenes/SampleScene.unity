@@ -741,6 +741,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7047540631127143046, guid: 9c83cf233735eec4ea18c893ec248fb8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7047540631127143043, guid: 9c83cf233735eec4ea18c893ec248fb8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -846,6 +851,11 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7047540631127143053, guid: 9c83cf233735eec4ea18c893ec248fb8,
+        type: 3}
+      propertyPath: bounceForce
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7047540629768090670, guid: 9c83cf233735eec4ea18c893ec248fb8,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -948,6 +958,7 @@ MonoBehaviour:
   AnimBoundary:
   - {fileID: 883400908}
   - {fileID: 320326730}
+  - {fileID: 4961981255736489717}
   DesTrapButton: {fileID: 5071961561475522412}
   RotateButton: {fileID: 5071961561239551759}
   ElseBullet: {fileID: 1549626832037591205, guid: df1eb72b2aee6ed46b20e319380e18fb,
@@ -1125,6 +1136,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2788346450694719355, guid: 9f13401d9a2835d4e9eca3916b533099,
     type: 3}
   m_PrefabInstance: {fileID: 821222488938816479}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4961981255736489717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4961981255736489717, guid: 2f215754799bd624f966b37773f8b2c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8288659915804150806}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5071961559990657844 stripped
 Transform:

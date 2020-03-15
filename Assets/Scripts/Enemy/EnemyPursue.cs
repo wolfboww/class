@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class stuff : MonoBehaviour
+public class EnemyPursue : MonoBehaviour
 {
     public float length;
     public float speed;

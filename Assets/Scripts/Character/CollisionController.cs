@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 public class CollisionController : MonoBehaviour
 {
     private Animator anim;
@@ -60,6 +61,7 @@ public class CollisionController : MonoBehaviour
                     Death();
                 else    //被踩蘑菇
                 {
+                    rig.velocity = Vector3.up * ctr.bounceForce;
                     Animator eAnim = collision.gameObject.GetComponent<Animator>();
                     eAnim.SetTrigger("Dead");
                     collision.GetComponent<DestroyController>().enabled = true;

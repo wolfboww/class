@@ -5,12 +5,12 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject[] Maps;
-
-    //[HideInInspector]
+    
+    [HideInInspector]
     public Transform revivePoint;
     [HideInInspector]
     public GameObject player;
-    
+
     private int mapNumber = 0;
     private Transform bulletsList;
     private Transform mask;
@@ -46,7 +46,6 @@ public class GameController : MonoBehaviour
             Camera.main.GetComponent<CameraController>().boundary[i]
                 = Maps[mapNumber].transform.Find("Boundary").GetChild(i);
         revivePoint = Maps[mapNumber].transform.Find("StartPoint");
-
     }
 
     public void Mask(bool be, Sprite sprite)
