@@ -124,8 +124,7 @@ MonoBehaviour:
   speed: 40
   desTime: 4
   playerBullet: 0
-  prefabpartical: {fileID: 1000012657451766, guid: 4451d4c0de3db0346b0ac628f0c87e4a,
-    type: 3}
+  prefabpartical: {fileID: 0}
 --- !u!114 &2994336653250323056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desTime: 0.5
-  prefabpartical: {fileID: 1000013603715808, guid: 05f3858935d1bb848aad2462a41bbd97,
-    type: 3}
+  prefabpartical: {fileID: 0}
 --- !u!50 &2609107415663057961
 Rigidbody2D:
   serializedVersion: 4

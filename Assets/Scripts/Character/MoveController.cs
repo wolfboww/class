@@ -18,6 +18,7 @@ public class MoveController : MonoBehaviour
     private Animator anim;
 
     private float time = 0;
+    private float maskTime = 5;
     private float checkRadius = 0.5f;
     private Vector3 Scale;
     private float scaleX;
@@ -52,14 +53,14 @@ public class MoveController : MonoBehaviour
         anim.SetBool("Stand", !isJump);
         JumpController();
 
-        if (Input.GetMouseButtonDown(1))//取消伪装
-        {
-            BeNotMask();
-        }
+
         if (IfBullet.bemask)
         {
+            if (Input.GetMouseButtonDown(1))//取消伪装
+                BeNotMask();
+
             time += Time.deltaTime;
-            if (time >= 3)
+            if (time >= maskTime)
                 BeNotMask();
         }
 

@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7047540629768090671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
-  m_LocalScale: {x: 10, y: 6.25, z: 5}
+  m_LocalPosition: {x: 0, y: 1.39, z: 0}
+  m_LocalScale: {x: 10, y: 6, z: 5}
   m_Children: []
   m_Father: {fileID: 7047540631127143043}
   m_RootOrder: 3
@@ -104,7 +104,7 @@ Transform:
   m_GameObject: {fileID: 7047540629865560808}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7047540631127143043}
   m_RootOrder: 2
@@ -249,7 +249,7 @@ Transform:
   m_GameObject: {fileID: 7047540631127143046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7047540630963515351}
   - {fileID: 7047540631080683100}
@@ -384,12 +384,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8669e3be92225a24580948c5383d6a57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 1000
-  bounceForce: 2
-  bullets:
-  - {fileID: 1549626832037591205, guid: df1eb72b2aee6ed46b20e319380e18fb, type: 3}
-  - {fileID: 1549626832037591205, guid: bae5d070e8f533148ab0c09e3d49d40d, type: 3}
+  moveSpeed: 5
+  jumpForce: 10
+  bounceForce: 8
+  bullets: []
   isJump: 0
 --- !u!114 &7047540631127143054
 MonoBehaviour:
@@ -403,7 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1adff6ef5d78a42baad0a3bfb4ac01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 1549626832037591205, guid: df1eb72b2aee6ed46b20e319380e18fb, type: 3}
+  bullet: {fileID: 0}
 --- !u!114 &7047540631127143042
 MonoBehaviour:
   m_ObjectHideFlags: 0

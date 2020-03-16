@@ -14,7 +14,6 @@ public class EnemyPatrol : MonoBehaviour
     public int life;
 
     private Animator anim;
-    private MapManager root;
     private Dir moveBack = Dir.left;
     private Vector3 pos;
 
@@ -22,7 +21,6 @@ public class EnemyPatrol : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        root = transform.root.GetComponent<MapManager>();
         pos = transform.position;
     }
 
@@ -30,13 +28,8 @@ public class EnemyPatrol : MonoBehaviour
     void Update()
     {
         if (life <= 0)
-        {
-            if (Random.Range(0, 1.0f) <= root.dropRate)
-                Instantiate(root.collection, transform.position, Quaternion.identity);
-
             anim.SetTrigger("Dead");
-            GetComponent<DestroyController>().enabled = true;
-        }
+
         Patrol();
     }
 

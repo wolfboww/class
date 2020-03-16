@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 128699638881482143}
   - component: {fileID: 128699638881482144}
   - component: {fileID: 128699638881482145}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: Ghost
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostType: 0
   canDead: 1
+  status: 4
 --- !u!114 &128699638881482143
 MonoBehaviour:
   m_ObjectHideFlags: 0

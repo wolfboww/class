@@ -49,6 +49,9 @@ public class CollisionController : MonoBehaviour
                     return;
                 Death();
                 break;
+            case "Collection":
+                collision.gameObject.GetComponent<DestroyController>().enabled = true;
+                break;
         }
     }
 
@@ -64,7 +67,6 @@ public class CollisionController : MonoBehaviour
                     rig.velocity = Vector3.up * ctr.bounceForce;
                     Animator eAnim = collision.gameObject.GetComponent<Animator>();
                     eAnim.SetTrigger("Dead");
-                    collision.GetComponent<DestroyController>().enabled = true;
                 }
                 break;
             case "Injurant":
