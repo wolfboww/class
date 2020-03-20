@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        height = GetComponent<Camera>().orthographicSize * 2f;
+        height = GetComponent<Camera>().orthographicSize;
         width = height * GetComponent<Camera>().aspect;
     }
 
@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
                 transform.position = new Vector2(x, transform.position.y);
             }
         }
-        limitPos = new Vector3(Mathf.Clamp(transform.position.x, boundary[0].position.x + width / 2, boundary[1].position.x - width / 2), Mathf.Clamp(transform.position.y, boundary[1].position.y + height / 2, boundary[0].position.y - height / 2), -10);
+        limitPos = new Vector3(Mathf.Clamp(transform.position.x, boundary[0].position.x + width, boundary[1].position.x - width), Mathf.Clamp(transform.position.y, boundary[1].position.y + height, boundary[0].position.y - height), -10);
         transform.position = limitPos;
     }
 }

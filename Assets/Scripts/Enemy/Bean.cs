@@ -21,6 +21,7 @@ public class Bean : MonoBehaviour
     {
         if (ActiveBean())
         {
+            ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
             GameController.Instance.ChangeMap();
             GameController.Instance.player.transform.SetParent(null);
             GameController.Instance.player.transform.position

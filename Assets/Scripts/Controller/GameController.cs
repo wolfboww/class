@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject[] Maps;
-    
+
     [HideInInspector]
     public Transform revivePoint;
     [HideInInspector]
@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ObjAudio();
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
         {
             if (bullet.transform.parent != bulletsList)
@@ -43,7 +44,7 @@ public class GameController : MonoBehaviour
         Maps[mapNumber].SetActive(true);
         Maps[mapNumber - 1].SetActive(false);
         for (int i = 0; i < Maps[mapNumber].transform.Find("Boundary").childCount; i++)
-            Camera.main.GetComponent<CameraController>().boundary[i]
+            ActiveCam().GetComponent<CameraController>().boundary[i]
                 = Maps[mapNumber].transform.Find("Boundary").GetChild(i);
         revivePoint = Maps[mapNumber].transform.Find("StartPoint");
     }
@@ -66,6 +67,34 @@ public class GameController : MonoBehaviour
             Destroy(mask.GetComponent<PolygonCollider2D>());
             player.transform.eulerAngles = Vector3.zero;
         }
+    }
+
+    public void ObjAudio()
+    {
+        GameObject[] obj = FindObjectsOfType(typeof(GameObject)) as GameObject[];
+        foreach (GameObject child in obj)
+        {
+            if (child.GetComponent<AudioSource>())
+            {
+                float height = ActiveCam().orthographicSize;
+                float width = height * ActiveCam().aspect;
+                if (child.transform.position.x > ActiveCam().transform.position.x - width && child.transform.position.x < ActiveCam().transform.position.x + width && child.transform.position.y > ActiveCam().transform.position.y - height && child.transform.position.y < ActiveCam().transform.position.y + height)
+                    child.GetComponent<AudioSource>().mute = false;
+                else
+                    child.GetComponent<AudioSource>().mute = true;
+            }
+        }
+    }
+
+    private Camera ActiveCam()
+    {
+        Camera[] camera = FindObjectsOfType<Camera>();
+        foreach (var item in camera)
+        {
+            if (item.gameObject.activeInHierarchy)
+                return item;
+        }
+        return ColliNameManager.Instance.MainCamera;
     }
 
     public static GameController _instance;

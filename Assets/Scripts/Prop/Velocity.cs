@@ -34,5 +34,4 @@ public class Velocity : MonoBehaviour
 
         GetComponent<Rigidbody2D>().velocity = moveDir * velocity;
     }
-
 }

@@ -5,12 +5,14 @@ using DG.Tweening;
 public class CollisionController : MonoBehaviour
 {
     private Animator anim;
+    private AudioSource au;
     private Rigidbody2D rig;
     private MoveController ctr;
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        au = GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         ctr = GetComponent<MoveController>();
     }
@@ -31,6 +33,9 @@ public class CollisionController : MonoBehaviour
                 }
                 break;
             case "Button":
+                if (collision.gameObject.GetComponent<AudioSource>())
+                    collision.gameObject.GetComponent<AudioSource>().Play();
+
                 if (collision.gameObject == ColliNameManager.Instance.RotateButton)
                     collision.transform.GetComponent<Rotate>().enabled = true;
                 else if (collision.gameObject == ColliNameManager.Instance.DesTrapButton)
@@ -64,9 +69,13 @@ public class CollisionController : MonoBehaviour
                     Death();
                 else    //被踩蘑菇
                 {
+                    au.clip = ColliNameManager.Instance.enemy1;
+                    au.Play();
+
                     rig.velocity = Vector3.up * ctr.bounceForce;
                     Animator eAnim = collision.gameObject.GetComponent<Animator>();
                     eAnim.SetTrigger("Dead");
+
                 }
                 break;
             case "Injurant":

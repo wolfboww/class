@@ -8,6 +8,7 @@ public class AnimatorController : MonoBehaviour
     public GameObject bullet;
 
     private Animator anim;
+    private AudioSource au;
     private Rigidbody2D rig;
     private Transform weaponPoint;
 
@@ -15,6 +16,7 @@ public class AnimatorController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        au = GetComponentInChildren<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         weaponPoint = transform.Find("WeaponPoint");
     }
@@ -22,7 +24,10 @@ public class AnimatorController : MonoBehaviour
     public void Shoot()
     {
         if (bullet)
+        {
             Instantiate(bullet, weaponPoint);
+            au.Play();
+        }
     }
 
     public void Dead()

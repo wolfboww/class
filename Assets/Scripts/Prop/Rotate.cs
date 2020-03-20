@@ -6,6 +6,11 @@ public class Rotate : MonoBehaviour
 {
     public Transform rotateObj;
     public float rotateAngle;
+    private void OnEnable()
+    {
+        if (rotateObj.GetComponent<AudioSource>())
+            rotateObj.GetComponent<AudioSource>().Play();
+    }
 
     // Update is called once per frame
     void Update()

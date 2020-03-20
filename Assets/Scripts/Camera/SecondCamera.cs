@@ -6,10 +6,12 @@ using DG.Tweening;
 
 public class SecondCamera : MonoBehaviour
 {
+    private Camera firstCamera;
     private Camera secondCamera;
 
     void Start()
     {
+        firstCamera = ColliNameManager.Instance.MainCamera;
         secondCamera = ColliNameManager.Instance.SecondCamera;
     }
 
@@ -23,6 +25,7 @@ public class SecondCamera : MonoBehaviour
     IEnumerator SCamera()
     {
         Destroy(GetComponent<EdgeCollider2D>());
+        firstCamera.gameObject.SetActive(false);
         secondCamera.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
         yield return secondCamera.DOOrthoSize(11, 3);

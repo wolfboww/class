@@ -22,6 +22,9 @@ public class ColliNameManager : MonoBehaviour
     public Camera MainCamera;
     public Camera SecondCamera;
 
+    [Header("Audio")]
+    public AudioClip enemy1;
+
 
     /// ////////////////////
     public static ColliNameManager _instance;
