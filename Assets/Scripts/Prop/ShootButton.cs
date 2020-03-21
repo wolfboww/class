@@ -29,27 +29,31 @@ public class ShootButton : MonoBehaviour
         {
             if (anim && shootNum == life)
                 anim.SetTrigger("Get");
-            switch (target)
+
+            if (targetObj != null)
             {
-                case Target.transPlat:
-                    targetObj.GetComponent<Translate>().enabled = true;
-                    break;
-                case Target.rotatePlat:
-                    targetObj.GetComponent<Rotate>().enabled = true;
-                    break;
-                case Target.DesPlat:
-                    if (shootNum < life)
-                        shootNum++;
-                    else
-                        targetObj.GetComponent<DestroyController>().enabled = true;
-                    break;
-                case Target.ActivePlat:
-                    if (!targetObj.activeInHierarchy)
-                        targetObj.SetActive(true);
-                    break;
-                case Target.AnimPlat:
-                    targetObj.GetComponent<Animator>().SetTrigger("Do");
-                    break;
+                switch (target)
+                {
+                    case Target.transPlat:
+                        targetObj.GetComponent<Translate>().enabled = true;
+                        break;
+                    case Target.rotatePlat:
+                        targetObj.GetComponent<Rotate>().enabled = true;
+                        break;
+                    case Target.DesPlat:
+                        if (shootNum < life)
+                            shootNum++;
+                        else
+                            targetObj.GetComponent<DestroyController>().enabled = true;
+                        break;
+                    case Target.ActivePlat:
+                        if (!targetObj.activeInHierarchy)
+                            targetObj.SetActive(true);
+                        break;
+                    case Target.AnimPlat:
+                        targetObj.GetComponent<Animator>().SetTrigger("Do");
+                        break;
+                }
             }
         }
     }

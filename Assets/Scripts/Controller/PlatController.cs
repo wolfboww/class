@@ -22,7 +22,7 @@ public class PlatController : MonoBehaviour
         {
             collision.transform.SetParent(null);
             //if (collision.transform.parent == null)
-            //    collision.transform.localScale = scale;
+                //collision.transform.localScale = scale;
         }
     }
 }
