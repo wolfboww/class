@@ -6,10 +6,11 @@ public class ShootButton : MonoBehaviour
 {
     public enum Target
     {
-        transPlat, rotatePlat, DesPlat, ActivePlat, AnimPlat, None
+        transPlat, rotatePlat, DesPlat, ActivePlat, AnimPlat, HandlePlat, None
     }
     public int life;
     public GameObject targetObj;
+    public GameObject particle;
     public Target target = Target.None;
 
     private int shootNum = 0;
@@ -27,8 +28,18 @@ public class ShootButton : MonoBehaviour
     {
         if (collision.transform.tag == "Bullet")
         {
+            if (!collision.gameObject.GetComponent<BulletController>().playerBullet)
+                return;
+
+            if (gameObject.layer == LayerMask.NameToLayer("Mask")
+                && !collision.gameObject.name.Equals("IfBullet(Clone)"))
+                return;
+
             if (anim && shootNum == life)
                 anim.SetTrigger("Get");
+
+            if (particle != null)
+                Instantiate(particle, transform.position, Quaternion.identity);
 
             if (targetObj != null)
             {
@@ -52,6 +63,12 @@ public class ShootButton : MonoBehaviour
                         break;
                     case Target.AnimPlat:
                         targetObj.GetComponent<Animator>().SetTrigger("Do");
+                        break;
+                    case Target.HandlePlat:
+                        targetObj.GetComponent<HandleMove>().handle.isPlus
+                            = int.Parse(transform.name);
+                        GameController.Instance.player.transform.
+                            SetParent(transform.parent.GetChild(0).GetChild(0));
                         break;
                 }
             }

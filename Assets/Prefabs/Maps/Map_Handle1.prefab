@@ -1822,7 +1822,7 @@ Transform:
   m_GameObject: {fileID: 1077970183436147667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.18, y: -2.11, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1, z: 1}
   m_Children:
   - {fileID: 1077970184819829237}
   - {fileID: 1077970183179936470}
@@ -1935,7 +1935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69aea7b0c439f4c4db3fffe182486f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 2.5
 --- !u!120 &1077970183436147665
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -5446,7 +5446,7 @@ Transform:
   m_GameObject: {fileID: 2059378359878588646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.18, y: -5.05, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1, z: 1}
   m_Children:
   - {fileID: 1077970184537873489}
   - {fileID: 2059378360680391139}
@@ -5559,7 +5559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69aea7b0c439f4c4db3fffe182486f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 2.5
 --- !u!120 &2059378359878588644
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -7183,6 +7183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 0
   targetObj: {fileID: 2774919874122538825}
+  particle: {fileID: 0}
   target: 0
 --- !u!82 &1051118319
 AudioSource:
@@ -7666,7 +7667,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.013493538, y: 0.013494253}
+  m_Offset: {x: -0.010863304, y: 0.014987946}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -7677,7 +7678,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.5531044, y: 0.9730115}
+  m_Size: {x: 3.5434265, y: 0.9700241}
   m_EdgeRadius: 0
 --- !u!114 &410981684735032695
 MonoBehaviour:
@@ -8900,6 +8901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 5
   targetObj: {fileID: 2774919873419333499}
+  particle: {fileID: 1000012657451766, guid: 4451d4c0de3db0346b0ac628f0c87e4a, type: 3}
   target: 2
 --- !u!114 &2774919873419333493
 MonoBehaviour:
@@ -9138,6 +9140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 0
   targetObj: {fileID: 2774919873487878128}
+  particle: {fileID: 0}
   target: 1
 --- !u!114 &2774919873487878125
 MonoBehaviour:
@@ -9593,7 +9596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69aea7b0c439f4c4db3fffe182486f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 2.5
 --- !u!1 &2774919873661250399
 GameObject:
   m_ObjectHideFlags: 0
@@ -11690,6 +11693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 5
   targetObj: {fileID: 2774919874599358673}
+  particle: {fileID: 1000012657451766, guid: 4451d4c0de3db0346b0ac628f0c87e4a, type: 3}
   target: 2
 --- !u!114 &2774919874599358675
 MonoBehaviour:

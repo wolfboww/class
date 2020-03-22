@@ -54,6 +54,7 @@ public class Ghost : MonoBehaviour
                 StartCoroutine(Escape());
                 break;
             case Status.Die:
+                anim.SetTrigger("Dead");
                 GetComponent<AIPath>().enabled = false;
                 iNum = GhostManager.Instance.ReBorn();
                 transform.position = GhostManager.Instance.initialPos[iNum].pos.position;
@@ -65,6 +66,7 @@ public class Ghost : MonoBehaviour
             case Status.Return:
                 if (!GhostManager.Instance.initialPos[iNum].isUsed)
                     status = Status.Attack;
+                anim.ResetTrigger("Dead");
                 break;
         }
     }
