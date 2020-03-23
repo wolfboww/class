@@ -31,9 +31,9 @@ public class ShootButton : MonoBehaviour
             if (!collision.gameObject.GetComponent<BulletController>().playerBullet)
                 return;
 
-            if (gameObject.layer == LayerMask.NameToLayer("Mask")
-                && !collision.gameObject.name.Equals("IfBullet(Clone)"))
-                return;
+            //if (gameObject.layer == LayerMask.NameToLayer("Mask")
+            //    && !collision.gameObject.name.Equals("IfBullet(Clone)"))
+            //    return;
 
             if (anim && shootNum == life)
                 anim.SetTrigger("Get");

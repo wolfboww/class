@@ -180,7 +180,7 @@ AnimationClip:
     - time: 0.625
       value: {fileID: 21300000, guid: 1e836847a803ca54f9b6115c97f65700, type: 3}
     attribute: m_Sprite
-    path: 
+    path: PlayerFX
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 8
@@ -219,7 +219,7 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 0
+      path: 3546734133
       attribute: 0
       script: {fileID: 0}
       typeID: 212

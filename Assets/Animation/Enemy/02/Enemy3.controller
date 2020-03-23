@@ -9,13 +9,13 @@ AnimatorController:
   m_Name: Enemy3
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Dead
-    m_Type: 9
+  - m_Name: OnPlane
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: OnPlane
+  - m_Name: isDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -73,9 +73,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_ExitTime: 0.9987844
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -89,6 +89,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: isDead
+    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: OnPlane
     m_EventTreshold: 0
@@ -137,7 +140,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Dead
+    m_ConditionEvent: isDead
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102694537666157340}
@@ -322,10 +325,10 @@ AnimatorStateMachine:
     m_Position: {x: 564, y: 192, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102162083657563158}
-    m_Position: {x: 564, y: 276, z: 0}
+    m_Position: {x: 564, y: 108, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102694537666157340}
-    m_Position: {x: 552, y: 36, z: 0}
+    m_Position: {x: 564, y: 24, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102091546457517372}
     m_Position: {x: 252, y: 108, z: 0}
@@ -336,8 +339,8 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 276, y: 36, z: 0}
-  m_EntryPosition: {x: 588, y: 120, z: 0}
+  m_AnyStatePosition: {x: 276, y: 24, z: 0}
+  m_EntryPosition: {x: 588, y: 276, z: 0}
   m_ExitPosition: {x: 276, y: 276, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102649654704031030}

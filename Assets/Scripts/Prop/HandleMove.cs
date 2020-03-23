@@ -54,7 +54,7 @@ public class HandleMove : MonoBehaviour
             else
                 dir = handle.isPlus > 0 ? Vector3.up : Vector3.down;
         }
-        Debug.Log(transform.position.x + "   " + boundary[0].x);
+
         transform.position = Vector2.Lerp(transform.position, transform.position + dir, Time.deltaTime * speed);
     }
 }

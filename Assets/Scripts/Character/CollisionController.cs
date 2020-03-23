@@ -40,14 +40,6 @@ public class CollisionController : MonoBehaviour
                     collision.transform.GetComponent<Rotate>().enabled = true;
                 else if (collision.gameObject == ColliNameManager.Instance.DesTrapButton)
                     collision.gameObject.GetComponentInChildren<DestroyController>().enabled = true;
-                else
-                {
-                    foreach (var item in ColliNameManager.Instance.AnimBoundary)
-                    {
-                        if (collision.gameObject == item)
-                            collision.gameObject.GetComponent<Animator>().SetTrigger("Do");
-                    }
-                }
                 break;
             case "Bullet":
                 if (collision.gameObject.GetComponent<BulletController>().playerBullet)
@@ -96,6 +88,13 @@ public class CollisionController : MonoBehaviour
                 foreach (var item in collision.gameObject.GetComponent<Boundary>().Sprites)
                     if (!item.activeInHierarchy)
                         item.gameObject.SetActive(true);
+                break;
+            case "Button":
+                foreach (var item in ColliNameManager.Instance.AnimBoundary)
+                {
+                    if (collision.gameObject == item)
+                        collision.gameObject.GetComponent<Animator>().SetTrigger("Do");
+                }
                 break;
         }
     }
