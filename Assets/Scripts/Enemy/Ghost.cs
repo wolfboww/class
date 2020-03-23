@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using DG.Tweening;
 
 public class Ghost : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class Ghost : MonoBehaviour
                 anim.SetBool("isDead", true);
                 GetComponent<AIPath>().enabled = false;
                 iNum = GhostManager.Instance.ReBorn();
+                transform.localScale = Vector3.one * 0.5f;
                 transform.position = GhostManager.Instance.initialPos[iNum].pos.position;
                 GhostManager.Instance.initialPos[iNum].timer = 0;
                 GhostManager.Instance.initialPos[iNum].isUsed = true;
@@ -122,6 +124,12 @@ public class Ghost : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Bullet")
-            life--;
+        {
+            if (!DOTween.IsTweening(transform))
+            {
+                life--;
+                transform.DOPunchScale(new Vector3(-0.1f, -0.1f, 0), 1, 1, 0);
+            }
+        }
     }
 }

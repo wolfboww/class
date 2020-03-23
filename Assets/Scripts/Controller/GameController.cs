@@ -37,6 +37,9 @@ public class GameController : MonoBehaviour
             if (bullet.transform.parent != bulletsList)
                 bullet.transform.SetParent(bulletsList);
         }
+
+        if (mapNumber == 3)
+            player.GetComponent<Animator>().SetFloat("Edition", 1);
     }
 
     public void ChangeMap()
@@ -52,7 +55,7 @@ public class GameController : MonoBehaviour
 
     public void Mask(bool be, Sprite sprite)
     {
-        player.GetComponent<SpriteRenderer>().enabled = !be;
+        player.GetComponentInChildren<SpriteRenderer>().enabled = !be;
         player.GetComponent<BoxCollider2D>().enabled = !be;
         player.GetComponent<Rigidbody2D>().gravityScale = be ? 0 : 3;
         player.GetComponent<MoveController>().moveSpeed = be ? 0 : 10;

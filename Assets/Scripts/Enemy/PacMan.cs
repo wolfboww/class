@@ -83,11 +83,18 @@ public class PacMan : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+
+
         if (collision.name == "Mask")
             collision.transform.parent.SetParent(transform);
 
         if (collision.transform.tag == "Enemy")
-            GhostManager.Instance.gameOver = true;
+        {
+            if (transform.childCount > 0)
+                return;
+            else
+                GhostManager.Instance.gameOver = true;
+        }
         else if (collision.transform.tag == "Bean" || collision.transform.tag == "Mask")
             collision.gameObject.SetActive(false);
     }

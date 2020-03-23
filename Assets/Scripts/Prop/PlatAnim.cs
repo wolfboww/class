@@ -19,7 +19,7 @@ public class PlatAnim : MonoBehaviour
     {
         foreach (var item in enemy)
         {
-            if (item.activeInHierarchy)
+            if (item != null)
                 return;
         }
 

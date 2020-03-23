@@ -16,7 +16,7 @@ public class AnimatorController : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
-        au = GetComponentInChildren<AudioSource>();
+        au = transform.Find("WeaponPoint").GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         weaponPoint = transform.Find("WeaponPoint");
     }
