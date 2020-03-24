@@ -27,7 +27,7 @@ public class MoveController : MonoBehaviour
     private float scaleX;
     private int bulletIndex;
 
-    private bool isForwardShoot = true;
+    private bool isForwardShoot = false;
     private float angletimer = 0;
     private float angleTime = 2;
     private Vector3 mousePos = Vector3.zero;
@@ -74,12 +74,12 @@ public class MoveController : MonoBehaviour
         if (bullets.Count != 0)
             GetComponent<AnimatorController>().bullet = bullets[bulletIndex];
 
-        if (!isForwardShoot)
+        if (!isForwardShoot && anim.GetFloat("Edition") > 0)
         {
             angletimer += Time.deltaTime;
             if (angletimer > angleTime || Input.GetMouseButtonDown(1))
             {
-                weaponPoint.localPosition = new Vector3(1, 1.2f);
+                weaponPoint.localPosition = new Vector3(2f, 1.2f);
                 weaponPoint.localEulerAngles = Vector3.zero;
                 anim.SetFloat("Angle", 0.5f);
                 isForwardShoot = true;
@@ -167,7 +167,7 @@ public class MoveController : MonoBehaviour
                     mouseDir = Event.current.mousePosition;
                     float angle = mouseDir.y < mousePos.y ? 0 : 1;
                     weaponPoint.localPosition = mouseDir.y < mousePos.y ?
-                        new Vector3(1, 2f) : new Vector3(1, 0.2f);
+                        new Vector3(1.5f, 2.5f) : new Vector3(1.5f, -0.2f);
                     weaponPoint.localEulerAngles =
                         new Vector3(0, 0, 45) * (mouseDir.y < mousePos.y ? 1 : -1);
                     anim.SetFloat("Angle", angle);

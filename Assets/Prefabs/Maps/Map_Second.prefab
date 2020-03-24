@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 4135601886090411444}
   - component: {fileID: 4135601886090411445}
   - component: {fileID: 4135601886090411440}
+  - component: {fileID: 5284977286155671952}
   m_Layer: 0
   m_Name: kuang1
   m_TagString: Untagged
@@ -662,6 +663,44 @@ EdgeCollider2D:
   m_Points:
   - {x: 0, y: -0.80237365}
   - {x: 0, y: -4.8132277}
+--- !u!60 &5284977286155671952
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4135601886090410571}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.85, y: 2.65}
+    newSize: {x: 2.85, y: 2.65}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.255, y: -0.875}
+      - {x: 1.4281301, y: -0.4623239}
+      - {x: 0.705, y: 1.3249999}
+      - {x: -0.825, y: 1.3249999}
+      - {x: -0.98411274, y: 1.2160182}
+      - {x: -1.265, y: 0.16499999}
+      - {x: -1.305, y: 0.015}
+      - {x: -1.4223881, y: -0.526855}
+      - {x: -1.255, y: -0.945}
+      - {x: -1.1690788, y: -0.2668767}
+      - {x: -0.7555733, y: 1.0965929}
+      - {x: 0.61977005, y: 1.1027904}
+      - {x: 1.125, y: -0.315}
 --- !u!1 &4135601886092172566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,7 +1360,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1850725259
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 48ba5e2f78547ac45a9087cff64224ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1479,7 +1518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b, type: 3}
-  speed: 0.9
+  speed: 1
 --- !u!1 &4135601886261873260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2594,7 +2633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b, type: 3}
-  speed: 0.9
+  speed: 1
 --- !u!1 &4135601886499950025
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,7 +3542,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4135601886650642373}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.8479958, y: -2.3220012, z: 0}
+  m_LocalPosition: {x: -6.8479958, y: -2.334, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4135601886449242024}
@@ -4087,7 +4126,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1850725259
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 48ba5e2f78547ac45a9087cff64224ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5369,7 +5408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3525061774953832270, guid: 024379930f696804e98ab9195bbb0e0b, type: 3}
-  speed: 0.9
+  speed: 1
 --- !u!1 &4135601887117983242
 GameObject:
   m_ObjectHideFlags: 0
@@ -6163,6 +6202,7 @@ GameObject:
   - component: {fileID: 4135601887340582355}
   - component: {fileID: 4135601887340582352}
   - component: {fileID: 4135601887340582354}
+  - component: {fileID: 6496795174570011836}
   m_Layer: 0
   m_Name: kuang1
   m_TagString: Untagged
@@ -6392,6 +6432,44 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.017534256, y: -0.7978127}
   - {x: 0, y: -3.810273}
+--- !u!60 &6496795174570011836
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4135601887340582357}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.85, y: 2.65}
+    newSize: {x: 2.85, y: 2.65}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.255, y: -0.875}
+      - {x: 1.4281301, y: -0.4623239}
+      - {x: 0.705, y: 1.3249999}
+      - {x: -0.825, y: 1.3249999}
+      - {x: -0.98411274, y: 1.2160182}
+      - {x: -1.265, y: 0.16499999}
+      - {x: -1.305, y: 0.015}
+      - {x: -1.4223881, y: -0.526855}
+      - {x: -1.255, y: -0.945}
+      - {x: -1.1690788, y: -0.2668767}
+      - {x: -0.7555733, y: 1.0965929}
+      - {x: 0.61977005, y: 1.1027904}
+      - {x: 1.125, y: -0.315}
 --- !u!1 &4135601887390110463
 GameObject:
   m_ObjectHideFlags: 0
@@ -6557,7 +6635,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1850725259
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 48ba5e2f78547ac45a9087cff64224ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6752,7 +6830,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4135601887470126589}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.2179956, y: -3.3620012, z: 0}
+  m_LocalPosition: {x: -5.2179956, y: -3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4135601886449242024}
@@ -7174,7 +7252,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4135601887646462328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.767996, y: -3.3020012, z: 0}
+  m_LocalPosition: {x: -7.767996, y: -3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4135601886449242024}
@@ -7254,9 +7332,9 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0.6941743, y: -0.17654753}
-      - {x: -0.632534, y: -0.169693}
-      - {x: -0.62977695, y: 0.25607157}
-      - {x: -0.695, y: 0.255}
+      - {x: -0.6326475, y: -0.17604733}
+      - {x: -0.63232803, y: 0.25174093}
+      - {x: -0.69188976, y: 0.25288725}
       - {x: -0.695, y: -0.33499998}
       - {x: 0.695, y: -0.33499998}
 --- !u!1 &4135601887687229331
@@ -8978,7 +9056,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1850725259
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 48ba5e2f78547ac45a9087cff64224ba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

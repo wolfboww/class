@@ -6,6 +6,7 @@ public class BallVeloc : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GetComponent<Velocity>().enabled = true;
+        if (collision.gameObject.tag == "Plane")
+            GetComponent<Velocity>().enabled = true;
     }
 }

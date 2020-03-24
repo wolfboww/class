@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
         mask = player.transform.Find("Mask");
         ChangeMap();
         ChangeMap();
-        ChangeMap();
+        //ChangeMap();
         player.transform.position = revivePoint.position;
     }
 
