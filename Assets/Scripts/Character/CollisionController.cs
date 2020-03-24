@@ -19,11 +19,13 @@ public class CollisionController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (IfBullet.bemask)
+            return;
+
         switch (collision.transform.tag)
         {
             case "Enemy":
-                if (!IfBullet.bemask)
-                    Death();
+                Death();
                 break;
             case "Bounce":
                 if (!ctr.isJump)
@@ -85,9 +87,11 @@ public class CollisionController : MonoBehaviour
                 break;
             case "Boundary":
                 GameController.Instance.ChangeMap();
-                foreach (var item in collision.gameObject.GetComponent<Boundary>().Sprites)
-                    if (!item.activeInHierarchy)
-                        item.gameObject.SetActive(true);
+                GameObject[] sprites = collision.gameObject.GetComponent<Boundary>().Sprites;
+                if (sprites.Length > 0)
+                    foreach (var item in sprites)
+                        if (!item.activeInHierarchy)
+                            item.gameObject.SetActive(true);
                 break;
             case "Button":
                 foreach (var item in ColliNameManager.Instance.AnimBoundary)

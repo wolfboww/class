@@ -70,7 +70,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 7
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 73309078399636309}
   m_Layer: 2
   m_Name: Ball
-  m_TagString: Injurant
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

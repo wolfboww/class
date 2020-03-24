@@ -32,6 +32,8 @@ public class Jumper : MonoBehaviour
 
         if (life <= 0 || transform.position.y < destroyHeight)
             anim.SetBool("isDead", true);
+        if (transform.position.y < destroyHeight)
+            Destroy(GetComponent<DropControl>());
 
         switch (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name)
         {

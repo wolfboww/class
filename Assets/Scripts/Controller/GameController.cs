@@ -22,9 +22,9 @@ public class GameController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         bulletsList = transform.Find("BulletsList");
         mask = player.transform.Find("Mask");
-        //ChangeMap();
-        //ChangeMap();
-        //ChangeMap();
+        ChangeMap();
+        ChangeMap();
+        ChangeMap();
         player.transform.position = revivePoint.position;
     }
 

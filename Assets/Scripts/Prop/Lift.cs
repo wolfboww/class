@@ -13,6 +13,7 @@ public class Lift : MonoBehaviour
 
     private float timer = -1;
     private float rebackTime = 4;
+    private float offset = 0.05f;
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +43,11 @@ public class Lift : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && !isPlayerOn)
         {
-            isPlayerOn = true;
-            timer = 0;
+            if (collision.gameObject.GetComponent<BoxCollider2D>().bounds.min.y >= GetComponent<BoxCollider2D>().bounds.max.y - offset)
+            {
+                isPlayerOn = true;
+                timer = 0;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
