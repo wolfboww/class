@@ -5,9 +5,9 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float Speed;
+    public GameObject follower;
     public Transform[] boundary;
 
-    private GameObject player;
     private Vector3 limitPos;
     private float height;
     private float width;
@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        follower = GameController.Instance.player;
         height = GetComponent<Camera>().orthographicSize;
         width = height * GetComponent<Camera>().aspect;
     }
@@ -28,13 +28,13 @@ public class CameraController : MonoBehaviour
 
     private void CameraFollow()
     {
-        if (Vector2.Distance(player.transform.position, transform.position) > 3)
+        if (Vector2.Distance(follower.transform.position, transform.position) > 3)
         {
-            if (Mathf.Abs(player.transform.position.y - transform.position.y) > 0.5f)
-                transform.position = Vector2.Lerp(transform.position, player.transform.position, Speed * Time.deltaTime);
+            if (Mathf.Abs(follower.transform.position.y - transform.position.y) > 0.5f)
+                transform.position = Vector2.Lerp(transform.position, follower.transform.position, Speed * Time.deltaTime);
             else
             {
-                float x = Mathf.Lerp(transform.position.x, player.transform.position.x, Speed * Time.deltaTime);
+                float x = Mathf.Lerp(transform.position.x, follower.transform.position.x, Speed * Time.deltaTime);
                 transform.position = new Vector2(x, transform.position.y);
             }
         }

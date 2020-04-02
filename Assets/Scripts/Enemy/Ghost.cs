@@ -59,7 +59,11 @@ public class Ghost : MonoBehaviour
                 anim.SetBool("isDead", true);
                 GetComponent<AIPath>().enabled = false;
                 iNum = GhostManager.Instance.ReBorn();
+
+                if (DOTween.IsTweening(transform))
+                    transform.DOKill();
                 transform.localScale = Vector3.one * 0.5f;
+
                 transform.position = GhostManager.Instance.initialPos[iNum].pos.position;
                 GhostManager.Instance.initialPos[iNum].timer = 0;
                 GhostManager.Instance.initialPos[iNum].isUsed = true;
@@ -97,6 +101,10 @@ public class Ghost : MonoBehaviour
         yield return new WaitForSeconds(GhostManager.Instance.reBackTime * 2);
         yield return GetComponent<AIDestinationSetter>().target
             = GameController.Instance.player.transform;
+
+        if (DOTween.IsTweening(transform))
+            transform.DOKill();
+        transform.localScale = Vector3.one * 0.5f;
         StopCoroutine(Escape());
     }
 
@@ -128,7 +136,8 @@ public class Ghost : MonoBehaviour
             if (!DOTween.IsTweening(transform))
             {
                 life--;
-                transform.DOPunchScale(new Vector3(-0.1f, -0.1f, 0), 1, 1, 0);
+                transform.DOScale(transform.localScale * 0.9f, 1);
+                //transform.DOPunchScale(new Vector3(-0.1f, -0.1f, 0), 1, 1, 0);
             }
         }
     }

@@ -20,19 +20,26 @@ public class Bean : MonoBehaviour
     void Update()
     {
         if (ActiveBean())
-        {
-            ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
-            GameController.Instance.ChangeMap();
-            GameController.Instance.player.transform.SetParent(null);
-            GameController.Instance.player.transform.position
-                = GameController.Instance.revivePoint.position;
-        }
+            NextMap();
+    }
+
+    public void NextMap()
+    {
+        ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
+        GameController.Instance.ChangeMap();
+        GameController.Instance.player.transform.SetParent(null);
+        GameController.Instance.player.transform.position
+            = GameController.Instance.revivePoint.position;
     }
 
     public void ReStart()
     {
         foreach (var item in beans)
+        {
             item.SetActive(true);
+            if (item.GetComponent<MaskControl>())
+                Destroy(item.GetComponent<MaskControl>());
+        }
         pacMan.InitialBean();
     }
 

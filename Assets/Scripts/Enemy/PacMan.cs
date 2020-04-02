@@ -18,9 +18,14 @@ public class PacMan : MonoBehaviour
     private List<Transform> pathPoint = new List<Transform>();
     private List<Transform> leftPoint = new List<Transform>();
 
+    private Vector3 hatPos;
+    private float hatPosX;
+
     void Start()
     {
         aiPath = GetComponentInParent<AIPath>();
+        hatPos = transform.GetChild(0).localScale;
+        hatPosX = hatPos.x;
         InitialBean();
     }
 
@@ -55,6 +60,8 @@ public class PacMan : MonoBehaviour
                 break;
         }
         GetComponent<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
+        hatPos.x = (dir == Dir.left ? -1 : 1) * hatPosX;
+        transform.GetChild(0).localScale = hatPos;
     }
 
     public void InitialBean()
@@ -83,19 +90,25 @@ public class PacMan : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        //if (collision.name == "Mask")
+        //    collision.transform.parent.SetParent(transform);
 
-
-        if (collision.name == "Mask")
-            collision.transform.parent.SetParent(transform);
-
-        if (collision.transform.tag == "Enemy")
+        switch (collision.transform.tag)
         {
-            if (transform.childCount > 0)
-                return;
-            else
-                GhostManager.Instance.gameOver = true;
+            case "Bean":
+                collision.gameObject.SetActive(false);
+                break;
+            case "Mask":
+                if (collision.gameObject.GetComponent<MaskControl>())
+                    GameController.Instance.Mask(gameObject);
+                collision.gameObject.SetActive(false);
+                break;
+            case "Enemy":
+                if (transform.childCount > 1)
+                    return;
+                else
+                    GhostManager.Instance.gameOver = true;
+                break;
         }
-        else if (collision.transform.tag == "Bean" || collision.transform.tag == "Mask")
-            collision.gameObject.SetActive(false);
     }
 }

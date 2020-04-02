@@ -77,12 +77,16 @@ public class CollisionController : MonoBehaviour
                 break;
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
-                if (collision.gameObject == ColliNameManager.Instance.Art)
-                    GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
-                else if (collision.gameObject == ColliNameManager.Instance.Gun)
+                if (collision.gameObject == ColliNameManager.Instance.Gun)
                 {
+                    GetComponent<AnimatorController>().GetBuff(1);
                     GetComponent<Animator>().SetBool("GetGun", true);
                     GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.ElseBullet);
+                }
+                else if (collision.gameObject == ColliNameManager.Instance.Art)
+                {
+                    GetComponent<AnimatorController>().GetBuff(2);
+                    GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
                 }
                 break;
             case "Boundary":

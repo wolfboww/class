@@ -36,4 +36,11 @@ public class AnimatorController : MonoBehaviour
         rig.constraints = RigidbodyConstraints2D.FreezeRotation;
         transform.position = GameController.Instance.revivePoint.position;
     }
+
+    public void GetBuff(int i)
+    {
+        anim.SetFloat("GetBuff", i);
+        rig.constraints = i.Equals(0) ?
+            RigidbodyConstraints2D.FreezeRotation : RigidbodyConstraints2D.FreezeAll;
+    }
 }

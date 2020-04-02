@@ -7,6 +7,7 @@ public class ColliNameManager : MonoBehaviour
     [Header("GameObject")]
     public GameObject Gun;
     public GameObject Art;
+    public GameObject Hat;
     public GameObject MapPacMan;
     public GameObject HandleLand;
     public GameObject[] AnimBoundary;

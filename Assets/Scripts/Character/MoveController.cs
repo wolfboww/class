@@ -93,7 +93,7 @@ public class MoveController : MonoBehaviour
         if (!canMove)
             return;
 
-        float H = Input.GetAxis("Horizontal");
+        float H = Input.GetAxisRaw("Horizontal");
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDead"))
             anim.SetFloat("Speed", H);
         else
@@ -179,7 +179,7 @@ public class MoveController : MonoBehaviour
 
     public void BeNotMask()
     {
-        GameController.Instance.Mask(false, null);
+        GameController.Instance.Mask(null);
         masktimer = 0;
         IfBullet.bemask = false;
         if (transform.parent != null)

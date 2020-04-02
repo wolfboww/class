@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject[] Maps;
-
     [HideInInspector]
     public Transform revivePoint;
     [HideInInspector]
@@ -13,17 +12,23 @@ public class GameController : MonoBehaviour
 
     private int mapNumber = 0;
     private Transform bulletsList;
-    private Transform mask;
 
+    private GameObject maskObj;
+    private Transform maskParent;
+
+    public void Awake()
+    {
+        _instance = this;
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         bulletsList = transform.Find("BulletsList");
-        mask = player.transform.Find("Mask");
-        ChangeMap();
-        ChangeMap();
+        //mask = player.transform.Find("Mask");
+        //ChangeMap();
+        //ChangeMap();
         //ChangeMap();
         player.transform.position = revivePoint.position;
     }
@@ -40,6 +45,15 @@ public class GameController : MonoBehaviour
 
         if (mapNumber == 3)
             player.GetComponent<Animator>().SetFloat("Edition", 1);
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            ColliNameManager.Instance.Gun.transform.position = player.transform.position;
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ChangeMap();
+            player.transform.position = revivePoint.position;
+        }
+
     }
 
     public void ChangeMap()
@@ -53,24 +67,25 @@ public class GameController : MonoBehaviour
         revivePoint = Maps[mapNumber].transform.Find("StartPoint");
     }
 
-    public void Mask(bool be, Sprite sprite)
+    public void Mask(GameObject mask)
     {
-        player.GetComponentInChildren<SpriteRenderer>().enabled = !be;
-        player.GetComponent<BoxCollider2D>().enabled = !be;
-        player.GetComponent<Rigidbody2D>().gravityScale = be ? 0 : 3;
-        player.GetComponent<MoveController>().moveSpeed = be ? 0 : 10;
-        mask.GetComponent<SpriteRenderer>().sprite = sprite;
-
-        if (be)
+        if (mask != null)
         {
-            mask.gameObject.AddComponent<PolygonCollider2D>();
-            player.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            maskObj = mask;
+            maskParent = mask.transform.parent;
+            mask.AddComponent<MaskControl>();
         }
         else
         {
-            Destroy(mask.GetComponent<PolygonCollider2D>());
-            player.transform.eulerAngles = Vector3.zero;
+            Destroy(maskObj.GetComponent<MaskControl>());
+            maskObj.transform.SetParent(maskParent);
         }
+
+        player.GetComponentInChildren<SpriteRenderer>().enabled = mask == null ? true : false;
+        player.transform.position = mask == null ?
+            maskObj.transform.position : mask.transform.position;
+        if (ActiveCam().GetComponent<CameraController>())
+            ActiveCam().GetComponent<CameraController>().follower = mask == null ? player : mask;
     }
 
     public void ObjAudio()
@@ -110,8 +125,4 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void Awake()
-    {
-        _instance = this;
-    }
 }
