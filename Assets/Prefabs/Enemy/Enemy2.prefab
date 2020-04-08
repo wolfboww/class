@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dir: 2
+  initialDir: 1
   speed: 2
   maxDis: 3
   life: 1

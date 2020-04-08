@@ -23,6 +23,7 @@ public class ColliNameManager : MonoBehaviour
     [Header("Camera")]
     public Camera MainCamera;
     public Camera SecondCamera;
+    public Camera ThirdCamera;
 
     [Header("Audio")]
     public AudioClip enemy1;

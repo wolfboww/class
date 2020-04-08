@@ -141,7 +141,7 @@ public class MoveController : MonoBehaviour
             if (anim.GetBool("GetGun") && !IfBullet.bemask)
             {
                 anim.SetFloat("Shoot", 1);
-                gameObject.GetComponent<AnimatorController>().Shoot();
+                GetComponent<AnimatorController>().Shoot();
             }
         }
         else if (Input.GetMouseButtonUp(0))

@@ -12,6 +12,7 @@ public class HandleMove : MonoBehaviour
 
     public HandleStatus handle;
     public bool isHor;
+    public Sprite[] handleDown;
 
     private Vector3[] boundary = new Vector3[2];
     private Vector3 dir = Vector3.zero;
@@ -44,6 +45,9 @@ public class HandleMove : MonoBehaviour
                 dir = handle.isPlus > 0 ? Vector3.zero : Vector3.left;
             else
                 dir = handle.isPlus > 0 ? Vector3.right : Vector3.left;
+
+            GetComponentInChildren<SpriteRenderer>().sprite = 
+                handle.isPlus > 0 ? handleDown[0] : handleDown[1];
         }
         else
         {
@@ -53,6 +57,9 @@ public class HandleMove : MonoBehaviour
                 dir = handle.isPlus > 0 ? Vector3.zero : Vector3.down;
             else
                 dir = handle.isPlus > 0 ? Vector3.up : Vector3.down;
+
+            GetComponentInChildren<SpriteRenderer>().sprite =
+                handle.isPlus > 0 ? handleDown[0] : handleDown[1];
         }
 
         transform.position = Vector2.Lerp(transform.position, transform.position + dir, Time.deltaTime * speed);

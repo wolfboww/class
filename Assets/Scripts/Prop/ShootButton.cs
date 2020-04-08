@@ -6,7 +6,7 @@ public class ShootButton : MonoBehaviour
 {
     public enum Target
     {
-        transPlat, rotatePlat, DesPlat, ActivePlat, AnimPlat, HandlePlat, None
+        None, transPlat, rotatePlat, DesPlat, ActivePlat, AnimPlat, HandlePlat
     }
     public int life;
     public GameObject targetObj;

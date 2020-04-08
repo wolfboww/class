@@ -9,6 +9,7 @@ public class EnemyPatrol : MonoBehaviour
         up, down, left, right
     }
     public Dir dir = Dir.left;
+    public bool initialDir;
     public float speed;
     public float maxDis;
     public int life;
@@ -54,8 +55,11 @@ public class EnemyPatrol : MonoBehaviour
                 transform.Translate(Vector3.down * speed * Time.deltaTime);
                 break;
         }
+        if (initialDir)
+            GetComponent<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
+        else
+            GetComponent<SpriteRenderer>().flipX = dir == Dir.right ? true : false;
 
-        GetComponent<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
         if (Vector3.Distance(transform.position, pos) > maxDis)
         {
             dir = moveBack;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Jumper : MonoBehaviour
 {
+    [HideInInspector]
+    public bool fromSpawn;
+
     private Animator anim;
     private Rigidbody2D rb;
     private Transform groundCheck;
@@ -21,26 +24,39 @@ public class Jumper : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         groundCheck = transform.Find("groundCheck");
-        destroyHeight = transform.parent.GetComponent<JumperSpawn>().destroyHeight.position.y;
+
+        if (fromSpawn)
+            destroyHeight = transform.parent.GetComponent<JumperSpawn>().destroyHeight.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
         isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
-        anim.SetBool("OnPlane", !isJump && OnLand);
 
-        if (life <= 0 || transform.position.y < destroyHeight)
+        if (fromSpawn)
+        {
+            anim.SetBool("OnPlane", !isJump && OnLand);
+            if (transform.position.y < destroyHeight)
+                anim.SetBool("isDead", true);
+            if (transform.position.y < destroyHeight)
+                Destroy(GetComponent<DropControl>());
+        }
+        else
+            anim.SetBool("OnPlane", !isJump);
+
+        if (life <= 0)
             anim.SetBool("isDead", true);
-        if (transform.position.y < destroyHeight)
-            Destroy(GetComponent<DropControl>());
+
 
         switch (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name)
         {
             case "EnemyFall1":
+                rb.gravityScale = 0;
                 rb.velocity = Vector2.down * speed;
                 break;
             case "EnemyAttack1":
+                rb.gravityScale = 1;
                 AttackDir();
                 break;
         }

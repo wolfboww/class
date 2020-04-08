@@ -7193,7 +7193,7 @@ MonoBehaviour:
   life: 0
   targetObj: {fileID: 2774919874122538825}
   particle: {fileID: 0}
-  target: 0
+  target: 1
 --- !u!82 &1051118319
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8911,7 +8911,7 @@ MonoBehaviour:
   life: 5
   targetObj: {fileID: 2774919873419333499}
   particle: {fileID: 1000012657451766, guid: 4451d4c0de3db0346b0ac628f0c87e4a, type: 3}
-  target: 2
+  target: 3
 --- !u!114 &2774919873419333493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9150,7 +9150,7 @@ MonoBehaviour:
   life: 0
   targetObj: {fileID: 2774919873487878128}
   particle: {fileID: 0}
-  target: 1
+  target: 2
 --- !u!114 &2774919873487878125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11703,7 +11703,7 @@ MonoBehaviour:
   life: 5
   targetObj: {fileID: 2774919874599358673}
   particle: {fileID: 1000012657451766, guid: 4451d4c0de3db0346b0ac628f0c87e4a, type: 3}
-  target: 2
+  target: 3
 --- !u!114 &2774919874599358675
 MonoBehaviour:
   m_ObjectHideFlags: 0

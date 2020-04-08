@@ -26,6 +26,7 @@ public class JumperSpawn : MonoBehaviour
         if (timer > spawnCD)
         {
             GameObject child = Instantiate(jumperObj, transform);
+            child.GetComponent<Jumper>().fromSpawn = true;
             Vector3 spawnPos = new Vector3(Random.Range(-spawnRange, spawnRange), 0, 0);
             child.transform.position += spawnPos;
             timer = 0;
