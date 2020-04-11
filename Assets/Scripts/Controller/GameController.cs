@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         ObjAudio();
+        EnemyActive();
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
         {
             if (bullet.transform.parent != bulletsList)
@@ -85,7 +86,8 @@ public class GameController : MonoBehaviour
         player.transform.position = mask == null ?
             maskObj.transform.position : mask.transform.position;
         if (ActiveCam().GetComponent<CameraController>())
-            ActiveCam().GetComponent<CameraController>().follower = mask == null ? player : mask;
+            ActiveCam().GetComponent<CameraController>().follower =
+                mask == null ? ColliNameManager.Instance.Follower : mask;
     }
 
     public void ObjAudio()
@@ -95,13 +97,23 @@ public class GameController : MonoBehaviour
         {
             if (child.GetComponent<AudioSource>())
             {
-                float height = ActiveCam().orthographicSize;
-                float width = height * ActiveCam().aspect;
-                if (child.transform.position.x > ActiveCam().transform.position.x - width && child.transform.position.x < ActiveCam().transform.position.x + width && child.transform.position.y > ActiveCam().transform.position.y - height && child.transform.position.y < ActiveCam().transform.position.y + height)
+                if (InCamera(child.transform))
                     child.GetComponent<AudioSource>().mute = false;
                 else
                     child.GetComponent<AudioSource>().mute = true;
             }
+        }
+    }
+
+    public void EnemyActive()
+    {
+        Transform enemy = Maps[mapNumber].transform.Find("Enemy");
+        foreach (Transform child in enemy)
+        {
+            if (InCamera(child))
+                child.gameObject.SetActive(true);
+            else
+                child.gameObject.SetActive(false);
         }
     }
 
@@ -115,6 +127,21 @@ public class GameController : MonoBehaviour
         }
         return ColliNameManager.Instance.MainCamera;
     }
+
+    private bool InCamera(Transform child)
+    {
+        float height = ActiveCam().orthographicSize;
+        float width = height * ActiveCam().aspect;
+
+        if (child.position.x > ActiveCam().transform.position.x - width 
+            && child.position.x < ActiveCam().transform.position.x + width 
+            && child.position.y > ActiveCam().transform.position.y - height 
+            && child.position.y < ActiveCam().transform.position.y + height)
+            return true;
+        else
+            return false;
+    }
+
 
     public static GameController _instance;
     public static GameController Instance

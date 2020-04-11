@@ -104,7 +104,7 @@ public class PacMan : MonoBehaviour
                 collision.gameObject.SetActive(false);
                 break;
             case "Enemy":
-                if (transform.childCount > 1)
+                if (!transform.GetChild(0).childCount.Equals(0))
                     return;
                 else
                     GhostManager.Instance.gameOver = true;

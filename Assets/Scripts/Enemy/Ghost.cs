@@ -18,6 +18,7 @@ public class Ghost : MonoBehaviour
 
     private AIPath aiPath;
     private Animator anim;
+    private Transform target;
 
     private int dir = 0;
     private int life;
@@ -28,6 +29,7 @@ public class Ghost : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         aiPath = GetComponent<AIPath>();
+        target = GetComponent<AIDestinationSetter>().target;
         life = GhostManager.ghostLife;
     }
 
@@ -37,6 +39,9 @@ public class Ghost : MonoBehaviour
         if (life <= 0 && canDead)
             status = Status.Die;
         else if (life < 3 && !canDead)
+            status = Status.Escape;
+
+        if (ColliNameManager.Instance.MapPacMan.transform.GetChild(0).GetChild(0).childCount > 0)
             status = Status.Escape;
 
         anim.SetFloat("Type", ghostType);
@@ -71,6 +76,7 @@ public class Ghost : MonoBehaviour
                 status = Status.Return;
                 break;
             case Status.Return:
+                GetComponent<AIDestinationSetter>().target = target;
                 if (!GhostManager.Instance.initialPos[iNum].isUsed)
                     status = Status.Attack;
                 break;
@@ -95,12 +101,12 @@ public class Ghost : MonoBehaviour
 
     IEnumerator Escape()
     {
+        yield return 0;
         yield return GetComponent<AIDestinationSetter>().target = EscapePos();
         life = GhostManager.ghostLife;
         status = Status.Attack;
         yield return new WaitForSeconds(GhostManager.Instance.reBackTime * 2);
-        yield return GetComponent<AIDestinationSetter>().target
-            = GameController.Instance.player.transform;
+        yield return GetComponent<AIDestinationSetter>().target = target;
 
         if (DOTween.IsTweening(transform))
             transform.DOKill();

@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public float Speed;
+    [HideInInspector]
     public GameObject follower;
     public Transform[] boundary;
 
@@ -15,7 +16,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        follower = GameController.Instance.player;
+        follower = ColliNameManager.Instance.Follower;
         height = GetComponent<Camera>().orthographicSize;
         width = height * GetComponent<Camera>().aspect;
     }

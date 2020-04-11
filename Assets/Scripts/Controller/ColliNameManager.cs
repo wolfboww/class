@@ -5,6 +5,7 @@ using UnityEngine;
 public class ColliNameManager : MonoBehaviour
 {
     [Header("GameObject")]
+    public GameObject Follower;
     public GameObject Gun;
     public GameObject Art;
     public GameObject Hat;

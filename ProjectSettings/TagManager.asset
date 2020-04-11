@@ -15,6 +15,7 @@ TagManager:
   - Injurant
   - Boundary
   - Button
+  - Boss
   layers:
   - Default
   - TransparentFX
