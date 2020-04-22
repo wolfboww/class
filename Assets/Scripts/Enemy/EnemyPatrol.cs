@@ -71,7 +71,8 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            if (collision.gameObject.GetComponent<BulletController>().playerBullet)
+            if (collision.gameObject.GetComponent<BulletController>())
+               if (collision.gameObject.GetComponent<BulletController>().playerBullet)
                 life--;
         }
     }

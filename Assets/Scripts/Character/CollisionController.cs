@@ -44,8 +44,13 @@ public class CollisionController : MonoBehaviour
                     collision.gameObject.GetComponentInChildren<DestroyController>().enabled = true;
                 break;
             case "Bullet":
-                if (collision.gameObject.GetComponent<BulletController>().playerBullet)
-                    return;
+                if (collision.gameObject.GetComponent<BulletController>())
+                {
+                    if (collision.gameObject.GetComponent<BulletController>().playerBullet)
+                        return;
+                }
+                else
+                    collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 Death();
                 break;
             case "Collection":

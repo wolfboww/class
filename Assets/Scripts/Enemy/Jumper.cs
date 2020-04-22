@@ -75,7 +75,7 @@ public class Jumper : MonoBehaviour
     {
         OnLand = collision.gameObject == ColliNameManager.Instance.HandleLand ? true : false;
 
-        if (collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Bullet" && collision.gameObject.GetComponent<BulletController>())
             if (collision.gameObject.GetComponent<BulletController>().playerBullet)
                 life--;
     }

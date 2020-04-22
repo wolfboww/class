@@ -13,6 +13,7 @@ public class MoveController : MonoBehaviour
     public bool isJump = false;
     [HideInInspector]
     public bool canMove = true;
+    public static bool canShoot = true;
     private bool isDoubleJump = false;
 
     private Transform groundCheck;
@@ -136,7 +137,7 @@ public class MoveController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))    // 射击and跳射
+        if (Input.GetMouseButtonDown(0) && canShoot)    // 射击and跳射
         {
             if (anim.GetBool("GetGun") && !IfBullet.bemask)
             {

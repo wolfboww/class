@@ -28,6 +28,8 @@ public class ShootButton : MonoBehaviour
     {
         if (collision.transform.tag == "Bullet")
         {
+            if (!collision.gameObject.GetComponent<BulletController>())
+                return;
             if (!collision.gameObject.GetComponent<BulletController>().playerBullet)
                 return;
 

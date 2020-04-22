@@ -11,6 +11,7 @@ public class ColliNameManager : MonoBehaviour
     public GameObject Hat;
     public GameObject MapPacMan;
     public GameObject HandleLand;
+    public GameObject BossSkate;
     public GameObject[] AnimBoundary;
 
     [Header("Button")]
@@ -25,6 +26,7 @@ public class ColliNameManager : MonoBehaviour
     public Camera MainCamera;
     public Camera SecondCamera;
     public Camera ThirdCamera;
+    public Camera ForthCamera;
 
     [Header("Audio")]
     public AudioClip enemy1;

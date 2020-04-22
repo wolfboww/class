@@ -5,8 +5,10 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject[] Maps;
+    public static bool isBoss;
     [HideInInspector]
     public Transform revivePoint;
+    public Transform reviveBossPoint;
     [HideInInspector]
     public GameObject player;
 
@@ -31,6 +33,7 @@ public class GameController : MonoBehaviour
         //ChangeMap();
         //ChangeMap();
         player.transform.position = revivePoint.position;
+        isBoss = false;
     }
 
     // Update is called once per frame
@@ -142,6 +145,12 @@ public class GameController : MonoBehaviour
             return false;
     }
 
+    public void BulletLookAt(Transform obj, Vector3 target)
+    {
+        Vector2 direction = target - obj.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        obj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
 
     public static GameController _instance;
     public static GameController Instance

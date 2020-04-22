@@ -34,7 +34,9 @@ public class AnimatorController : MonoBehaviour
     {
         anim.ResetTrigger("Dead");
         rig.constraints = RigidbodyConstraints2D.FreezeRotation;
-        transform.position = GameController.Instance.revivePoint.position;
+        transform.position = GameController.isBoss ? GameController.Instance.reviveBossPoint.position : GameController.Instance.revivePoint.position;
+        if (GameController.isBoss)
+            ThirdCamera.gameOver = true;
     }
 
     public void GetBuff(int i)
