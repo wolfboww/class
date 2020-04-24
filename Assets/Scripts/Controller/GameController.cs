@@ -51,13 +51,15 @@ public class GameController : MonoBehaviour
             player.GetComponent<Animator>().SetFloat("Edition", 1);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
+        { 
             ColliNameManager.Instance.Gun.transform.position = player.transform.position;
+            ColliNameManager.Instance.Art.transform.position = player.transform.position;
+        }  
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ChangeMap();
             player.transform.position = revivePoint.position;
         }
-
     }
 
     public void ChangeMap()

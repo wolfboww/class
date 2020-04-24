@@ -12,6 +12,7 @@ public class Parabola : MonoBehaviour
     private Transform target;
     private Tween _bulletTween;
     private TweenParams para;
+    public float dis =1;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class Parabola : MonoBehaviour
 
     void Update()
     {
-        if (timer >0.25f)
+        if (timer >dis)
         {
             StartCoroutine(WaterCurtain());
             timer = 0;
