@@ -5,7 +5,7 @@ using UnityEngine;
 public class Transmit : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         GameController.Instance.player.transform.position = transform.GetChild(0).position;
     }

@@ -135,6 +135,7 @@ public class MoveController : MonoBehaviour
                 anim.SetTrigger("DoubleJump");
                 rig.velocity = new Vector2(rig.velocity.x, jumpForce);
             }
+
         }
 
         if (Input.GetMouseButtonDown(0) && canShoot)    // 射击and跳射

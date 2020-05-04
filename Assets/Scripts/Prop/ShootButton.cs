@@ -24,6 +24,11 @@ public class ShootButton : MonoBehaviour
             anim = null;
     }
 
+    private void Delay()
+    {
+        targetObj.SetActive(false);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.transform.tag == "Bullet")
@@ -38,7 +43,7 @@ public class ShootButton : MonoBehaviour
             //    return;
 
             if (anim && shootNum == life)
-                anim.SetTrigger("Get");
+                StartCoroutine(GameController.Instance.ResetAnim(anim,"Get"));
 
             if (particle != null)
                 Instantiate(particle, transform.position, Quaternion.identity);
@@ -57,14 +62,14 @@ public class ShootButton : MonoBehaviour
                         if (shootNum < life)
                             shootNum++;
                         else
-                            targetObj.GetComponent<DestroyController>().enabled = true;
+                            targetObj.SetActive(false);
                         break;
                     case Target.ActivePlat:
                         if (!targetObj.activeInHierarchy)
                             targetObj.SetActive(true);
                         break;
                     case Target.AnimPlat:
-                        targetObj.GetComponent<Animator>().SetTrigger("Do");
+                        StartCoroutine(GameController.Instance.ResetAnim(targetObj.GetComponent<Animator>(), "Do"));
                         break;
                     case Target.HandlePlat:
                         targetObj.GetComponent<HandleMove>().handle.isPlus
@@ -76,4 +81,5 @@ public class ShootButton : MonoBehaviour
             }
         }
     }
+
 }

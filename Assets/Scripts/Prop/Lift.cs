@@ -6,6 +6,8 @@ public class Lift : MonoBehaviour
 {
     public float speed;
 
+    private GameObject light;
+    private Color initialColor;
     private Vector3 lastPos;
     private Vector3 newPos;
     private Vector3 targetPos;
@@ -18,6 +20,8 @@ public class Lift : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        light = transform.Find("light1").gameObject;
+        initialColor = light.GetComponent<SpriteRenderer>().color;
         lastPos = transform.position;
         newPos = transform.GetChild(0).position;
     }
@@ -28,6 +32,11 @@ public class Lift : MonoBehaviour
         targetPos = isPlayerOn ? newPos : lastPos;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
+        if (Vector3.Distance(transform.position, lastPos) < 0.1f)
+            light.GetComponent<SpriteRenderer>().color = Color.white;
+        else
+            light.GetComponent<SpriteRenderer>().color = initialColor;
+
         if (!timer.Equals(-1) && isPlayerOn)
         {
             timer += Time.deltaTime;
@@ -37,6 +46,9 @@ public class Lift : MonoBehaviour
                 isPlayerOn = false;
             }
         }
+
+        if (GameController.isRevive)
+            transform.position = lastPos;
     }
 
     private void OnCollisionStay2D(Collision2D collision)

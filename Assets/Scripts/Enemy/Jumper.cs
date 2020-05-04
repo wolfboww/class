@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Jumper : MonoBehaviour
 {
-    [HideInInspector]
     public bool fromSpawn;
 
     private Animator anim;
@@ -26,7 +25,9 @@ public class Jumper : MonoBehaviour
         groundCheck = transform.Find("groundCheck");
 
         if (fromSpawn)
+        {
             destroyHeight = transform.parent.GetComponent<JumperSpawn>().destroyHeight.position.y;
+        }
     }
 
     // Update is called once per frame
@@ -37,16 +38,20 @@ public class Jumper : MonoBehaviour
         if (fromSpawn)
         {
             anim.SetBool("OnPlane", !isJump && OnLand);
-            if (transform.position.y < destroyHeight)
-                anim.SetBool("isDead", true);
+            if (transform.position.y < destroyHeight || life < 0)
+            {
+                StartCoroutine(GameController.Instance.ResetAnim(anim, "Dead"));
+                Destroy(gameObject, 0.3f);
+            }
             if (transform.position.y < destroyHeight)
                 Destroy(GetComponent<DropControl>());
         }
         else
+        {
             anim.SetBool("OnPlane", !isJump);
-
-        if (life <= 0)
-            anim.SetBool("isDead", true);
+            GetComponent<EnemyPatrol>().enabled = !isJump;
+            GetComponent<EnemyPatrol>().dir = GetComponent<SpriteRenderer>().flipX ? EnemyPatrol.Dir.right : EnemyPatrol.Dir.left;
+        }
 
 
         switch (anim.GetCurrentAnimatorClipInfo(0)[0].clip.name)
@@ -57,7 +62,8 @@ public class Jumper : MonoBehaviour
                 break;
             case "EnemyAttack1":
                 rb.gravityScale = 1;
-                AttackDir();
+                if (fromSpawn)
+                    AttackDir();
                 break;
         }
     }

@@ -11,6 +11,8 @@ public class ColliNameManager : MonoBehaviour
     public GameObject Hat;
     public GameObject MapPacMan;
     public GameObject HandleLand;
+    public GameObject SwimArea;
+    public GameObject Princess;
     public GameObject BossSkate;
     public GameObject[] AnimBoundary;
 
@@ -30,6 +32,14 @@ public class ColliNameManager : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip enemy1;
+
+    [Header("Enemy")]
+    public GameObject Enemy1;
+    public GameObject Enemy2;
+    public GameObject Enemy3;
+    public GameObject Enemy4;
+    public GameObject Enemy5;
+
 
 
     /// ////////////////////

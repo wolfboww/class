@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PendulunAnim : MonoBehaviour
 {
+    public GameObject ballObj;
+
     private Animator anim;
     private Transform ball;
     private Transform player;
-    private float timer = 4;
+
+    private float timer = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +23,16 @@ public class PendulunAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponentInChildren<BoxCollider2D>().bounds.min.y > player.position.y)
-            anim.SetFloat("Distance", 4);
+        if (GameController.isRevive)
+        {
+            ballObj.transform.SetParent(transform.GetChild(0));
+            ballObj.transform.localPosition = Vector3.zero;
+            anim.SetFloat("Distance", 0);
+            timer = 1;
+        }
+
+        if (GetComponentInChildren<PolygonCollider2D>().bounds.min.y > player.position.y)
+            anim.SetFloat("Distance", 1);
 
         if (!anim.GetFloat("Distance").Equals(0))
         {
@@ -30,22 +41,11 @@ public class PendulunAnim : MonoBehaviour
             timer += Time.deltaTime;
             anim.SetFloat("Distance", timer);
         }
+
     }
 
     private void FrameAttack()
     {
-        ball.SetParent(null);
-        ball.GetComponent<Rigidbody2D>().gravityScale = 1;
-    }
-
-    IEnumerator FrameShake()
-    {
-        Vector3 frameShake = Random.insideUnitSphere * 0.1f;
-        do
-        {
-            yield return ball.position += frameShake;
-            yield return new WaitForSeconds(0.1f);
-            yield return ball.position -= frameShake;
-        } while (anim.GetCurrentAnimatorStateInfo(0).IsName("FrameShake"));
+        ball.transform.SetParent(null);
     }
 }

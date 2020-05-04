@@ -12,6 +12,7 @@ public class BossSkate : MonoBehaviour
 
     private Rigidbody2D rb;
     private Transform player;
+    private Vector3 dis;
 
     // Start is called before the first frame update
     void Start()
@@ -26,15 +27,14 @@ public class BossSkate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCol)
-            return;
-        if (childReady && Boss01.summonChildCount == 0)
+        if (childReady && Boss01.summonChildCount <= 0 || ThirdCamera.gameOver)
         {
             isCol = false;
             StartCoroutine(Return());
         }
-        else
-            rb.velocity = Vector3.zero;
+
+        if (transform.root.tag.Contains("Player"))
+            transform.localPosition = Vector3.zero;
     }
 
     IEnumerator Return()
@@ -54,6 +54,7 @@ public class BossSkate : MonoBehaviour
         }
         transform.SetParent(target);
         yield return transform.localPosition = Vector3.zero;
+        rb.velocity = Vector3.zero;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,7 +66,7 @@ public class BossSkate : MonoBehaviour
         {
             isCol = true;
             MoveController.canShoot = false;
-            StartCoroutine(Translate(player.Find("Follower").GetChild(0)));
+            StartCoroutine(Translate(player.Find("SkatePos")));
         }
     }
 }

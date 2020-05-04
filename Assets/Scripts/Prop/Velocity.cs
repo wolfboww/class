@@ -14,7 +14,7 @@ public class Velocity : MonoBehaviour
     private Vector3 moveDir = Vector3.down;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         switch (dir)
         {

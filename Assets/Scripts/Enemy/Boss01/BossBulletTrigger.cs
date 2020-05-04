@@ -11,6 +11,7 @@ public class BossBulletTrigger : MonoBehaviour
     public float spawnCD;
 
     private Tween _bulletTween;
+    private List<GameObject> bullet;
     private Vector3 player;
     private Vector3 spawnPos;
     private Vector3 initialPos;
@@ -21,6 +22,7 @@ public class BossBulletTrigger : MonoBehaviour
         spawnPos = transform.parent.Find("SpawnPos").position;
         initialPos = spawnPos;
         maXPosX = transform.parent.Find("MaxPos").position.x;
+        bullet = new List<GameObject>();
     }
 
     // Start is called before the first frame update
@@ -32,12 +34,13 @@ public class BossBulletTrigger : MonoBehaviour
     IEnumerator Spawn()
     {
         spawnPos = initialPos;
-        player = GameController.Instance.player.transform.position;
         for (; spawnPos.x < maXPosX;)
         {
+            player = GameController.Instance.player.transform.position;
             float kArch = Random.Range(0f, 1f);
             Vector3[] pointPos = GetWaveBullet(spawnPos, kArch);
             GameObject child = Instantiate(trackBullet, spawnPos, Quaternion.identity);
+            bullet.Add(child);
             if (player.x < child.transform.position.x && child.transform.lossyScale.x > 0)
             {
                 float x = -child.transform.localScale.x;
@@ -47,13 +50,24 @@ public class BossBulletTrigger : MonoBehaviour
             _bulletTween = child.transform.DOPath(pointPos, speed, PathType.CatmullRom).OnWaypointChange(p =>
             {
                 GameController.Instance.BulletLookAt(child.transform, player);
-            });
+            }).OnComplete(() => bullet.Remove(child));
             yield return spawnPos += Vector3.right;
+            //yield return new WaitForSeconds(0.1f);
         }
-        yield return 1;
+        yield return new WaitUntil(() => isDestroy(bullet));
         yield return Boss01.isSkill = false;
         this.enabled = false;
     }
+
+    private bool isDestroy(List<GameObject> child)
+    {
+        foreach (var item in child)
+            if (item != null)
+                return false;
+
+        return true;
+    }
+
 
     public Vector3[] GetWaveBullet(Vector3 emitPoint, float kArch)
     {

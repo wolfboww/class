@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &435208384314510556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1953437768178552787}
+  m_Layer: 13
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1953437768178552787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435208384314510556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.38, y: 1.349, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2976028200158447369}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2976028200158447374
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +43,6 @@ GameObject:
   - component: {fileID: 2976028200158447375}
   - component: {fileID: 2976028200158447412}
   - component: {fileID: 2976028200158447371}
-  - component: {fileID: 2976028200158447370}
   - component: {fileID: 8431414121754900798}
   - component: {fileID: 4291594784534369429}
   m_Layer: 13
@@ -33,7 +62,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1953437768178552787}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -151,20 +181,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2976028200158447370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2976028200158447374}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9b02bb54388ca458f1690283e22957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  desTime: 0
-  prefabpartical: {fileID: 0}
 --- !u!114 &8431414121754900798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +207,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dir: 2
   initialDir: 0
+  canPursue: 1
+  bullet: {fileID: 2417912384101967613, guid: 466e48afcd58fa941bc8009725ea917a, type: 3}
+  shootCD: 1
   speed: 2
-  maxDis: 3
+  maxDis: 0
   life: 1

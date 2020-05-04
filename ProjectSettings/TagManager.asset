@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Plane
-  - Bounce
   - Enemy
   - Collection
   - Bullet
@@ -16,6 +15,7 @@ TagManager:
   - Boundary
   - Button
   - Boss
+  - RevivePoint
   layers:
   - Default
   - TransparentFX
@@ -33,7 +33,7 @@ TagManager:
   - Enemy
   - IfBullet
   - Boss
-  - 
+  - OnlyPlayerCol
   - 
   - 
   - 

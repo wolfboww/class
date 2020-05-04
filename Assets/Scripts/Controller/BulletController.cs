@@ -9,8 +9,8 @@ public class BulletController : MonoBehaviour
     public float desTime;
     public bool playerBullet = false;
     public GameObject prefabpartical;
+    public Vector2 dir = Vector2.right;
 
-    private Vector2 dir = Vector2.right;
     private bool col = false;
     private float timer = 0;
     private Animator anim;
@@ -48,6 +48,9 @@ public class BulletController : MonoBehaviour
             else
                 GetComponent<DestroyController>().enabled = true;
         }
+
+        if (ThirdCamera.gameOver)
+            Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

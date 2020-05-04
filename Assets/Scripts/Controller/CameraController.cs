@@ -41,5 +41,6 @@ public class CameraController : MonoBehaviour
         }
         limitPos = new Vector3(Mathf.Clamp(transform.position.x, boundary[0].position.x + width, boundary[1].position.x - width), Mathf.Clamp(transform.position.y, boundary[1].position.y + height, boundary[0].position.y - height), -10);
         transform.position = limitPos;
+
     }
 }

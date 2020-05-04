@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 {
     public GameObject[] Maps;
     public static bool isBoss;
+    public static bool isRevive;
     [HideInInspector]
     public Transform revivePoint;
     public Transform reviveBossPoint;
@@ -28,12 +29,9 @@ public class GameController : MonoBehaviour
     void Start()
     {
         bulletsList = transform.Find("BulletsList");
-        //mask = player.transform.Find("Mask");
-        //ChangeMap();
-        //ChangeMap();
-        //ChangeMap();
         player.transform.position = revivePoint.position;
         isBoss = false;
+        isRevive = false;
     }
 
     // Update is called once per frame
@@ -51,10 +49,10 @@ public class GameController : MonoBehaviour
             player.GetComponent<Animator>().SetFloat("Edition", 1);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        { 
+        {
             ColliNameManager.Instance.Gun.transform.position = player.transform.position;
             ColliNameManager.Instance.Art.transform.position = player.transform.position;
-        }  
+        }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ChangeMap();
@@ -70,7 +68,7 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < Maps[mapNumber].transform.Find("Boundary").childCount; i++)
             ActiveCam().GetComponent<CameraController>().boundary[i]
                 = Maps[mapNumber].transform.Find("Boundary").GetChild(i);
-        revivePoint = Maps[mapNumber].transform.Find("StartPoint");
+        revivePoint = Maps[mapNumber].transform.Find("StartPoint").GetChild(0);
     }
 
     public void Mask(GameObject mask)
@@ -117,12 +115,10 @@ public class GameController : MonoBehaviour
         {
             if (InCamera(child))
                 child.gameObject.SetActive(true);
-            else
-                child.gameObject.SetActive(false);
         }
     }
 
-    private Camera ActiveCam()
+    public Camera ActiveCam()
     {
         Camera[] camera = FindObjectsOfType<Camera>();
         foreach (var item in camera)
@@ -138,9 +134,9 @@ public class GameController : MonoBehaviour
         float height = ActiveCam().orthographicSize;
         float width = height * ActiveCam().aspect;
 
-        if (child.position.x > ActiveCam().transform.position.x - width 
-            && child.position.x < ActiveCam().transform.position.x + width 
-            && child.position.y > ActiveCam().transform.position.y - height 
+        if (child.position.x > ActiveCam().transform.position.x - width
+            && child.position.x < ActiveCam().transform.position.x + width
+            && child.position.y > ActiveCam().transform.position.y - height
             && child.position.y < ActiveCam().transform.position.y + height)
             return true;
         else
@@ -152,6 +148,13 @@ public class GameController : MonoBehaviour
         Vector2 direction = target - obj.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         obj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    public IEnumerator ResetAnim(Animator anim, string name)
+    {
+        anim.SetTrigger(name);
+        yield return 2;
+        anim.ResetTrigger(name);
     }
 
     public static GameController _instance;

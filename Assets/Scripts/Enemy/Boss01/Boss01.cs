@@ -6,7 +6,7 @@ public class Boss01 : MonoBehaviour
 {
     public enum State
     {
-        Idle, Run, Attack, Skill1, Skill2, Skill3
+        Idle, Run, Attack, Skill1, Skill2, Skill3, Show
     }
     public State state = State.Idle;
     public static bool isSkill;
@@ -17,6 +17,7 @@ public class Boss01 : MonoBehaviour
     public GameObject bossBullet;
     public GameObject bulletTrigger;
     public float moveSpeed;
+    public int life;
     public static bool isTrigger;
 
     private Rigidbody2D rig;
@@ -74,11 +75,41 @@ public class Boss01 : MonoBehaviour
         StartCoroutine(BossControl());
     }
 
+    public IEnumerator BossControl()
+    {
+        yield return state = State.Idle;
+        yield return new WaitForSeconds(2);
+        while (life > 0)
+        {
+            yield return StartCoroutine(SkillAndShow(State.Skill1));
+            yield return StartCoroutine(SkillAndShow(State.Skill3));
+            yield return StartCoroutine(SkillAndShow(State.Skill2));
+            yield return StartCoroutine(SkillAndShow(State.Skill3));
+            yield return StartCoroutine(SkillAndShow(State.Skill2));
+        }
+    }
+
+    IEnumerator SkillAndShow(State s)
+    {
+        yield return state = s;
+        yield return new WaitUntil(() => !isSkill);
+        yield return StartCoroutine(TVLight(0, 0));
+        anim.SetTrigger("Show");
+        yield return new WaitWhile(() => anim.GetCurrentAnimatorStateInfo(0).IsName("BossShow"));
+        yield return new WaitForSeconds(2);
+    }
+
     // Update is called once per frame
     void Update()
     {
         onPlane = Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
         anim.SetBool("OnPlane", onPlane);
+
+        if (ThirdCamera.gameOver)
+        {
+            StopAllCoroutines();
+            return;
+        }
 
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("BossJump"))
         {
@@ -113,12 +144,8 @@ public class Boss01 : MonoBehaviour
                 bulletTrigger.SetActive(false);
             if (location.Find("LocatePos").gameObject.activeInHierarchy)
                 location.Find("LocatePos").gameObject.SetActive(false);
-        }
-
-        if (ThirdCamera.gameOver)
-        {
-            StopAllCoroutines();
-            deAnim.SetTrigger("Return");
+            if (device.GetComponent<SpriteRenderer>().enabled)
+                device.GetComponent<SpriteRenderer>().enabled = false;
         }
 
         StateController();
@@ -152,7 +179,6 @@ public class Boss01 : MonoBehaviour
                     StartCoroutine(BulletRain());
                     break;
                 case State.Idle:
-                    StartCoroutine(TVLight(0, 0));
                     bulletClone = null;
                     isTrigger = false;
                     break;
@@ -160,20 +186,6 @@ public class Boss01 : MonoBehaviour
         }
         else if (state == State.Idle)
             complete = false;
-    }
-
-    public IEnumerator BossControl()
-    {
-        yield return state = State.Idle;
-        yield return new WaitForSeconds(2);
-        yield return state = State.Skill1;
-        yield return new WaitUntil(() => !isSkill);
-        yield return new WaitForSeconds(2);
-        yield return state = State.Skill3;
-        yield return new WaitUntil(() => !isSkill);
-        yield return new WaitForSeconds(2);
-        yield return state = State.Skill2;
-        yield return new WaitUntil(() => !isSkill);
     }
 
     IEnumerator TVLight(float TV1, float TV2)
@@ -260,7 +272,9 @@ public class Boss01 : MonoBehaviour
     IEnumerator Jump()
     {
         isSkill = true;
+        deAnim.ResetTrigger("Return");
         yield return StartCoroutine(TVLight(90, 90));
+        device.GetComponent<SpriteRenderer>().enabled = true;
         deAnim.SetInteger("Step", 1);
         yield return StartCoroutine(Back(device.transform));
         yield return 0;
@@ -291,22 +305,24 @@ public class Boss01 : MonoBehaviour
 
     IEnumerator Summon()
     {
-
+        summonChildCount = summonTime;
         for (int i = 0; i < summonTime; i++)
         {
             if (state == State.Skill1 || state == State.Skill3)
                 break;
 
-            Vector3 pos = device.transform.GetChild(0).position;
+            Vector3 pos = device.transform.parent.Find("EnemySpawn").position;
             yield return pos.x = Random.Range(limit[0].x, limit[1].x);
-            GameObject summon = Instantiate(bossSummon, device.transform.GetChild(0));
+            GameObject summon = Instantiate(bossSummon, device.transform.parent.Find("EnemySpawn"));
             summon.transform.position = pos;
             summon.GetComponent<BossEnemy>().limitY =
-                device.transform.Find("LimitY").position.y;
+                device.transform.parent.Find("LimitY").position.y;
             yield return new WaitForSeconds(1);
         }
         yield return bossSkate.GetComponent<BossSkate>().childReady = true;
-        StopCoroutine(Summon());
+        yield return new WaitUntil(() => summonChildCount <= 0);
+        isSkill = false;
+        deAnim.SetTrigger("Return");
     }
 
     IEnumerator BulletRain()
@@ -318,11 +334,13 @@ public class Boss01 : MonoBehaviour
             () => anim.GetCurrentAnimatorStateInfo(0).IsName("BossReturn"));
         trigger.transform.position = transform.Find("TriggerPos").position;
         bulletTrigger.SetActive(true);
+        yield return new WaitForSeconds(1);
         anim.SetFloat("Angle", 0);
         yield return 1;
         Shoot();
         trigger.Translate(new Vector3(transform.lossyScale.x > 0 ? -1 : 1, 1) * 0.05f);
         yield return new WaitUntil(() => isTrigger);
+        yield return new WaitForSeconds(1);
         trigger.GetComponent<BossBulletTrigger>().enabled = true;
         anim.SetFloat("Angle", 0.5f);
         yield return state = State.Idle;
@@ -345,7 +363,7 @@ public class Boss01 : MonoBehaviour
 
     private void HideSkate(int i)
     {
-        skate.GetComponentInChildren<SpriteRenderer>().enabled =
+        ColliNameManager.Instance.BossSkate.GetComponentInChildren<SpriteRenderer>().enabled =
             i.Equals(0) ? true : false;
     }
 

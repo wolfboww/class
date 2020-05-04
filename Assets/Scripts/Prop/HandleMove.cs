@@ -14,6 +14,7 @@ public class HandleMove : MonoBehaviour
     public bool isHor;
     public Sprite[] handleDown;
 
+    private Sprite sprite;
     private Vector3[] boundary = new Vector3[2];
     private Vector3 dir = Vector3.zero;
     private float speed = 2;
@@ -26,6 +27,7 @@ public class HandleMove : MonoBehaviour
 
         boundary[0] = transform.Find("Boundary").GetChild(0).position;
         boundary[1] = transform.Find("Boundary").GetChild(1).position;
+        sprite = GetComponentInChildren<SpriteRenderer>().sprite;
     }
 
     // Update is called once per frame
@@ -35,7 +37,10 @@ public class HandleMove : MonoBehaviour
             return;
 
         if (!IfBullet.bemask)
+        {
             handle.isPlus = 0;
+            GetComponentInChildren<SpriteRenderer>().sprite = sprite;
+        }
 
         if (handle.isHorizontal)
         {
@@ -52,11 +57,11 @@ public class HandleMove : MonoBehaviour
         else
         {
             if (transform.position.y < boundary[1].y)
-                dir = handle.isPlus > 0 ? Vector3.up : Vector3.zero;
+                dir = handle.isPlus < 0 ? Vector3.up : Vector3.zero;
             else if (transform.position.y > boundary[0].y)
-                dir = handle.isPlus > 0 ? Vector3.zero : Vector3.down;
+                dir = handle.isPlus < 0 ? Vector3.zero : Vector3.down;
             else
-                dir = handle.isPlus > 0 ? Vector3.up : Vector3.down;
+                dir = handle.isPlus < 0 ? Vector3.up : Vector3.down;
 
             GetComponentInChildren<SpriteRenderer>().sprite =
                 handle.isPlus > 0 ? handleDown[0] : handleDown[1];

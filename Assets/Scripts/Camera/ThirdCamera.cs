@@ -16,6 +16,8 @@ public class ThirdCamera : MonoBehaviour
     private Transform bossPos;
     private GameObject player;
     private Animator anim;
+    private Coroutine async;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,11 @@ public class ThirdCamera : MonoBehaviour
     void Update()
     {
         if (gameOver)
-            StartCoroutine(GameReturn());
+        {
+            if (async != null)
+                return;
+            async = StartCoroutine(GameReturn());
+        }
     }
 
     IEnumerator BossAnim()
@@ -62,10 +68,15 @@ public class ThirdCamera : MonoBehaviour
         Boss.SetActive(true);
         player.transform.position = playerPos.position;
         player.transform.localScale = new Vector3(1, 1, 1);
+        yield return 1;
         forthCamera.GetComponent<CameraBlack>().enabled = true;
         yield return new WaitUntil(() => forthCamera.GetComponent<BrightnessSaturationAndContrast>().brightness >= 0.9f);
         Boss.GetComponent<Animator>().SetTrigger("Run");
+        yield return new WaitUntil(() => Boss.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+        Boss.GetComponent<Animator>().SetTrigger("Action");
         GetComponent<StopControl>().PlayerStop(0);
+        bossPos.GetComponent<BoxCollider2D>().isTrigger = false;
+        async = null;
     }
 
     IEnumerator GameReturn()
@@ -73,6 +84,10 @@ public class ThirdCamera : MonoBehaviour
         yield return 1;
         gameOver = false;
         Boss01.isSkill = false;
+        Boss.GetComponent<Animator>().SetTrigger("Win");
+        Boss.GetComponent<Boss01>().enabled = false;
+        bossPos.GetComponent<BoxCollider2D>().isTrigger = true;
+        yield return new WaitUntil(() => Boss.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
         ColliNameManager.Instance.BossSkate.GetComponent<BossSkate>().childReady = false;
         forthCamera.GetComponent<CameraBlack>().enabled = false;
         yield return forthCamera.GetComponent<CameraBlack>().targetBrightness = 0;
@@ -86,10 +101,12 @@ public class ThirdCamera : MonoBehaviour
 
         if (ColliNameManager.Instance.BossSkate.transform.parent != Boss.transform.parent.Find("SkatePos"))
             ColliNameManager.Instance.BossSkate.transform.SetParent(Boss.transform.parent.Find("SkatePos"));
+        Boss.transform.parent.Find("SkatePos").localPosition = Vector3.zero;
         yield return forthCamera.GetComponent<CameraBlack>().targetBrightness = 1;
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(GameStart());
-        yield return StartCoroutine(Boss.GetComponent<Boss01>().BossControl());
+        yield return 1;
+        yield return Boss.GetComponent<Boss01>().enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

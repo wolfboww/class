@@ -5,6 +5,8 @@ using UnityEngine;
 public class Translate : MonoBehaviour
 {
     public float moveSpeed = 1f;
+    public bool isProp;
+
     private Vector3 moveto;
     private Vector3 origin;
     private Vector3 target;
@@ -24,6 +26,13 @@ public class Translate : MonoBehaviour
             moveto = moveto == target ? origin : target;
         else
             transform.position = Vector3.MoveTowards(transform.position, moveto, moveSpeed * Time.deltaTime);
+
+        if (GameController.isRevive)
+        {
+            transform.position = origin;
+            if (isProp)
+                this.enabled = false;
+        }
     }
 
 }

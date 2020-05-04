@@ -10,6 +10,8 @@ public class MaskControl : MonoBehaviour
     void Start()
     {
         hatObj = Instantiate(ColliNameManager.Instance.Hat, transform.Find("hatPos"));
+        hatObj.GetComponent<Animator>().SetFloat("Edition",
+            GameController.Instance.player.GetComponent<Animator>().GetFloat("Edition"));
 
     }
 

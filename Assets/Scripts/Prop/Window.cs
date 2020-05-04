@@ -5,6 +5,8 @@ using UnityEngine;
 public class Window : MonoBehaviour
 {
     public float speed = 1;
+    public bool playerChange;
+    public bool horizontal;
 
     private Vector3 origin;
     private Vector3 target;
@@ -21,22 +23,49 @@ public class Window : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moveto && transform.position.x < target.x)
-            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        else if (transform.position.x >= target.x)
+        if (horizontal)
         {
-            GameController.Instance.player.transform.position = transform.GetChild(1).position;
-            moveback = true;
-            moveto = false;
+            if (moveto)
+            {
+                if (Mathf.Abs(transform.position.x - target.x) > 0.1f)
+                    transform.Translate((target - transform.position).normalized * 0.35f);
+                if (Mathf.Abs(transform.position.x - target.x) <= 0.5f)
+                {
+                    if (playerChange)
+                        GameController.Instance.player.transform.position = transform.GetChild(1).position;
+                    moveback = true;
+                    moveto = false;
+                }
+            }
+            if (moveback && Mathf.Abs(transform.position.x - target.x) > 0.1f)
+                transform.position = Vector3.MoveTowards(transform.position, origin, speed * Time.deltaTime);
+            else
+                moveback = false;
+        }
+        else
+        {
+            if (moveto)
+            {
+                if (Mathf.Abs(transform.position.y - target.y) > 0.1f)
+                    transform.Translate((target - transform.position).normalized * 0.35f);
+                if (Mathf.Abs(transform.position.y - target.y) <= 0.5f)
+                {
+                    if (playerChange)
+                        GameController.Instance.player.transform.position = transform.GetChild(1).position;
+                    moveback = true;
+                    moveto = false;
+                }
+            }
+
+            if (moveback && Mathf.Abs(transform.position.y - target.y) > 0.1f)
+                transform.position = Vector3.MoveTowards(transform.position, origin, speed * Time.deltaTime);
+            else
+                moveback = false;
         }
 
-        if (moveback && transform.position.x >= origin.x)
-            transform.position = Vector3.MoveTowards(transform.position, origin, speed * Time.deltaTime);
-        else
-            moveback = false;
-
+        if (GameController.isRevive)
+            transform.position = origin;
     }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.transform.tag == "Player")

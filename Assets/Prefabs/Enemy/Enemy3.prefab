@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 2976028200158447412}
   - component: {fileID: 2976028200158447371}
   - component: {fileID: 2976028200158447413}
-  - component: {fileID: 2976028200158447370}
+  - component: {fileID: 3023913021487377244}
   - component: {fileID: 8431414121754900798}
   m_Layer: 13
   m_Name: Enemy3
@@ -65,6 +65,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2976028200111052423}
+  - {fileID: 8978207359214767499}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fromSpawn: 0
---- !u!114 &2976028200158447370
+--- !u!114 &3023913021487377244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,11 +205,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2976028200158447374}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9b02bb54388ca458f1690283e22957, type: 3}
+  m_Script: {fileID: 11500000, guid: fdbdc22a1b319cf48bbbabf1ba9df461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desTime: 0
-  prefabpartical: {fileID: 0}
+  dir: 2
+  initialDir: 0
+  canPursue: 1
+  bullet: {fileID: 2417912384101967613, guid: 466e48afcd58fa941bc8009725ea917a, type: 3}
+  shootCD: 2
+  speed: 2
+  maxDis: 2
+  life: 1
 --- !u!114 &8431414121754900798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,3 +228,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc031e9ad2ecf74498a2abfa89a2903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3769378949937350564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8978207359214767499}
+  m_Layer: 13
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8978207359214767499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3769378949937350564}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.4, y: 1.376, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2976028200158447369}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

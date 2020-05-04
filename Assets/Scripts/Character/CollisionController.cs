@@ -22,6 +22,10 @@ public class CollisionController : MonoBehaviour
         if (IfBullet.bemask)
             return;
 
+        if (collision.gameObject == ColliNameManager.Instance.Princess)
+            StartCoroutine(GameController.Instance.ResetAnim(collision.gameObject.GetComponentInParent<Animator>(), "Get"));
+
+
         switch (collision.transform.tag)
         {
             case "Enemy":
@@ -41,7 +45,7 @@ public class CollisionController : MonoBehaviour
                 if (collision.gameObject == ColliNameManager.Instance.RotateButton)
                     collision.transform.GetComponent<Rotate>().enabled = true;
                 else if (collision.gameObject == ColliNameManager.Instance.DesTrapButton)
-                    collision.gameObject.GetComponentInChildren<DestroyController>().enabled = true;
+                    collision.transform.GetChild(0).gameObject.SetActive(false);
                 break;
             case "Bullet":
                 if (collision.gameObject.GetComponent<BulletController>())
@@ -95,12 +99,19 @@ public class CollisionController : MonoBehaviour
                 }
                 break;
             case "Boundary":
-                GameController.Instance.ChangeMap();
-                GameObject[] sprites = collision.gameObject.GetComponent<Boundary>().Sprites;
-                if (sprites.Length > 0)
-                    foreach (var item in sprites)
-                        if (!item.activeInHierarchy)
-                            item.gameObject.SetActive(true);
+                if (anim.GetFloat("Edition") < 0.1f)
+                {
+                    GameController.Instance.ChangeMap();
+                    GameObject[] sprites = collision.gameObject.GetComponent<Boundary>().Sprites;
+                    if (sprites.Length > 0)
+                        foreach (var item in sprites)
+                            if (!item.activeInHierarchy)
+                                item.gameObject.SetActive(true);
+                }
+                else
+                {
+                    GameController.Instance.ActiveCam().GetComponent<CameraController>().boundary[1] = collision.transform.parent.GetChild(int.Parse(collision.gameObject.name));
+                }
                 break;
             case "Button":
                 foreach (var item in ColliNameManager.Instance.AnimBoundary)
