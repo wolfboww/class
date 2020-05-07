@@ -164,12 +164,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dir: 2
   initialDir: 1
-  canPursue: 1
+  canPursue: 0
   bullet: {fileID: 0}
   shootCD: 0
   speed: 2
   maxDis: 3
   life: 1
+  isDead: 0
 --- !u!114 &7964158814078524161
 MonoBehaviour:
   m_ObjectHideFlags: 0
