@@ -58,7 +58,7 @@ public class EnemyPatrol : MonoBehaviour
                 Pursue();
             Shoot();
         }
-        else if (!maxDis.Equals(0))
+        else
             Patrol();
 
 
@@ -120,7 +120,15 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Patrol()
     {
-        anim.SetBool("Attack", false);
+        anim.SetBool("Attack", maxDis.Equals(0) ? false : true);
+        if (initialDir)
+            GetComponent<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
+        else
+            GetComponent<SpriteRenderer>().flipX = dir == Dir.right ? true : false;
+
+        if (maxDis.Equals(0))
+            return;
+
         switch (dir)
         {
             case Dir.left:
@@ -145,10 +153,6 @@ public class EnemyPatrol : MonoBehaviour
             dir = moveBack;
             pos = transform.position;
         }
-        if (initialDir)
-            GetComponent<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
-        else
-            GetComponent<SpriteRenderer>().flipX = dir == Dir.right ? true : false;
     }
 
     public void Revive()
