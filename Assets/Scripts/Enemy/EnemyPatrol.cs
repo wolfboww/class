@@ -56,6 +56,8 @@ public class EnemyPatrol : MonoBehaviour
         {
             if (canPursue)
                 Pursue();
+            else
+                Patrol();
             Shoot();
         }
         else
@@ -120,7 +122,8 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Patrol()
     {
-        anim.SetBool("Attack", maxDis.Equals(0) ? false : true);
+            anim.SetBool("Attack", maxDis.Equals(0) ? false : true);
+
         if (initialDir)
             GetComponent<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
         else
