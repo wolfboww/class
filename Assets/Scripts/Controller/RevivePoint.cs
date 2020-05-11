@@ -76,7 +76,6 @@ public class RevivePoint : MonoBehaviour
             if (GameController.Instance.player.GetComponent<Animator>().GetFloat("Edition") > 0.1f)
                 GameController.Instance.ActiveCam().GetComponent<CameraController>().boundary[1] = transform.root.Find("Boundary").GetChild(1).GetChild(int.Parse(transform.parent.name));
         }
-        Debug.Log(life + "  " + CollisionController.life);
     }
 
     IEnumerator Revive()
