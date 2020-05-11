@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
     {
         _instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
+        CollisionController.life = 1;
     }
 
     // Start is called before the first frame update
@@ -51,12 +52,17 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ColliNameManager.Instance.Gun.transform.position = player.transform.position;
-            ColliNameManager.Instance.Art.transform.position = player.transform.position;
+            //ColliNameManager.Instance.Art.transform.position = player.transform.position;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ChangeMap();
             player.transform.position = revivePoint.position;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (CollisionController.life < 3)
+                CollisionController.life++;
         }
     }
 
@@ -69,6 +75,7 @@ public class GameController : MonoBehaviour
             ActiveCam().GetComponent<CameraController>().boundary[i]
                 = Maps[mapNumber].transform.Find("Boundary").GetChild(i);
         revivePoint = Maps[mapNumber].transform.Find("StartPoint").GetChild(0);
+        HPUI.edition++;
     }
 
     public void Mask(GameObject mask)

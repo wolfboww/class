@@ -18,6 +18,7 @@ public class RevivePoint : MonoBehaviour
         public bool isActive;
     }
 
+    private int life;
     private bool revive = false;
     private GameObj[] enemyObj;
     private SetActObj[] setActObj;
@@ -40,7 +41,7 @@ public class RevivePoint : MonoBehaviour
                 enemyObj[i].pos = EnemyObj[i - enemyObj.Length].transform.position;
             }
         }
-
+        life = CollisionController.life;
         setActObj = new SetActObj[ActiveObj.Length];
         for (int i = 0; i < setActObj.Length; i++)
         {
@@ -55,6 +56,7 @@ public class RevivePoint : MonoBehaviour
         if (revive && GameController.isRevive)
         {
             revive = false;
+            CollisionController.life = life;
             StartCoroutine(Revive());
             for (int i = 0; i < enemyObj.Length; i++)
             {
@@ -74,6 +76,7 @@ public class RevivePoint : MonoBehaviour
             if (GameController.Instance.player.GetComponent<Animator>().GetFloat("Edition") > 0.1f)
                 GameController.Instance.ActiveCam().GetComponent<CameraController>().boundary[1] = transform.root.Find("Boundary").GetChild(1).GetChild(int.Parse(transform.parent.name));
         }
+        Debug.Log(life + "  " + CollisionController.life);
     }
 
     IEnumerator Revive()
@@ -88,6 +91,7 @@ public class RevivePoint : MonoBehaviour
         {
             GameController.Instance.revivePoint = transform;
             revive = true;
+            life = life < CollisionController.life ? CollisionController.life : life;
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 public class CollisionController : MonoBehaviour
 {
+    public static int life;
+
     private Animator anim;
     private AudioSource au;
     private Rigidbody2D rig;
@@ -29,7 +31,7 @@ public class CollisionController : MonoBehaviour
         switch (collision.transform.tag)
         {
             case "Enemy":
-                Death();
+                LoseHP();
                 break;
             case "Bounce":
                 if (!ctr.isJump)
@@ -55,7 +57,7 @@ public class CollisionController : MonoBehaviour
                 }
                 else
                     collision.gameObject.GetComponent<DestroyController>().enabled = true;
-                Death();
+                LoseHP();
                 break;
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
@@ -69,7 +71,7 @@ public class CollisionController : MonoBehaviour
         {
             case "Trap":
                 if (!ctr.isJump)
-                    Death();
+                    LoseHP();
                 else    //被踩蘑菇
                 {
                     au.clip = ColliNameManager.Instance.enemy1;
@@ -82,7 +84,7 @@ public class CollisionController : MonoBehaviour
                 }
                 break;
             case "Injurant":
-                Death();
+                LoseHP();
                 break;
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
@@ -91,11 +93,13 @@ public class CollisionController : MonoBehaviour
                     GetComponent<AnimatorController>().GetBuff(1);
                     GetComponent<Animator>().SetBool("GetGun", true);
                     GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.ElseBullet);
+                    BulletUI.bulletNum++;
                 }
                 else if (collision.gameObject == ColliNameManager.Instance.Art)
                 {
                     GetComponent<AnimatorController>().GetBuff(2);
                     GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
+                    BulletUI.bulletNum++;
                 }
                 break;
             case "Boundary":
@@ -123,8 +127,12 @@ public class CollisionController : MonoBehaviour
         }
     }
 
-    private void Death()
+    private void LoseHP()
     {
+        life--;
+        if (life > 0)
+            return;
+
         anim.speed = 1;
         anim.SetTrigger("Dead");
         rig.constraints = RigidbodyConstraints2D.FreezeAll;
