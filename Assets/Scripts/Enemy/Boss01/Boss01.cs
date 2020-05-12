@@ -190,6 +190,8 @@ public class Boss01 : MonoBehaviour
 
     IEnumerator TVLight(float TV1, float TV2)
     {
+        TVButton[0].GetComponent<AudioSource>().enabled = true;
+
         while (Mathf.Abs(TVButton[0].eulerAngles.z - TV1) > 0.1f)
         {
             if (TVButton[0].eulerAngles.z < TV1)
@@ -206,6 +208,7 @@ public class Boss01 : MonoBehaviour
                 TVButton[1].Rotate(Vector3.back, rotateSpeed);
         }
         yield return new WaitForSeconds(1);
+        TVButton[0].GetComponent<AudioSource>().enabled = false;
     }
 
 

@@ -6,7 +6,7 @@ public class ShootButton : MonoBehaviour
 {
     public enum Target
     {
-        None, transPlat, rotatePlat, DesPlat, ActivePlat, AnimPlat, HandlePlat
+        None, transPlat, rotatePlat, DesPlat, ActivePlat, AnimPlat, HandlePlat, LiftPlat
     }
     public int life;
     public GameObject targetObj;
@@ -43,7 +43,7 @@ public class ShootButton : MonoBehaviour
             //    return;
 
             if (anim && shootNum == life)
-                StartCoroutine(GameController.Instance.ResetAnim(anim,"Get"));
+                StartCoroutine(GameController.Instance.ResetAnim(anim, "Get"));
 
             if (particle != null)
                 Instantiate(particle, transform.position, Quaternion.identity);
@@ -76,6 +76,9 @@ public class ShootButton : MonoBehaviour
                             = int.Parse(transform.name);
                         GameController.Instance.player.transform.
                             SetParent(transform.parent.GetChild(0).GetChild(0));
+                        break;
+                    case Target.LiftPlat:
+                        targetObj.GetComponent<SpriteRenderer>().color = Color.white;
                         break;
                 }
             }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RevivePoint : MonoBehaviour
 {
+    public static float edition;
     public GameObject[] EnemyObj;
     public GameObject[] AnimObj;
     public GameObject[] ActiveObj;
@@ -18,6 +19,7 @@ public class RevivePoint : MonoBehaviour
         public bool isActive;
     }
 
+    private Animator anim;
     private int life;
     private bool revive = false;
     private GameObj[] enemyObj;
@@ -26,6 +28,7 @@ public class RevivePoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         enemyObj = new GameObj[transform.root.Find("Enemy").childCount + EnemyObj.Length];
         for (int i = 0; i < enemyObj.Length; i++)
         {
@@ -53,11 +56,13 @@ public class RevivePoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        anim.SetFloat("Edition", edition);
         if (revive && GameController.isRevive)
         {
             revive = false;
             CollisionController.life = life;
             StartCoroutine(Revive());
+            StartCoroutine(Reset(anim));
             for (int i = 0; i < enemyObj.Length; i++)
             {
                 GameObject child = enemyObj[i].prefab;
@@ -65,11 +70,17 @@ public class RevivePoint : MonoBehaviour
                     child.SetActive(true);
                 child.transform.position = enemyObj[i].pos;
                 if (child.GetComponentInChildren<Animator>())
+                {
                     child.GetComponentInChildren<Animator>().SetTrigger("Revive");
+                    StartCoroutine(Reset(child.GetComponentInChildren<Animator>()));
+                }
             }
 
             foreach (GameObject item in AnimObj)
+            {
                 item.GetComponent<Animator>().SetTrigger("Revive");
+                StartCoroutine(Reset(item.GetComponent<Animator>()));
+            }
             for (int i = 0; i < setActObj.Length; i++)
                 setActObj[i].obj.SetActive(setActObj[i].isActive);
 
@@ -84,11 +95,19 @@ public class RevivePoint : MonoBehaviour
         GameController.isRevive = false;
     }
 
+    IEnumerator Reset(Animator anim)
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (anim != null)
+            anim.ResetTrigger("Revive");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             GameController.Instance.revivePoint = transform;
+            anim.SetTrigger("Revive");
             revive = true;
             life = life < CollisionController.life ? CollisionController.life : life;
         }

@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
         _instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         CollisionController.life = 1;
+        RevivePoint.edition = 0;
     }
 
     // Start is called before the first frame update
@@ -52,7 +53,8 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ColliNameManager.Instance.Gun.transform.position = player.transform.position;
-            //ColliNameManager.Instance.Art.transform.position = player.transform.position;
+            ColliNameManager.Instance.Art.SetActive(true);
+            ColliNameManager.Instance.Art.transform.position = player.transform.position;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -69,13 +71,14 @@ public class GameController : MonoBehaviour
     public void ChangeMap()
     {
         mapNumber++;
+        HPUI.edition++;
+        RevivePoint.edition++;
         Maps[mapNumber].SetActive(true);
         Maps[mapNumber - 1].SetActive(false);
         for (int i = 0; i < Maps[mapNumber].transform.Find("Boundary").childCount; i++)
             ActiveCam().GetComponent<CameraController>().boundary[i]
                 = Maps[mapNumber].transform.Find("Boundary").GetChild(i);
         revivePoint = Maps[mapNumber].transform.Find("StartPoint").GetChild(0);
-        HPUI.edition++;
     }
 
     public void Mask(GameObject mask)
@@ -120,7 +123,7 @@ public class GameController : MonoBehaviour
         Transform enemy = Maps[mapNumber].transform.Find("Enemy");
         foreach (Transform child in enemy)
         {
-            if (InCamera(child))
+            if (InCamera(child) && child.name != "ActiveEnemy")
                 child.gameObject.SetActive(true);
         }
     }

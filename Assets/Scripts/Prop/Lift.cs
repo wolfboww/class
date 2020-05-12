@@ -5,6 +5,7 @@ using UnityEngine;
 public class Lift : MonoBehaviour
 {
     public float speed;
+    public bool buttonController;
 
     private GameObject light;
     private Color initialColor;
@@ -34,7 +35,7 @@ public class Lift : MonoBehaviour
 
         if (Vector3.Distance(transform.position, lastPos) < 0.1f)
             light.GetComponent<SpriteRenderer>().color = Color.white;
-        else
+        else if (!buttonController)
             light.GetComponent<SpriteRenderer>().color = initialColor;
 
         if (!timer.Equals(-1) && isPlayerOn)

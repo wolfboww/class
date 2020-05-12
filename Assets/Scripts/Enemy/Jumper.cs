@@ -38,7 +38,7 @@ public class Jumper : MonoBehaviour
         if (fromSpawn)
         {
             anim.SetBool("OnPlane", !isJump && OnLand);
-            if (transform.position.y < destroyHeight || life < 0)
+            if (transform.position.y < destroyHeight || life <= 0)
             {
                 StartCoroutine(GameController.Instance.ResetAnim(anim, "Dead"));
                 Destroy(gameObject, 0.3f);

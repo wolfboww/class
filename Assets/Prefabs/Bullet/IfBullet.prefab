@@ -122,10 +122,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d364f90ff0ca7409e59b959329a5da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  independentDir: 0
   speed: 50
-  desTime: 4
+  desTime: 0.35
   playerBullet: 1
   prefabpartical: {fileID: 0}
+  dir: {x: 1, y: 0}
 --- !u!114 &3893124741400417998
 MonoBehaviour:
   m_ObjectHideFlags: 0

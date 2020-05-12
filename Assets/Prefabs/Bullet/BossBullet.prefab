@@ -117,7 +117,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000015258789, y: -0.0500412}
+  m_Offset: {x: 0.008972168, y: 0.048461914}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -128,7 +128,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.94918823, y: 0.6390228}
+  m_Size: {x: 0.96710205, y: 0.6282959}
   m_EdgeRadius: 0
 --- !u!114 &7067248578435019789
 MonoBehaviour:
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBoss: 1
   dir: {x: 0, y: 0, z: 0}
+  skate: 0
 --- !u!114 &5538278395859109522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +197,4 @@ MonoBehaviour:
   desTime: 3
   playerBullet: 0
   prefabpartical: {fileID: 0}
+  dir: {x: 1, y: 0}

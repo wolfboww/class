@@ -15,6 +15,7 @@ public class EnemyPatrol : MonoBehaviour
     public float shootCD;
     public float speed;
     public float maxDis;
+    public float pursueDistance = 6;   //追踪距离
     public int life;
     [HideInInspector]
     public bool isDead = false;
@@ -26,7 +27,6 @@ public class EnemyPatrol : MonoBehaviour
     private Vector3 pos;
     private Vector3 shootPos;
     private float timer = 0;
-    private float pursueDistance = 6;   //追踪距离
     private int shootNum = 0;
     private int maxLife;
 
@@ -46,10 +46,14 @@ public class EnemyPatrol : MonoBehaviour
     void Update()
     {
         if (life <= 0)
+        {
+            anim.ResetTrigger("Revive");
             StartCoroutine(GameController.Instance.ResetAnim(anim, "Dead"));
+        }
 
         enemyDir = player.position.x > transform.position.x ?
             Vector3.right : Vector3.left;
+        isDead = anim.GetCurrentAnimatorStateInfo(0).IsName("EnemyDead");
         if (isDead || IfBullet.bemask)
             return;
         else if (Vector3.Distance(player.position, transform.position) < pursueDistance && RayHit())
@@ -62,7 +66,6 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
             Patrol();
-
 
         if (GameController.isRevive)
             Revive();
@@ -102,6 +105,11 @@ public class EnemyPatrol : MonoBehaviour
         if (bullet == null)
             return;
 
+        if (initialDir)
+            GetComponent<SpriteRenderer>().flipX = enemyDir == Vector3.left ? true : false;
+        else
+            GetComponent<SpriteRenderer>().flipX = enemyDir == Vector3.right ? true : false;
+
         timer += Time.deltaTime;
         if (timer > shootCD)
         {
@@ -122,7 +130,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Patrol()
     {
-            anim.SetBool("Attack", maxDis.Equals(0) ? false : true);
+        anim.SetBool("Attack", maxDis.Equals(0) ? false : true);
 
         if (initialDir)
             GetComponent<SpriteRenderer>().flipX = dir == Dir.left ? true : false;
@@ -160,6 +168,7 @@ public class EnemyPatrol : MonoBehaviour
 
     public void Revive()
     {
+        life = maxLife;
         if (GetComponent<Jumper>())
         {
             if (GetComponent<Jumper>().fromSpawn)
@@ -167,9 +176,9 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
         {
-            life = maxLife;
             anim.SetBool("Attack", false);
         }
+        shootNum = 0;
     }
 
     public void EnemyDead(int i)

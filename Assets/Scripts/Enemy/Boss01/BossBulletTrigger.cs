@@ -12,6 +12,7 @@ public class BossBulletTrigger : MonoBehaviour
 
     private Tween _bulletTween;
     private List<GameObject> bullet;
+    private GameObject effect;
     private Vector3 player;
     private Vector3 spawnPos;
     private Vector3 initialPos;
@@ -23,12 +24,19 @@ public class BossBulletTrigger : MonoBehaviour
         initialPos = spawnPos;
         maXPosX = transform.parent.Find("MaxPos").position.x;
         bullet = new List<GameObject>();
+        effect = transform.Find("Effect").gameObject;
     }
 
     // Start is called before the first frame update
     void OnEnable()
     {
         StartCoroutine(Spawn());
+        effect.SetActive(true);
+    }
+
+    void OnDisable()
+    {
+        effect.SetActive(false );
     }
 
     IEnumerator Spawn()

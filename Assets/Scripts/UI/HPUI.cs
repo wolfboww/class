@@ -44,6 +44,8 @@ public class HPUI : MonoBehaviour
             return;
         if (activeNum > CollisionController.life)
         {
+            if (activeNum <= 0)
+                return;
             HPchild[activeNum - 1].GetComponent<Animator>().SetTrigger("LoseHP");
         }
         else

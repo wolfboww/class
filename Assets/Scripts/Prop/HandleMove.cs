@@ -34,13 +34,13 @@ public class HandleMove : MonoBehaviour
     void Update()
     {
         if (handle.isPlus.Equals(0))
+        {
+            GetComponentInChildren<SpriteRenderer>().sprite = sprite;
             return;
+        }
 
         if (!IfBullet.bemask)
-        {
             handle.isPlus = 0;
-            GetComponentInChildren<SpriteRenderer>().sprite = sprite;
-        }
 
         if (handle.isHorizontal)
         {

@@ -70,9 +70,11 @@ public class GhostManager : MonoBehaviour
         pacMan.GetComponentInChildren<PacMan>().dir = PacMan.Dir.right;
         pacMan.GetComponent<AIPath>().enabled = false;
         bean.ReStart();
+        transform.root.GetComponentInChildren<AudioSource>().enabled = false;
         yield return gameOver = false;
         yield return new WaitForSeconds(reBackTime);
         pacMan.GetComponent<AIPath>().enabled = true;
+        transform.root.GetComponentInChildren<AudioSource>().enabled = true;
     }
 
 

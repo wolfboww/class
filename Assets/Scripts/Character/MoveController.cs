@@ -18,8 +18,10 @@ public class MoveController : MonoBehaviour
 
     private Transform groundCheck;
     private Transform weaponPoint;
+    private Transform bubble;
     private Rigidbody2D rig;
     private Animator anim;
+    private Coroutine bubbleCor = null;
 
     private float masktimer = 0;
     private float maskTime = 5;
@@ -38,6 +40,7 @@ public class MoveController : MonoBehaviour
     {
         groundCheck = transform.Find("GroundCheck");
         weaponPoint = transform.Find("WeaponPoint");
+        bubble = transform.Find("BubblePos");
         Scale = transform.localScale;
         scaleX = Scale.x;
 
@@ -52,7 +55,6 @@ public class MoveController : MonoBehaviour
         isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
         anim.SetBool("Stand", !isJump);
         JumpControl();
-
 
         if (IfBullet.bemask)
         {
@@ -87,6 +89,29 @@ public class MoveController : MonoBehaviour
             }
         }
 
+
+        if (bubble.gameObject.activeInHierarchy)
+        {
+            if (bubbleCor != null)
+                return;
+            bubbleCor = StartCoroutine(Bubble());
+        }
+        else
+        {
+            StopCoroutine(Bubble());
+            bubbleCor = null;
+        }
+    }
+
+    IEnumerator Bubble()
+    {
+        while (bubble.gameObject.activeInHierarchy)
+        {
+            bubble.GetComponentInChildren<AudioSource>().enabled = true;
+            yield return new WaitForSeconds(bubble.GetComponentInChildren<AudioSource>().clip.length + 0.5f);
+            bubble.GetComponentInChildren<AudioSource>().enabled = false;
+            yield return new WaitForSeconds(1);
+        }
     }
 
     public void MoveControl()

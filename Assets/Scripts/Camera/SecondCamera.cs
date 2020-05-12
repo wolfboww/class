@@ -33,5 +33,6 @@ public class SecondCamera : MonoBehaviour
             GhostManager.Instance.enemy.GetChild(i).GetComponent<Ghost>().status = Ghost.Status.Die;
         yield return new WaitForSeconds(3);
         ColliNameManager.Instance.MapPacMan.GetComponent<AIPath>().enabled = true;
+        transform.root.GetComponent<AudioSource>().enabled = true;
     }
 }

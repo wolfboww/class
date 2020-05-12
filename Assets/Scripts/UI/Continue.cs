@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Continue : MonoBehaviour
 {
+    public GameObject Action;
+
     private Animator anim;
     private GameObject[] child;
 
@@ -33,15 +36,20 @@ public class Continue : MonoBehaviour
 
     IEnumerator ContinueImage()
     {
-        child[0].SetActive(true);
+        child[1].SetActive(true);
         anim.SetTrigger("IsActive");
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("PleaseEnter"));
-        child[1].SetActive(true);
-        yield return new WaitUntil(() => enter);
         child[2].SetActive(true);
+        yield return new WaitUntil(() => enter);
+        child[3].SetActive(true);
         anim.SetTrigger("Enter");
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("StartLoading") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1);
-        child[3].SetActive(true);
+        child[4].SetActive(true);
+    }
+
+    public void GameContinue()
+    {
+        Action.SetActive(true);
     }
 
     void OnDisable()

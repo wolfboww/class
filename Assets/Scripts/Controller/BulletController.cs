@@ -9,6 +9,7 @@ public class BulletController : MonoBehaviour
     public float desTime;
     public bool playerBullet = false;
     public GameObject prefabpartical;
+    [HideInInspector]
     public Vector2 dir = Vector2.right;
 
     private bool col = false;
@@ -40,7 +41,10 @@ public class BulletController : MonoBehaviour
             col = true;
 
         if (!col)
-            transform.Translate(dir * speed * Time.deltaTime);
+        {
+            if (!independentDir)
+                transform.Translate(dir * speed * Time.deltaTime);
+        }
         else
         {
             if (anim != null)
