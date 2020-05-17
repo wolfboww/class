@@ -133,8 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   desTime: 0
-  prefabpartical: {fileID: 1000012820763552, guid: 4dadae33774dfbb42ac44805a8405f53,
-    type: 3}
+  prefabpartical: {fileID: 0}
 --- !u!95 &7237898324043974636
 Animator:
   serializedVersion: 3

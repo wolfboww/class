@@ -7,6 +7,7 @@ public class PlatAnim : MonoBehaviour
     public GameObject[] enemy;
 
     private Animator anim;
+    private Coroutine cor;
 
     // Start is called before the first frame update
     void Start()
@@ -17,18 +18,41 @@ public class PlatAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameController.isRevive)
+            StartCoroutine(Revive());
+
         foreach (var item in enemy)
         {
-            if (item != null)
+            if (!item.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("EnemyDead"))
                 return;
         }
 
-        Invoke("Anim", 1);
+        if (cor != null)
+            return;
+        cor = StartCoroutine(Anim());
     }
 
-    private void Anim()
+    IEnumerator Revive()
+    {
+        anim.ResetTrigger("Do");
+        yield return new WaitUntil(() =>
+        {
+            foreach (var item in enemy)
+            {
+                if (item.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("EnemyDead"))
+                    return false;
+            }
+            return true;
+
+        });
+        cor = null;
+
+    }
+
+    IEnumerator Anim()
     {
         anim.SetTrigger("Do");
-
+        yield return 1;
+        anim.ResetTrigger("Do");
     }
 }

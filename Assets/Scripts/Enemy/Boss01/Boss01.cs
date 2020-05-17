@@ -1,23 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class Boss01 : MonoBehaviour
 {
     public enum State
     {
-        Idle, Run, Attack, Skill1, Skill2, Skill3, Show
+        Idle, Run, Attack, Skill1, Skill2, Skill3, Skill4, Skill5
     }
     public State state = State.Idle;
     public static bool isSkill;
     public Transform[] TVButton;
+    public Transform bossUI;
     public GameObject device;
     public GameObject bossSummon;
     public static int summonChildCount;
     public GameObject bossBullet;
     public GameObject bulletTrigger;
+    public GameObject bulletEffect;
     public float moveSpeed;
-    public int life;
+    public static int life;
+    [HideInInspector]
+    public int skill;
     public static bool isTrigger;
 
     private Rigidbody2D rig;
@@ -38,12 +44,12 @@ public class Boss01 : MonoBehaviour
     private Vector3 skatePos;
     private bool onPlane;
     private bool complete = false;
-    private int skill;
     private int summonTime = 10;
     private float checkRadius = 0.5f;
     private float jumpForce = 10;
-    private float rotateSpeed = 1;
+    private float rotateSpeed = 5;
     private float angle;
+    private float timer = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -66,6 +72,7 @@ public class Boss01 : MonoBehaviour
         trigger = bulletTrigger.transform.GetChild(0);
         deAnim = device.GetComponent<Animator>();
         summonChildCount = summonTime;
+        life = 100;
         isTrigger = false;
         isSkill = false;
     }
@@ -79,14 +86,11 @@ public class Boss01 : MonoBehaviour
     {
         yield return state = State.Idle;
         yield return new WaitForSeconds(2);
-        while (life > 0)
-        {
-            yield return StartCoroutine(SkillAndShow(State.Skill1));
-            yield return StartCoroutine(SkillAndShow(State.Skill3));
-            yield return StartCoroutine(SkillAndShow(State.Skill2));
-            yield return StartCoroutine(SkillAndShow(State.Skill3));
-            yield return StartCoroutine(SkillAndShow(State.Skill2));
-        }
+        yield return StartCoroutine(SkillAndShow(State.Skill1));
+        yield return StartCoroutine(SkillAndShow(State.Skill3));
+        yield return StartCoroutine(SkillAndShow(State.Skill2));
+        yield return StartCoroutine(SkillAndShow(State.Skill5));
+        yield return StartCoroutine(SkillAndShow(State.Skill4));
     }
 
     IEnumerator SkillAndShow(State s)
@@ -148,6 +152,27 @@ public class Boss01 : MonoBehaviour
                 device.GetComponent<SpriteRenderer>().enabled = false;
         }
 
+        if (timer > 4)
+        {
+            timer = 0;
+            StartCoroutine(Anim("Run"));
+        }
+        else
+            timer += Time.deltaTime;
+
+        if (life > 50)
+        {
+            bossUI.GetChild(0).GetChild(0).GetComponent<Image>().DOFillAmount((float)(life - 50) / 50, 0.1f);
+            bossUI.GetChild(1).GetChild(0).GetComponent<Image>().fillAmount = 1;
+        }
+        else if (life > 0)
+        {
+            bossUI.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 0;
+            bossUI.GetChild(1).GetChild(0).GetComponent<Image>().DOFillAmount((float)life / 50, 0.1f);
+        }
+        else
+            StartCoroutine(Anim("Dead"));
+
         StateController();
     }
 
@@ -168,16 +193,23 @@ public class Boss01 : MonoBehaviour
                     Shoot();
                     break;
                 case State.Skill1:  // 定位
+                    StartCoroutine(TVLight(0, 90));
+                    skill:
                     skill = 1;
                     StartCoroutine(Locate());
                     break;
                 case State.Skill2:  // 召唤伞兵
+                    StartCoroutine(TVLight(90, 90));
                     StartCoroutine(Jump());
                     break;
                 case State.Skill3:  // 子弹雨
                     skill = 3;
+                    StartCoroutine(TVLight(90, 0));
                     StartCoroutine(BulletRain());
                     break;
+                case State.Skill4:
+                case State.Skill5:
+                    goto skill;
                 case State.Idle:
                     bulletClone = null;
                     isTrigger = false;
@@ -198,6 +230,7 @@ public class Boss01 : MonoBehaviour
                 TVButton[0].Rotate(Vector3.forward, rotateSpeed);
             else
                 TVButton[0].Rotate(Vector3.back, rotateSpeed);
+            yield return 1;
         }
 
         while (Mathf.Abs(TVButton[1].eulerAngles.z - TV2) > 0.1f)
@@ -206,6 +239,7 @@ public class Boss01 : MonoBehaviour
                 TVButton[1].Rotate(Vector3.forward, rotateSpeed);
             else
                 TVButton[1].Rotate(Vector3.back, rotateSpeed);
+            yield return 1;
         }
         yield return new WaitForSeconds(1);
         TVButton[0].GetComponent<AudioSource>().enabled = false;
@@ -223,7 +257,6 @@ public class Boss01 : MonoBehaviour
     IEnumerator Locate()
     {
         isSkill = true;
-        yield return StartCoroutine(TVLight(0, 90));
         Vector3 pos = location.position;
         if (player.position.x < limit[0].x)
             pos.x = limit[0].x;
@@ -235,8 +268,34 @@ public class Boss01 : MonoBehaviour
         yield return StartCoroutine(Back(player));
         yield return location.Find("LocatePos").position = pos;
         location.Find("LocatePos").gameObject.SetActive(true);
-        InvokeRepeating("Shoot", 1, 2);     // 散弹发射间隔
-        yield return state = State.Idle;
+
+        yield return new WaitUntil(() => location.Find("LocatePos").gameObject.activeInHierarchy);
+        while (true)
+        {
+
+            InvokeRepeating("Shoot", 1, 2);     // 散弹发射间隔
+            if (state == State.Skill4)
+            {
+                skill = 2;
+                StartCoroutine(Jump());
+                yield return new WaitUntil(() => summonChildCount == summonTime);
+                yield return new WaitUntil(() => summonChildCount <= 0);
+            }
+            else if (state == State.Skill5)
+            {
+                StartCoroutine(BulletRain());
+                yield return new WaitUntil(() => trigger.GetComponent<BossBulletTrigger>().enabled);
+                yield return new WaitWhile(() => trigger.GetComponent<BossBulletTrigger>().enabled);
+                bulletTrigger.SetActive(false);
+            }
+            else break;
+
+            if (!location.Find("LocatePos").gameObject.activeInHierarchy)
+                break;
+            yield return new WaitForSeconds(5);
+        }
+        state = State.Idle;
+
         yield return new WaitWhile(() => location.Find("LocatePos").gameObject.activeInHierarchy);
         isSkill = false;
         StopCoroutine(Locate());
@@ -263,10 +322,12 @@ public class Boss01 : MonoBehaviour
                 bulletClone.GetComponent<BossEnemyBullet>().dir = location.Find("Dir").position;
                 GameController.Instance.BulletLookAt(bulletClone.transform, location.Find("Dir").position);
                 break;
+            case 2:
+                break;
             case 3:
                 bulletClone = Instantiate(
                     bossBullet, weaponPoint.position, Quaternion.identity);
-                bulletClone.GetComponent<BossEnemyBullet>().dir = (weaponPoint.position - trigger.position).normalized * 10;
+                bulletClone.GetComponent<BossEnemyBullet>().dir = (weaponPoint.position - trigger.position).normalized * 20;
                 GameController.Instance.BulletLookAt(bulletClone.transform, (weaponPoint.position - trigger.position).normalized);
                 break;
         }
@@ -276,7 +337,6 @@ public class Boss01 : MonoBehaviour
     {
         isSkill = true;
         deAnim.ResetTrigger("Return");
-        yield return StartCoroutine(TVLight(90, 90));
         device.GetComponent<SpriteRenderer>().enabled = true;
         deAnim.SetInteger("Step", 1);
         yield return StartCoroutine(Back(device.transform));
@@ -294,7 +354,8 @@ public class Boss01 : MonoBehaviour
         skate.DetachChildren();
         BossSkate.canGet = true;
         yield return rig.velocity = new Vector2(rig.velocity.x, jumpForce);
-        yield return state = State.Idle;
+        if (state != State.Skill4)
+            state = State.Idle;
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => onPlane);
         yield return new WaitWhile(() => BossSkate.isCol);
@@ -308,6 +369,7 @@ public class Boss01 : MonoBehaviour
 
     IEnumerator Summon()
     {
+        skill = 1;
         summonChildCount = summonTime;
         for (int i = 0; i < summonTime; i++)
         {
@@ -324,14 +386,14 @@ public class Boss01 : MonoBehaviour
         }
         yield return bossSkate.GetComponent<BossSkate>().childReady = true;
         yield return new WaitUntil(() => summonChildCount <= 0);
-        isSkill = false;
+        if (state != State.Skill4)
+            isSkill = false;
         deAnim.SetTrigger("Return");
     }
 
     IEnumerator BulletRain()
     {
         isSkill = true;
-        yield return StartCoroutine(TVLight(90, 0));
         yield return StartCoroutine(Back(player));
         yield return new WaitWhile(
             () => anim.GetCurrentAnimatorStateInfo(0).IsName("BossReturn"));
@@ -340,14 +402,19 @@ public class Boss01 : MonoBehaviour
         yield return new WaitForSeconds(1);
         anim.SetFloat("Angle", 0);
         yield return 1;
+        skill = 3;
         Shoot();
         trigger.Translate(new Vector3(transform.lossyScale.x > 0 ? -1 : 1, 1) * 0.05f);
         yield return new WaitUntil(() => isTrigger);
+        if (state == State.Skill5)
+            skill = 1;
+        else
+            state = State.Idle;
         yield return new WaitForSeconds(1);
         trigger.GetComponent<BossBulletTrigger>().enabled = true;
         anim.SetFloat("Angle", 0.5f);
-        yield return state = State.Idle;
-        //trigger.GetComponent<BossBulletTrigger>().enabled = false;
+        yield return 1;
+
         StopCoroutine(BulletRain());
     }
 
@@ -373,6 +440,8 @@ public class Boss01 : MonoBehaviour
     private void Dead()
     {
         GameController.isBoss = false;
+        GameObject child = Instantiate(ColliNameManager.Instance.BossWinner, GameController.Instance.player.transform.Find("Follower").position, Quaternion.identity);
+        child.transform.localScale *= 1.5f;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -381,6 +450,26 @@ public class Boss01 : MonoBehaviour
         {
             deAnim.SetInteger("Step", 2);
             StartCoroutine(Summon());
+        }
+        if (collision.gameObject.GetComponent<BulletController>())
+            if (collision.gameObject.GetComponent<BulletController>().playerBullet)
+            {
+                GameObject effect = Instantiate(bulletEffect, collision.contacts[0].point, Quaternion.identity);
+                if (collision.contacts[0].point.y < (GetComponent<PolygonCollider2D>().bounds.max.y + GetComponent<PolygonCollider2D>().bounds.min.y * 2) / 3)
+                    life -= 4;
+                else if (collision.contacts[0].point.y > (GetComponent<PolygonCollider2D>().bounds.min.y + GetComponent<PolygonCollider2D>().bounds.max.y * 2) / 3)
+                    life -= 10;
+                else
+                    life -= 7;
+                StartCoroutine(Back(player));
+            }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "Boundary")
+        {
+            StartCoroutine(Anim("Return"));
         }
     }
 }

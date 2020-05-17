@@ -10,6 +10,7 @@ public class ThirdCamera : MonoBehaviour
     public Transform playerPos;
     public Transform device;
     public static bool gameOver;
+    public int bossLife = 100;
 
     private Transform thirdCamera;
     private Transform forthCamera;
@@ -73,6 +74,7 @@ public class ThirdCamera : MonoBehaviour
         yield return new WaitUntil(() => forthCamera.GetComponent<BrightnessSaturationAndContrast>().brightness >= 0.9f);
         Boss.GetComponent<Animator>().SetTrigger("Run");
         yield return new WaitUntil(() => Boss.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+        Boss01.life = bossLife;
         Boss.GetComponent<Animator>().SetTrigger("Action");
         GetComponent<StopControl>().PlayerStop(0);
         bossPos.GetComponent<BoxCollider2D>().isTrigger = false;
@@ -102,6 +104,7 @@ public class ThirdCamera : MonoBehaviour
         if (ColliNameManager.Instance.BossSkate.transform.parent != Boss.transform.parent.Find("SkatePos"))
             ColliNameManager.Instance.BossSkate.transform.SetParent(Boss.transform.parent.Find("SkatePos"));
         Boss.transform.parent.Find("SkatePos").localPosition = Vector3.zero;
+        ColliNameManager.Instance.BossSkate.GetComponent<Rigidbody2D>().mass = 1;
         yield return forthCamera.GetComponent<CameraBlack>().targetBrightness = 1;
         yield return new WaitForSeconds(2);
         yield return StartCoroutine(GameStart());

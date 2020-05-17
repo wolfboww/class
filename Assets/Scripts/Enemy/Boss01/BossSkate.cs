@@ -40,6 +40,7 @@ public class BossSkate : MonoBehaviour
     IEnumerator Return()
     {
         yield return StartCoroutine(Translate(skatePos));
+        rb.mass = 100;
         Boss01.isSkill = false;
         MoveController.canShoot = true;
         childReady = false;
@@ -66,6 +67,7 @@ public class BossSkate : MonoBehaviour
         {
             isCol = true;
             MoveController.canShoot = false;
+            rb.mass = 0;
             StartCoroutine(Translate(player.Find("SkatePos")));
         }
     }

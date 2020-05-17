@@ -492,11 +492,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map_Pac-Man
       objectReference: {fileID: 0}
-    - target: {fileID: 1171171917619066287, guid: ef882b0a755ebc349a5368af9fb1fad3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1171171917619066285, guid: ef882b0a755ebc349a5368af9fb1fad3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1395,6 +1390,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1475579470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4961981255750261408, guid: 2f215754799bd624f966b37773f8b2c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 8288659915804150806}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1537134360
 GameObject:
   m_ObjectHideFlags: 0
@@ -2226,10 +2227,13 @@ MonoBehaviour:
   SwimArea: {fileID: 8340309324129359183}
   Princess: {fileID: 1587129460494866600}
   BossSkate: {fileID: 7329651213718807055}
+  BossWinner: {fileID: 3532825880456604564, guid: 32f1f988a71aeb7498c0fd03e219670f,
+    type: 3}
   AnimBoundary:
   - {fileID: 883400908}
   - {fileID: 3414293481018851254}
   - {fileID: 4961981255736489717}
+  - {fileID: 1475579470}
   DesTrapButton: {fileID: 2916017845278895685}
   RotateButton: {fileID: 2916017845047201318}
   ElseBullet: {fileID: 1549626832037591205, guid: df1eb72b2aee6ed46b20e319380e18fb,
@@ -2417,11 +2421,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map_Second
       objectReference: {fileID: 0}
-    - target: {fileID: 1799102679844077356, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1799102679844077358, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2476,6 +2475,42 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.data[0].y
+      value: 3.7964163
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.data[0].x
+      value: -0.22689533
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.data[1].x
+      value: -0.20937824
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.data[1].y
+      value: -2.6142747
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.data[2].x
+      value: 0.6221943
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.data[2].y
+      value: -3.3843858
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.data[3].x
+      value: 0.5916462
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322732085, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
+      propertyPath: m_Points.Array.data[3].y
+      value: -3.5982685
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}

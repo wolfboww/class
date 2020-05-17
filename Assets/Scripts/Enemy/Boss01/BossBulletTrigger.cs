@@ -13,6 +13,8 @@ public class BossBulletTrigger : MonoBehaviour
     private Tween _bulletTween;
     private List<GameObject> bullet;
     private GameObject effect;
+    private Transform boss;
+
     private Vector3 player;
     private Vector3 spawnPos;
     private Vector3 initialPos;
@@ -25,6 +27,7 @@ public class BossBulletTrigger : MonoBehaviour
         maXPosX = transform.parent.Find("MaxPos").position.x;
         bullet = new List<GameObject>();
         effect = transform.Find("Effect").gameObject;
+        boss = transform.parent.parent.Find("Boss");
     }
 
     // Start is called before the first frame update
@@ -36,7 +39,7 @@ public class BossBulletTrigger : MonoBehaviour
 
     void OnDisable()
     {
-        effect.SetActive(false );
+        effect.SetActive(false);
     }
 
     IEnumerator Spawn()
@@ -63,7 +66,9 @@ public class BossBulletTrigger : MonoBehaviour
             //yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitUntil(() => isDestroy(bullet));
-        yield return Boss01.isSkill = false;
+
+        if (boss.GetComponent<Boss01>().state != Boss01.State.Skill5)
+            Boss01.isSkill = false;
         this.enabled = false;
     }
 

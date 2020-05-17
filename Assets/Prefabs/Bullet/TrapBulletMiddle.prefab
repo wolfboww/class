@@ -191,7 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   independentDir: 1
   speed: 2
-  desTime: 8
+  desTime: 4
   playerBullet: 0
   prefabpartical: {fileID: 0}
   dir: {x: 1, y: 0}

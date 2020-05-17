@@ -14,6 +14,7 @@ public class ColliNameManager : MonoBehaviour
     public GameObject SwimArea;
     public GameObject Princess;
     public GameObject BossSkate;
+    public GameObject BossWinner;
     public GameObject[] AnimBoundary;
 
     [Header("Button")]

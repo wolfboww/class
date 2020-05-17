@@ -63,6 +63,9 @@ public class RevivePoint : MonoBehaviour
             CollisionController.life = life;
             StartCoroutine(Revive());
             StartCoroutine(Reset(anim));
+
+            if (Mathf.Abs(edition - 1) <= 0.1f)
+                return;
             for (int i = 0; i < enemyObj.Length; i++)
             {
                 GameObject child = enemyObj[i].prefab;

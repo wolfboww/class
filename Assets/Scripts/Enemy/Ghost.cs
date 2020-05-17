@@ -11,6 +11,7 @@ public class Ghost : MonoBehaviour
         Attack, Escape, Die, Return, None
     }
 
+    public int life;
     public float ghostType;
     public bool canDead;
     //[HideInInspector]
@@ -21,13 +22,12 @@ public class Ghost : MonoBehaviour
     private Transform target;
 
     private int dir = 0;
-    private int life;
     private int iNum;
 
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         aiPath = GetComponent<AIPath>();
         target = GetComponent<AIDestinationSetter>().target;
         life = GhostManager.ghostLife;
@@ -64,10 +64,7 @@ public class Ghost : MonoBehaviour
                 anim.SetBool("isDead", true);
                 GetComponent<AIPath>().enabled = false;
                 iNum = GhostManager.Instance.ReBorn();
-
-                if (DOTween.IsTweening(transform))
-                    transform.DOKill();
-                transform.localScale = Vector3.one * 0.5f;
+                GetComponentInChildren<GhostFX>().Revive();
 
                 transform.position = GhostManager.Instance.initialPos[iNum].pos.position;
                 GhostManager.Instance.initialPos[iNum].timer = 0;
@@ -85,17 +82,22 @@ public class Ghost : MonoBehaviour
 
     private void MoveDir()
     {
-        if (aiPath.desiredVelocity.x <= -2f)
-            dir = 0;
-        else if (aiPath.desiredVelocity.x >= 2f)
-            dir = 1;
+        if (Mathf.Abs(aiPath.desiredVelocity.x) >= Mathf.Abs(aiPath.desiredVelocity.y))
+        {
+            if (aiPath.desiredVelocity.x <= -0.01f)
+                dir = 0;
+            else if (aiPath.desiredVelocity.x >= 0.01f)
+                dir = 1;
+        }
+        else
+        {
+            if (aiPath.desiredVelocity.y >= 0.01f)
+                dir = 2;
+            else if (aiPath.desiredVelocity.y <= -0.01f)
+                dir = 3;
+        }
 
-        if (aiPath.desiredVelocity.y >= 2f)
-            dir = 2;
-        else if (aiPath.desiredVelocity.y <= -2f)
-            dir = 3;
-
-        GetComponent<SpriteRenderer>().flipX = dir == 1 ? true : false;
+        GetComponentInChildren<SpriteRenderer>().flipX = dir == 1 ? true : false;
         anim.SetInteger("Dir", dir);
     }
 
@@ -108,9 +110,7 @@ public class Ghost : MonoBehaviour
         yield return new WaitForSeconds(GhostManager.Instance.reBackTime * 2);
         yield return GetComponent<AIDestinationSetter>().target = target;
 
-        if (DOTween.IsTweening(transform))
-            transform.DOKill();
-        transform.localScale = Vector3.one * 0.5f;
+        GetComponentInChildren<GhostFX>().Revive();
         StopCoroutine(Escape());
     }
 
@@ -135,16 +135,4 @@ public class Ghost : MonoBehaviour
         return GhostManager.Instance.escapePos[index];
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            if (!DOTween.IsTweening(transform))
-            {
-                life--;
-                transform.DOScale(transform.localScale * 0.9f, 1);
-                //transform.DOPunchScale(new Vector3(-0.1f, -0.1f, 0), 1, 1, 0);
-            }
-        }
-    }
 }
