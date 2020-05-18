@@ -107,6 +107,7 @@ public class Boss01 : MonoBehaviour
     void FixedUpdate()
     {
         StartCoroutine(Back(boundary));
+        transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.lossyScale.x > 0 ? Vector3.left : Vector3.right) * moveSpeed * 0.01f, 1);
     }
 
     // Update is called once per frame
@@ -129,11 +130,6 @@ public class Boss01 : MonoBehaviour
             else
                 pos.x = transform.localPosition.x - skatePos.x;
             skate.localPosition = pos;
-        }
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BossRunShoot"))
-        {
-            transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.lossyScale.x > 0 ? Vector3.left : Vector3.right) * moveSpeed, 1);
         }
 
         if (bossSkate.transform.parent == skate)
@@ -304,16 +300,21 @@ public class Boss01 : MonoBehaviour
         switch (skill)
         {
             case 0:
+                if (transform.position.x > player.position.x && transform.lossyScale.x < 0 || transform.position.x < player.position.x && transform.lossyScale.x > 0)
+                    return;
                 bulletClone = Instantiate(
-                    bossBullet, weaponPoint.position, Quaternion.identity);
+                bossBullet, weaponPoint.position, Quaternion.identity);
                 bulletClone.GetComponent<BossEnemyBullet>().dir = player.position;
                 GameController.Instance.BulletLookAt(bulletClone.transform, player.position);
                 break;
             case 1:
+
                 if (!location.Find("LocatePos").gameObject.activeInHierarchy)
                     CancelInvoke();
                 if (state == State.Skill2 || state == State.Skill3 || ThirdCamera.gameOver)
                     CancelInvoke();
+                if (transform.position.x > player.position.x && transform.lossyScale.x < 0 || transform.position.x < player.position.x && transform.lossyScale.x > 0)
+                    return;
 
                 bulletClone = Instantiate(
                     bossBullet, weaponPoint.position, Quaternion.identity);

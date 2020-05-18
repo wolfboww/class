@@ -7,10 +7,13 @@ public class ThirdCamera : MonoBehaviour
 {
     public GameObject TVLight;
     public GameObject Boss;
+    public GameObject Jxb;
+    public Transform JxbLimit;
     public Transform playerPos;
     public Transform device;
     public static bool gameOver;
     public int bossLife = 100;
+    public float maskCD;
 
     private Transform thirdCamera;
     private Transform forthCamera;
@@ -18,6 +21,8 @@ public class ThirdCamera : MonoBehaviour
     private GameObject player;
     private Animator anim;
     private Coroutine async;
+
+    private float timer = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +42,18 @@ public class ThirdCamera : MonoBehaviour
             if (async != null)
                 return;
             async = StartCoroutine(GameReturn());
+        }
+
+        if (!Jxb.activeInHierarchy && GameController.isBoss)
+        {
+            if (timer >= maskCD)
+            {
+                timer = 0;
+                Jxb.transform.position = new Vector3(Random.Range(JxbLimit.GetChild(0).position.x, JxbLimit.GetChild(1).position.x), Jxb.transform.position.y);
+                Jxb.SetActive(true);
+            }
+            else
+                timer += Time.deltaTime;
         }
     }
 

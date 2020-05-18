@@ -20,14 +20,14 @@ public class BossEnemyBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         if (!isBoss)
             dir = GameController.Instance.player.transform.position;
+        rb.velocity = (dir - transform.position).normalized * speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = skate ? CastLaser(direction) * speed
-            : (dir - transform.position).normalized * speed;
-        Debug.Log(rb.velocity);
+        if (skate)
+            rb.velocity = CastLaser(direction) * speed;
     }
 
     private Vector3 CastLaser(Vector3 other)
