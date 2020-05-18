@@ -40,6 +40,7 @@ public class Boss01 : MonoBehaviour
     private Transform trigger;
     private GameObject bulletClone;
     private Animator deAnim;
+    private Transform boundary;
 
     private Vector3 skatePos;
     private bool onPlane;
@@ -49,7 +50,6 @@ public class Boss01 : MonoBehaviour
     private float jumpForce = 10;
     private float rotateSpeed = 5;
     private float angle;
-    private float timer = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -69,6 +69,7 @@ public class Boss01 : MonoBehaviour
         weaponPoint = transform.Find("WeaponPoint");
         weaponPos = weaponPoint.position;
 
+        boundary = transform.parent.Find("Boundary").GetChild(0);
         trigger = bulletTrigger.transform.GetChild(0);
         deAnim = device.GetComponent<Animator>();
         summonChildCount = summonTime;
@@ -101,6 +102,11 @@ public class Boss01 : MonoBehaviour
         anim.SetTrigger("Show");
         yield return new WaitWhile(() => anim.GetCurrentAnimatorStateInfo(0).IsName("BossShow"));
         yield return new WaitForSeconds(2);
+    }
+
+    void FixedUpdate()
+    {
+        StartCoroutine(Back(boundary));
     }
 
     // Update is called once per frame
@@ -151,14 +157,6 @@ public class Boss01 : MonoBehaviour
             if (device.GetComponent<SpriteRenderer>().enabled)
                 device.GetComponent<SpriteRenderer>().enabled = false;
         }
-
-        if (timer > 4)
-        {
-            timer = 0;
-            StartCoroutine(Anim("Run"));
-        }
-        else
-            timer += Time.deltaTime;
 
         if (life > 50)
         {
@@ -429,6 +427,8 @@ public class Boss01 : MonoBehaviour
         float x = -transform.localScale.x;
         transform.localScale = new Vector3(x, transform.localScale.y);
         skate.localScale = new Vector3(x, skate.localScale.y);
+
+        boundary = boundary.name.Equals("Min") ? transform.parent.Find("Boundary").GetChild(1) : transform.parent.Find("Boundary").GetChild(0);
     }
 
     private void HideSkate(int i)
@@ -463,13 +463,5 @@ public class Boss01 : MonoBehaviour
                     life -= 7;
                 StartCoroutine(Back(player));
             }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "Boundary")
-        {
-            StartCoroutine(Anim("Return"));
-        }
     }
 }

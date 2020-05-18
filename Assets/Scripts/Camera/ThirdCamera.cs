@@ -87,7 +87,6 @@ public class ThirdCamera : MonoBehaviour
         gameOver = false;
         Boss01.isSkill = false;
         Boss.GetComponent<Animator>().SetTrigger("Win");
-        Boss.GetComponent<Boss01>().enabled = false;
         bossPos.GetComponent<BoxCollider2D>().isTrigger = true;
         yield return new WaitUntil(() => Boss.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
         ColliNameManager.Instance.BossSkate.GetComponent<BossSkate>().childReady = false;
@@ -97,6 +96,11 @@ public class ThirdCamera : MonoBehaviour
         yield return forthCamera.GetComponent<CameraBlack>().enabled = true;
         yield return new WaitUntil(() => forthCamera.GetComponent<BrightnessSaturationAndContrast>().brightness <= 0.1f);
         forthCamera.GetComponent<CameraBlack>().enabled = false;
+        thirdCamera.GetComponent<BrightnessSaturationAndContrast>().brightness = 1;
+        ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
+        forthCamera.gameObject.SetActive(false);
+        Boss.SetActive(false);
+        GameController.isBoss = false;
         yield return Boss.transform.position = bossPos.position;
         if (transform.position.x > player.transform.position.x && transform.lossyScale.x < 0 || transform.position.x < player.transform.position.x && transform.lossyScale.x > 0)
             Boss.GetComponent<Animator>().SetTrigger("Return");
@@ -104,12 +108,12 @@ public class ThirdCamera : MonoBehaviour
         if (ColliNameManager.Instance.BossSkate.transform.parent != Boss.transform.parent.Find("SkatePos"))
             ColliNameManager.Instance.BossSkate.transform.SetParent(Boss.transform.parent.Find("SkatePos"));
         Boss.transform.parent.Find("SkatePos").localPosition = Vector3.zero;
-        ColliNameManager.Instance.BossSkate.GetComponent<Rigidbody2D>().mass = 1;
+        ColliNameManager.Instance.BossSkate.GetComponent<Rigidbody2D>().mass = 100;
         yield return forthCamera.GetComponent<CameraBlack>().targetBrightness = 1;
         yield return new WaitForSeconds(2);
-        yield return StartCoroutine(GameStart());
-        yield return 1;
-        yield return Boss.GetComponent<Boss01>().enabled = true;
+        //yield return StartCoroutine(GameStart());
+        //yield return 1;
+        //yield return Boss.GetComponent<Boss01>().enabled = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

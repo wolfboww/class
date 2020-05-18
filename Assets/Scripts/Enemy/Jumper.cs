@@ -50,7 +50,6 @@ public class Jumper : MonoBehaviour
         {
             anim.SetBool("OnPlane", !isJump);
             GetComponent<EnemyPatrol>().enabled = !isJump;
-            GetComponent<EnemyPatrol>().dir = GetComponent<SpriteRenderer>().flipX ? EnemyPatrol.Dir.right : EnemyPatrol.Dir.left;
         }
 
 

@@ -40,8 +40,8 @@ public class RevivePoint : MonoBehaviour
             }
             else
             {
-                enemyObj[i].prefab = EnemyObj[i - enemyObj.Length];
-                enemyObj[i].pos = EnemyObj[i - enemyObj.Length].transform.position;
+                enemyObj[i].prefab = EnemyObj[i - transform.root.Find("Enemy").childCount];
+                enemyObj[i].pos = EnemyObj[i - transform.root.Find("Enemy").childCount].transform.position;
             }
         }
         life = CollisionController.life;
@@ -88,7 +88,11 @@ public class RevivePoint : MonoBehaviour
                 setActObj[i].obj.SetActive(setActObj[i].isActive);
 
             if (GameController.Instance.player.GetComponent<Animator>().GetFloat("Edition") > 0.1f)
+            {
+                if (GameController.Instance.ActiveCam().gameObject == ColliNameManager.Instance.ForthCamera)
+                    return;
                 GameController.Instance.ActiveCam().GetComponent<CameraController>().boundary[1] = transform.root.Find("Boundary").GetChild(1).GetChild(int.Parse(transform.parent.name));
+            }
         }
     }
 

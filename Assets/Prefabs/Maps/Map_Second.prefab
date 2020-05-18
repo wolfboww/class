@@ -9300,7 +9300,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2352388179711440722}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 16.269993, y: 2.71, z: 0}
+  m_LocalPosition: {x: 16.13, y: 7.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1799102678667963179}
@@ -18657,6 +18657,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4891739156444891976, guid: ebc814332f83c6a4680eb4b97ac88b98,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891739156444891976, guid: ebc814332f83c6a4680eb4b97ac88b98,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.43
+      objectReference: {fileID: 0}
     - target: {fileID: 1223032319277816680, guid: ebc814332f83c6a4680eb4b97ac88b98,
         type: 3}
       propertyPath: TVButton.Array.data[0]
@@ -18672,7 +18682,8 @@ PrefabInstance:
       propertyPath: bossUI
       value: 
       objectReference: {fileID: 1455211038}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4891739156444891977, guid: ebc814332f83c6a4680eb4b97ac88b98, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ebc814332f83c6a4680eb4b97ac88b98, type: 3}
 --- !u!4 &4912029346313186900 stripped
 Transform:
@@ -19618,11 +19629,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291594784534369429, guid: 5bbed48a81a2a1b40ba7c92f92b4dd52,
-        type: 3}
-      propertyPath: dir
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4291594784534369429, guid: 5bbed48a81a2a1b40ba7c92f92b4dd52,
         type: 3}
@@ -21462,28 +21468,13 @@ PrefabInstance:
     - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: AnimObj.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: AnimObj.Array.data[0]
       value: 
-      objectReference: {fileID: 1799102679991266649}
-    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: AnimObj.Array.data[1]
-      value: 
-      objectReference: {fileID: 5921553459971991574}
-    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: AnimObj.Array.data[2]
-      value: 
-      objectReference: {fileID: 8380104387329687144}
-    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: AnimObj.Array.data[3]
-      value: 
-      objectReference: {fileID: 762842751157011849}
+      objectReference: {fileID: 7404318194142586880}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffe549735d2ac784bb8a439f0858ba3a, type: 3}
 --- !u!4 &2791956127917908110 stripped
@@ -22336,9 +22327,49 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
+      propertyPath: EnemyObj.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: AnimObj.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
       propertyPath: ActiveObj.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: EnemyObj.Array.data[0]
+      value: 
+      objectReference: {fileID: 1799102678606650178}
+    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: EnemyObj.Array.data[1]
+      value: 
+      objectReference: {fileID: 1799102679587686802}
+    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: AnimObj.Array.data[0]
+      value: 
+      objectReference: {fileID: 1799102679991266649}
+    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: AnimObj.Array.data[1]
+      value: 
+      objectReference: {fileID: 5921553459971991574}
+    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: AnimObj.Array.data[2]
+      value: 
+      objectReference: {fileID: 8380104387329687144}
+    - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: AnimObj.Array.data[3]
+      value: 
+      objectReference: {fileID: 762842751157011849}
     - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: ActiveObj.Array.data[0]

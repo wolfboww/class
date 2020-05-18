@@ -162,10 +162,10 @@ public class EnemyPatrol : MonoBehaviour
                 transform.Translate(Vector3.down * speed * Time.deltaTime);
                 break;
         }
-        if (Vector3.Distance(transform.position, pos) > maxDis)
+        if (Mathf.Abs(transform.position.x - pos.x) > maxDis)
         {
             dir = moveBack;
-            pos = transform.position;
+            pos.x = transform.position.x;
         }
     }
 

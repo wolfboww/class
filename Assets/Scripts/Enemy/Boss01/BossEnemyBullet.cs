@@ -27,6 +27,7 @@ public class BossEnemyBullet : MonoBehaviour
     {
         rb.velocity = skate ? CastLaser(direction) * speed
             : (dir - transform.position).normalized * speed;
+        Debug.Log(rb.velocity);
     }
 
     private Vector3 CastLaser(Vector3 other)

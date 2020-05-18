@@ -115,7 +115,7 @@ public class CollisionController : MonoBehaviour
                 else
                 {
                     GameController.Instance.ActiveCam().GetComponent<CameraController>().boundary[1] = collision.transform.parent.GetChild(int.Parse(collision.gameObject.name));
-                    RevivePoint.edition += 0.5f;
+                    RevivePoint.edition = int.Parse(collision.gameObject.name) + 3;
                 }
                 break;
             case "Button":
