@@ -73,7 +73,7 @@ public class Boss01 : MonoBehaviour
         trigger = bulletTrigger.transform.GetChild(0);
         deAnim = device.GetComponent<Animator>();
         summonChildCount = summonTime;
-        life = 100;
+        life = 150;
         isTrigger = false;
         isSkill = false;
     }
@@ -154,15 +154,23 @@ public class Boss01 : MonoBehaviour
                 device.GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        if (life > 50)
+        if (life > 100)
         {
-            bossUI.GetChild(0).GetChild(0).GetComponent<Image>().DOFillAmount((float)(life - 50) / 50, 0.1f);
+            bossUI.GetChild(0).GetChild(0).GetComponent<Image>().DOFillAmount((float)(life - 100) / 50, 0.1f);
             bossUI.GetChild(1).GetChild(0).GetComponent<Image>().fillAmount = 1;
+            bossUI.GetChild(2).GetChild(0).GetComponent<Image>().fillAmount = 1;
         }
-        else if (life > 0)
+        else if (life > 50)
         {
             bossUI.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 0;
-            bossUI.GetChild(1).GetChild(0).GetComponent<Image>().DOFillAmount((float)life / 50, 0.1f);
+            bossUI.GetChild(1).GetChild(0).GetComponent<Image>().DOFillAmount((float)(life - 50)/ 50, 0.1f);
+            bossUI.GetChild(2).GetChild(0).GetComponent<Image>().fillAmount = 1;
+        }
+        else if(life > 0)
+        {
+            bossUI.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 0;
+            bossUI.GetChild(1).GetChild(0).GetComponent<Image>().fillAmount = 0;
+            bossUI.GetChild(2).GetChild(0).GetComponent<Image>().DOFillAmount((float)life / 50, 0.1f);
         }
         else
             StartCoroutine(Anim("Dead"));
