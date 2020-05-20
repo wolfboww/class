@@ -63,6 +63,7 @@ public class RevivePoint : MonoBehaviour
             CollisionController.life = life;
             StartCoroutine(Revive());
             StartCoroutine(Reset(anim));
+            DesCollection();
 
             if (Mathf.Abs(edition - 1) <= 0.1f)
                 return;
@@ -107,6 +108,19 @@ public class RevivePoint : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         if (anim != null)
             anim.ResetTrigger("Revive");
+    }
+
+    void DesCollection()
+    {
+        GameObject[] obj = FindObjectsOfType(typeof(GameObject)) as GameObject[];
+        foreach (GameObject child in obj)
+        {
+            if (child.tag == "Collection")
+            {
+                if (child.transform.parent == null)
+                    Destroy(child);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

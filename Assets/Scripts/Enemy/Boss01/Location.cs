@@ -46,7 +46,8 @@ public class Location : MonoBehaviour
         dir.position = Vector3.Distance(RayHit(), Vector3.zero) < 1f ?
             new Vector3(pos.x + Mathf.RoundToInt(disX) * limitX, player.GetComponent<BoxCollider2D>().bounds.min.y) : RayHit();
 
-        DrawCurve(linePoint.position, boss.Find("LocationPoint").GetChild(0).position, boss.Find("LocationPoint").GetChild(1).position, linePoint.GetComponent<LineRenderer>());
+        if (GameController.isBoss)
+            DrawCurve(linePoint.position, boss.Find("LocationPoint").GetChild(0).position, boss.Find("LocationPoint").position, linePoint.GetComponent<LineRenderer>());
 
         if (life <= 0 || ThirdCamera.gameOver)
             anim.SetTrigger("Dead");

@@ -34,7 +34,7 @@ public class BossJxb : MonoBehaviour
         child = Instantiate(mask[Random.Range(0, 2)], maskPos.position, Quaternion.identity);
         child.transform.SetParent(transform.root.Find("Mask"));
         child.transform.localScale = Vector3.one;
-        target.localPosition = targetPos - new Vector3(0, Random.Range(-1.0f, 0), 0);
+        target.localPosition = targetPos + new Vector3(0, Random.Range(-0.4f, 0.3f), 0);
         StartCoroutine(Jxb());
     }
 

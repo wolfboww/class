@@ -12,7 +12,7 @@ public class ThirdCamera : MonoBehaviour
     public Transform playerPos;
     public Transform device;
     public static bool gameOver;
-    public int bossLife = 100;
+    public int bossLife = 150;
     public float maskCD;
 
     private Transform thirdCamera;
@@ -39,6 +39,7 @@ public class ThirdCamera : MonoBehaviour
     {
         if (gameOver)
         {
+            timer = 0;
             if (async != null)
                 return;
             async = StartCoroutine(GameReturn());
@@ -106,6 +107,7 @@ public class ThirdCamera : MonoBehaviour
         Boss.GetComponent<Animator>().SetTrigger("Win");
         bossPos.GetComponent<BoxCollider2D>().isTrigger = true;
         yield return new WaitUntil(() => Boss.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
+        yield return new WaitForSeconds(1);
         ColliNameManager.Instance.BossSkate.GetComponent<BossSkate>().childReady = false;
         forthCamera.GetComponent<CameraBlack>().enabled = false;
         yield return forthCamera.GetComponent<CameraBlack>().targetBrightness = 0;

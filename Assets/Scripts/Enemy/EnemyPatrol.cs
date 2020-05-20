@@ -49,12 +49,14 @@ public class EnemyPatrol : MonoBehaviour
         {
             anim.ResetTrigger("Revive");
             StartCoroutine(GameController.Instance.ResetAnim(anim, "Dead"));
+            shootNum = 0;
         }
 
         enemyDir = player.position.x > transform.position.x ?
             Vector3.right : Vector3.left;
         isDead = anim.GetCurrentAnimatorStateInfo(0).IsName("EnemyDead");
-        if (isDead || IfBullet.bemask)
+
+        if (isDead)
             return;
         else if (Vector3.Distance(player.position, transform.position) < pursueDistance && RayHit())
         {
@@ -77,6 +79,9 @@ public class EnemyPatrol : MonoBehaviour
 
     private bool RayHit()
     {
+        if (IfBullet.bemask)
+            return false;
+
         Vector3 start = GetComponent<BoxCollider2D>().bounds.center;
         start.x = enemyDir == Vector3.left ? GetComponent<BoxCollider2D>().bounds.min.x - 0.5f : GetComponent<BoxCollider2D>().bounds.max.x + 0.5f;
 

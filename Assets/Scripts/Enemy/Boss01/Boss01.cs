@@ -107,7 +107,10 @@ public class Boss01 : MonoBehaviour
     void FixedUpdate()
     {
         StartCoroutine(Back(boundary));
-        transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.lossyScale.x > 0 ? Vector3.left : Vector3.right) * moveSpeed * 0.01f, 1);
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("BossShoot") || anim.GetCurrentAnimatorStateInfo(0).IsName("BossRunShoot"))
+        {
+            transform.position = Vector2.MoveTowards(transform.position, transform.position + (transform.lossyScale.x > 0 ? Vector3.left : Vector3.right) * moveSpeed * 0.01f, 1);
+        }
     }
 
     // Update is called once per frame
@@ -144,6 +147,10 @@ public class Boss01 : MonoBehaviour
             anim.SetFloat("Angle", angle);
         }
 
+        if (bulletTrigger.activeInHierarchy)
+            bulletTrigger.transform.position = transform.Find("TriggerPos").position;
+
+
         if (!isSkill || ThirdCamera.gameOver)
         {
             if (bulletTrigger.activeInHierarchy)
@@ -163,10 +170,10 @@ public class Boss01 : MonoBehaviour
         else if (life > 50)
         {
             bossUI.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 0;
-            bossUI.GetChild(1).GetChild(0).GetComponent<Image>().DOFillAmount((float)(life - 50)/ 50, 0.1f);
+            bossUI.GetChild(1).GetChild(0).GetComponent<Image>().DOFillAmount((float)(life - 50) / 50, 0.1f);
             bossUI.GetChild(2).GetChild(0).GetComponent<Image>().fillAmount = 1;
         }
-        else if(life > 0)
+        else if (life > 0)
         {
             bossUI.GetChild(0).GetChild(0).GetComponent<Image>().fillAmount = 0;
             bossUI.GetChild(1).GetChild(0).GetComponent<Image>().fillAmount = 0;
@@ -353,7 +360,6 @@ public class Boss01 : MonoBehaviour
             yield return StartCoroutine(Anim("Run"));
         }
         while (Mathf.Abs(transform.position.x - device.transform.position.x) > moveSpeed);
-
         yield return new WaitWhile(() => anim.GetCurrentAnimatorStateInfo(0).IsName("BossReturn"));
         yield return StartCoroutine(Anim("Jump"));
         yield return new WaitUntil(
@@ -404,14 +410,12 @@ public class Boss01 : MonoBehaviour
         yield return StartCoroutine(Back(player));
         yield return new WaitWhile(
             () => anim.GetCurrentAnimatorStateInfo(0).IsName("BossReturn"));
-        trigger.transform.position = transform.Find("TriggerPos").position;
         bulletTrigger.SetActive(true);
         yield return new WaitForSeconds(1);
         anim.SetFloat("Angle", 0);
         yield return 1;
         skill = 3;
         Shoot();
-        trigger.Translate(new Vector3(transform.lossyScale.x > 0 ? -1 : 1, 1) * 0.05f);
         yield return new WaitUntil(() => isTrigger);
         if (state == State.Skill5)
             skill = 1;
@@ -428,7 +432,10 @@ public class Boss01 : MonoBehaviour
     IEnumerator Back(Transform target)
     {
         if (transform.position.x > target.position.x && transform.lossyScale.x < 0 || transform.position.x < target.position.x && transform.lossyScale.x > 0)
+        {
             yield return StartCoroutine(Anim("Return"));
+            yield return new WaitUntil(() => ColliNameManager.Instance.BossSkate.GetComponentInChildren<SpriteRenderer>().enabled);
+        }
     }
 
     private void Return()
@@ -449,8 +456,14 @@ public class Boss01 : MonoBehaviour
     private void Dead()
     {
         GameController.isBoss = false;
-        GameObject child = Instantiate(ColliNameManager.Instance.BossWinner, GameController.Instance.player.transform.Find("Follower").position, Quaternion.identity);
+
+    }
+
+    private void Win()
+    {
+        GameObject child = Instantiate(ColliNameManager.Instance.BossWinner, transform.position + new Vector3(0, 5), Quaternion.identity);
         child.transform.localScale *= 1.5f;
+        Destroy(child, child.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length * 2);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

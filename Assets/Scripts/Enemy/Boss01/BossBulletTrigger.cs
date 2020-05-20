@@ -10,7 +10,6 @@ public class BossBulletTrigger : MonoBehaviour
     public float speed;
     public float spawnCD;
 
-    private Tween _bulletTween;
     private List<GameObject> bullet;
     private GameObject effect;
     private Transform boss;
@@ -58,12 +57,12 @@ public class BossBulletTrigger : MonoBehaviour
                 child.transform.localScale =
                     new Vector3(x, child.transform.localScale.y);
             }
-            _bulletTween = child.transform.DOPath(pointPos, speed, PathType.CatmullRom).OnWaypointChange(p =>
-            {
-                GameController.Instance.BulletLookAt(child.transform, player);
-            }).OnComplete(() => bullet.Remove(child));
+            child.transform.DOMove(pointPos[0], 1).OnPlay(() => GameController.Instance.BulletLookAt(child.transform, pointPos[0])).OnComplete(() =>
+                {
+                    child.transform.DOPath(pointPos, speed, PathType.CatmullRom).OnWaypointChange(p =>
+                         GameController.Instance.BulletLookAt(child.transform, player)).OnComplete(() => bullet.Remove(child));
+                });
             yield return spawnPos += Vector3.right;
-            //yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitUntil(() => isDestroy(bullet));
 

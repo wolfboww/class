@@ -12,6 +12,7 @@ public class ShootButton : MonoBehaviour
     public GameObject targetObj;
     public GameObject particle;
     public Target target = Target.None;
+    public bool ifbullet;
 
     private int shootNum = 0;
     private Animator anim;
@@ -33,6 +34,8 @@ public class ShootButton : MonoBehaviour
     {
         if (collision.transform.tag == "Bullet")
         {
+            if (!ifbullet && collision.gameObject.GetComponent<IfBullet>())
+                return;
             if (!collision.gameObject.GetComponent<BulletController>())
                 return;
             if (!collision.gameObject.GetComponent<BulletController>().playerBullet)
