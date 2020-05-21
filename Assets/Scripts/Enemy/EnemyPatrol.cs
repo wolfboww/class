@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -130,6 +131,7 @@ public class EnemyPatrol : MonoBehaviour
             }
             GameObject child = Instantiate(bullet, transform.Find("ShootPos"));
             child.GetComponent<BulletController>().dir = GetComponent<SpriteRenderer>().flipX ? Vector3.right : Vector3.left;
+            StartCoroutine(GameController.Instance.Language(transform, "!!!", "%$^"));
             shootNum++;
         }
 
@@ -192,6 +194,16 @@ public class EnemyPatrol : MonoBehaviour
     public void EnemyDead(int i)
     {
         isDead = i.Equals(0) ? true : false;
+    }
+
+    public void DeadLanguage()
+    {
+        StartCoroutine(GameController.Instance.Language(transform, "???", "..."));
+
+        if (GetComponent<Jumper>())
+            if (GetComponent<Jumper>().fromSpawn)
+                return;
+        StartCoroutine(GameController.Instance.Language(GameController.Instance.player.transform, "^_^", "･◡･"));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -166,6 +167,18 @@ public class GameController : MonoBehaviour
         yield return 2;
         anim.ResetTrigger(name);
     }
+
+    public IEnumerator Language(Transform target,string text1, string text2)
+    {
+        string text = Random.Range(0, 1.0f) > 0.5f ? text1 : text2;
+        if (target.Find("Language").GetComponentInChildren<Text>().text == text)
+            StopCoroutine(Language(target, text1, text2));
+        target.Find("Language").GetComponentInChildren<Text>().text = text;
+        yield return new WaitForSeconds(0.5f);
+        target.Find("Language").GetComponentInChildren<Text>().text = "";
+    }
+
+
 
     public static GameController _instance;
     public static GameController Instance

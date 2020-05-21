@@ -42,9 +42,11 @@ public class Jumper : MonoBehaviour
             {
                 StartCoroutine(GameController.Instance.ResetAnim(anim, "Dead"));
                 Destroy(gameObject, 0.3f);
+                if (transform.position.y < destroyHeight)
+                    Destroy(GetComponent<DropControl>());
+                else if (life <= 0)
+                    StartCoroutine(GameController.Instance.Language(GameController.Instance.player.transform, "^_^", "･◡･"));
             }
-            if (transform.position.y < destroyHeight)
-                Destroy(GetComponent<DropControl>());
         }
         else
         {

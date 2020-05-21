@@ -137,5 +137,6 @@ public class CollisionController : MonoBehaviour
         anim.speed = 1;
         anim.SetTrigger("Dead");
         rig.constraints = RigidbodyConstraints2D.FreezeAll;
+        StartCoroutine(GameController.Instance.Language(transform, "-_-", "•︵•"));
     }
 }

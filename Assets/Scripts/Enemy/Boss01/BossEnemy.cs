@@ -34,6 +34,7 @@ public class BossEnemy : MonoBehaviour
         {
             GameObject eBullet = Instantiate(bullet, weaponPoint.position, Quaternion.identity);
             GameController.Instance.BulletLookAt(eBullet.transform, player.position);
+            StartCoroutine(GameController.Instance.Language(transform, "!!!", "%$^"));
             timer = 0;
         }
         else
@@ -50,6 +51,12 @@ public class BossEnemy : MonoBehaviour
             float x = -transform.localScale.x;
             transform.localScale = new Vector3(x, transform.localScale.y);
         }
+    }
+
+    public void DeadLanguage()
+    {
+        StartCoroutine(GameController.Instance.Language(transform, "???", "..."));
+        StartCoroutine(GameController.Instance.Language(GameController.Instance.player.transform, "^_^", "･◡･"));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
