@@ -21,6 +21,8 @@ public class RevivePoint : MonoBehaviour
 
     private Animator anim;
     private int life;
+    private int mapCollectionNum;
+    private float collectionNum;
     private bool revive = false;
     private GameObj[] enemyObj;
     private SetActObj[] setActObj;
@@ -46,11 +48,14 @@ public class RevivePoint : MonoBehaviour
         }
         life = CollisionController.life;
         setActObj = new SetActObj[ActiveObj.Length];
+        collectionNum = 0;
         for (int i = 0; i < setActObj.Length; i++)
         {
             setActObj[i].obj = ActiveObj[i];
             setActObj[i].isActive = ActiveObj[i].activeInHierarchy;
         }
+        if (transform.root.Find("Collection"))
+            mapCollectionNum = transform.root.Find("Collection").childCount;
     }
 
     // Update is called once per frame
@@ -61,6 +66,9 @@ public class RevivePoint : MonoBehaviour
         {
             revive = false;
             CollisionController.life = life;
+            GameController.deadNum++;
+            GameController.collectNum = transform.root.Find("Collection").childCount == mapCollectionNum ? collectionNum : collectionNum + mapCollectionNum - transform.root.Find("Collection").childCount;
+
             StartCoroutine(Revive());
             StartCoroutine(Reset(anim));
             DesCollection();
@@ -130,6 +138,8 @@ public class RevivePoint : MonoBehaviour
             GameController.Instance.revivePoint = transform;
             anim.SetTrigger("Revive");
             revive = true;
+            if (!GameController.isRevive)
+                collectionNum = GameController.collectNum;
             life = life < CollisionController.life ? CollisionController.life : life;
         }
     }

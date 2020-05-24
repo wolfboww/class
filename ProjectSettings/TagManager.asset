@@ -16,6 +16,7 @@ TagManager:
   - Button
   - Boss
   - RevivePoint
+  - Account
   layers:
   - Default
   - TransparentFX

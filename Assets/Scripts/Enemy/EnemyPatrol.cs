@@ -28,7 +28,6 @@ public class EnemyPatrol : MonoBehaviour
     private Vector3 pos;
     private Vector3 shootPos;
     private float timer = 0;
-    private int shootNum = 0;
     private int maxLife;
 
     // Start is called before the first frame update
@@ -50,7 +49,6 @@ public class EnemyPatrol : MonoBehaviour
         {
             anim.ResetTrigger("Revive");
             StartCoroutine(GameController.Instance.ResetAnim(anim, "Dead"));
-            shootNum = 0;
         }
 
         enemyDir = player.position.x > transform.position.x ?
@@ -73,9 +71,9 @@ public class EnemyPatrol : MonoBehaviour
         if (GameController.isRevive)
             Revive();
 
-        if (shootNum > 4 || transform.name != "Enemy4")
+        if (gameObject.name != "Enemy4")
             return;
-        anim.SetFloat("Shoot", shootNum);
+        anim.SetFloat("Shoot", life);
     }
 
     private bool RayHit()
@@ -132,7 +130,6 @@ public class EnemyPatrol : MonoBehaviour
             GameObject child = Instantiate(bullet, transform.Find("ShootPos"));
             child.GetComponent<BulletController>().dir = GetComponent<SpriteRenderer>().flipX ? Vector3.right : Vector3.left;
             StartCoroutine(GameController.Instance.Language(transform, "!!!", "%$^"));
-            shootNum++;
         }
 
 
@@ -188,7 +185,6 @@ public class EnemyPatrol : MonoBehaviour
         {
             anim.SetBool("Attack", false);
         }
-        shootNum = 0;
     }
 
     public void EnemyDead(int i)

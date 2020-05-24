@@ -26,7 +26,6 @@ public class PacMan : MonoBehaviour
         aiPath = GetComponentInParent<AIPath>();
         hatPos = transform.GetChild(0).localScale;
         hatPosX = hatPos.x;
-        InitialBean();
     }
 
     void Update()

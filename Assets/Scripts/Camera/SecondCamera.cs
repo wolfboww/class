@@ -6,15 +6,20 @@ using DG.Tweening;
 
 public class SecondCamera : MonoBehaviour
 {
+    public Transform[] points;
+    public GameObject mask;
+
+    private Transform pacman;
     private Camera firstCamera;
     private Camera secondCamera;
+    private int i = 0;
 
     void Start()
     {
+        pacman = ColliNameManager.Instance.MapPacMan.transform;
         firstCamera = ColliNameManager.Instance.MainCamera;
         secondCamera = ColliNameManager.Instance.SecondCamera;
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -28,11 +33,21 @@ public class SecondCamera : MonoBehaviour
         firstCamera.gameObject.SetActive(false);
         secondCamera.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
+        secondCamera.transform.DOLocalMove(new Vector3(-1.6f, 0.024f, -10), 3);
         yield return secondCamera.DOOrthoSize(11, 3);
-        for (int i = 0; i < GhostManager.Instance.enemy.childCount; i++)
-            GhostManager.Instance.enemy.GetChild(i).GetComponent<Ghost>().status = Ghost.Status.Die;
-        yield return new WaitForSeconds(3);
-        ColliNameManager.Instance.MapPacMan.GetComponent<AIPath>().enabled = true;
-        transform.root.GetComponent<AudioSource>().enabled = true;
+        yield return pacman.GetComponent<AIPath>().enabled = true;
+        while (true)
+        {
+            if (Vector2.Distance(pacman.transform.position, points[i].position) > 0.1f)
+                pacman.GetComponent<AIDestinationSetter>().target = points[i];
+            else if (i < points.Length - 1)
+                i++;
+            else break;
+
+            yield return 1;
+        }
+        mask.GetComponent<Animator>().SetTrigger("Mask");
+        yield return new WaitUntil(() => mask.transform.GetChild(0).childCount > 0);
+        yield return pacman.GetComponent<AIDestinationSetter>().target = transform.root.Find("EnemyPos").Find("PacmanPos");
     }
 }

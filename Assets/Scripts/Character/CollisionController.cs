@@ -61,6 +61,8 @@ public class CollisionController : MonoBehaviour
                 break;
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
+                GameController.collectNum++;
+                GameController.collectAccountNum++;
                 break;
         }
     }
@@ -125,14 +127,29 @@ public class CollisionController : MonoBehaviour
                         collision.gameObject.GetComponent<Animator>().SetTrigger("Do");
                 }
                 break;
+            case "Account":
+                StartCoroutine(Account());
+                break;
         }
+    }
+
+    public IEnumerator Account()
+    {
+        ColliNameManager.Instance.account.SetActive(true);
+        yield return new WaitUntil(() => AccountUI.go);
+        GameController.Instance.ChangeMap();
+        anim.SetFloat("Edition", anim.GetFloat("Edition") + 1);
+        anim.SetTrigger("Show");
     }
 
     private void LoseHP()
     {
         life--;
         if (life > 0)
+        {
+            anim.SetTrigger("LoseHP");
             return;
+        }
 
         anim.speed = 1;
         anim.SetTrigger("Dead");

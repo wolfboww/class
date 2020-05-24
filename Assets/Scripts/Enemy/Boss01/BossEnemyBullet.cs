@@ -45,7 +45,12 @@ public class BossEnemyBullet : MonoBehaviour
         if (collision.gameObject.name == "TriggerPos" && isBoss)
             Boss01.isTrigger = true;
         if (collision.gameObject != ColliNameManager.Instance.BossSkate || isBoss)
-            GetComponent<DestroyController>().enabled = true;
+        {
+            if (isBoss)
+                GetComponent<Animator>().SetTrigger("Dead");
+            else
+                GetComponent<DestroyController>().enabled = true;
+        }
         if (collision.gameObject == ColliNameManager.Instance.BossSkate && !isBoss)
         {
             skate = true;

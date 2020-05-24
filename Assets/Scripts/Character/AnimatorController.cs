@@ -19,6 +19,7 @@ public class AnimatorController : MonoBehaviour
         au = transform.Find("WeaponPoint").GetComponent<AudioSource>();
         rig = GetComponent<Rigidbody2D>();
         weaponPoint = transform.Find("WeaponPoint");
+        anim.SetTrigger("Show");
     }
 
     public void Shoot()

@@ -15,7 +15,6 @@ public class BossJxb : MonoBehaviour
 
     private GameObject child;
     private Tween _tween;
-    private float timer = 0;
     private bool maskScale = true;
 
     // Start is called before the first frame update

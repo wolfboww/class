@@ -33,8 +33,9 @@ public class ColliNameManager : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip enemy1;
-    public AudioClip bossSkill2;
-    public AudioClip bossSkill3;
+
+    [Header("UI")]
+    public GameObject account;
 
     [Header("Enemy")]
     public GameObject Enemy1;

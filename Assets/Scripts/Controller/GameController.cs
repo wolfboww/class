@@ -8,6 +8,12 @@ public class GameController : MonoBehaviour
     public GameObject[] Maps;
     public static bool isBoss;
     public static bool isRevive;
+
+    public static float deadNum;
+    public static float collectNum;
+    public static float collectAccountNum;
+    public static float timeNum;
+
     [HideInInspector]
     public Transform revivePoint;
     public Transform reviveBossPoint;
@@ -26,6 +32,10 @@ public class GameController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         CollisionController.life = 1;
         RevivePoint.edition = 0;
+        timeNum = 0;
+        deadNum = 0;
+        collectNum = 0;
+        collectAccountNum = 0;
     }
 
     // Start is called before the first frame update
@@ -42,14 +52,13 @@ public class GameController : MonoBehaviour
     {
         ObjAudio();
         EnemyActive();
+        timeNum += Time.deltaTime;
+
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
         {
             if (bullet.transform.parent != bulletsList)
                 bullet.transform.SetParent(bulletsList);
         }
-
-        if (mapNumber == 3)
-            player.GetComponent<Animator>().SetFloat("Edition", 1);
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
