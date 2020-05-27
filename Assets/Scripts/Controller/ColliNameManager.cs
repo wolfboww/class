@@ -6,6 +6,7 @@ public class ColliNameManager : MonoBehaviour
 {
     [Header("GameObject")]
     public GameObject Follower;
+    public GameObject GetCollection;
     public GameObject Gun;
     public GameObject Art;
     public GameObject Hat;
@@ -33,9 +34,13 @@ public class ColliNameManager : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip enemy1;
+    public AudioClip getCollection;
+    public AudioClip loseHP;
+    public AudioClip playerDead;
 
     [Header("UI")]
     public GameObject account;
+    public GameObject Mouse;
 
     [Header("Enemy")]
     public GameObject Enemy1;

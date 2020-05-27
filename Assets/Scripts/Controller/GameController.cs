@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     public GameObject[] Maps;
     public static bool isBoss;
     public static bool isRevive;
+    public static bool music;
+    public static bool sound;
 
     public static float deadNum;
     public static float collectNum;
@@ -36,6 +38,8 @@ public class GameController : MonoBehaviour
         deadNum = 0;
         collectNum = 0;
         collectAccountNum = 0;
+        music = true;
+        sound = true;
     }
 
     // Start is called before the first frame update
@@ -76,6 +80,9 @@ public class GameController : MonoBehaviour
             if (CollisionController.life < 3)
                 CollisionController.life++;
         }
+
+        if (Maps[mapNumber].GetComponent<AudioSource>())
+            Maps[mapNumber].GetComponent<AudioSource>().mute = !music;
     }
 
     public void ChangeMap()
@@ -120,6 +127,12 @@ public class GameController : MonoBehaviour
         {
             if (child.GetComponent<AudioSource>())
             {
+                if (!sound)
+                {
+                    child.GetComponent<AudioSource>().mute = false;
+                    return;
+                }
+
                 if (InCamera(child.transform))
                     child.GetComponent<AudioSource>().mute = false;
                 else
@@ -177,13 +190,13 @@ public class GameController : MonoBehaviour
         anim.ResetTrigger(name);
     }
 
-    public IEnumerator Language(Transform target,string text1, string text2)
+    public IEnumerator Language(Transform target, string text1, string text2)
     {
         string text = Random.Range(0, 1.0f) > 0.5f ? text1 : text2;
         if (target.Find("Language").GetComponentInChildren<Text>().text == text)
             StopCoroutine(Language(target, text1, text2));
         target.Find("Language").GetComponentInChildren<Text>().text = text;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         target.Find("Language").GetComponentInChildren<Text>().text = "";
     }
 

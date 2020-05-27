@@ -61,6 +61,9 @@ public class CollisionController : MonoBehaviour
                 break;
             case "Collection":
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
+                Instantiate(ColliNameManager.Instance.GetCollection, collision.transform.position, Quaternion.identity);
+                au.clip = ColliNameManager.Instance.getCollection;
+                au.Play();
                 GameController.collectNum++;
                 GameController.collectAccountNum++;
                 break;
@@ -95,6 +98,7 @@ public class CollisionController : MonoBehaviour
                     GetComponent<AnimatorController>().GetBuff(1);
                     GetComponent<Animator>().SetBool("GetGun", true);
                     GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.ElseBullet);
+                    ColliNameManager.Instance.Mouse.SetActive(true);
                     BulletUI.bulletNum++;
                 }
                 else if (collision.gameObject == ColliNameManager.Instance.Art)
@@ -148,11 +152,15 @@ public class CollisionController : MonoBehaviour
         if (life > 0)
         {
             anim.SetTrigger("LoseHP");
+            au.clip = ColliNameManager.Instance.loseHP;
+            au.Play();
             return;
         }
 
         anim.speed = 1;
         anim.SetTrigger("Dead");
+        au.clip = ColliNameManager.Instance.playerDead;
+        au.Play();
         rig.constraints = RigidbodyConstraints2D.FreezeAll;
         StartCoroutine(GameController.Instance.Language(transform, "-_-", "•︵•"));
     }

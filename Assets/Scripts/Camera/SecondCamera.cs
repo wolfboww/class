@@ -29,7 +29,7 @@ public class SecondCamera : MonoBehaviour
 
     IEnumerator SCamera()
     {
-        Destroy(GetComponent<EdgeCollider2D>());
+        GetComponent<EdgeCollider2D>().isTrigger = false;
         firstCamera.gameObject.SetActive(false);
         secondCamera.gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
@@ -47,6 +47,8 @@ public class SecondCamera : MonoBehaviour
             yield return 1;
         }
         mask.GetComponent<Animator>().SetTrigger("Mask");
+        ColliNameManager.Instance.Mouse.SetActive(true);
+        ColliNameManager.Instance.Mouse.GetComponent<Animator>().SetFloat("Edition", 1);
         yield return new WaitUntil(() => mask.transform.GetChild(0).childCount > 0);
         yield return pacman.GetComponent<AIDestinationSetter>().target = transform.root.Find("EnemyPos").Find("PacmanPos");
     }

@@ -19,6 +19,7 @@ public class AccountUI : MonoBehaviour
     public GameObject getHP;
 
     private Animator playerHP;
+    private Animator playerImage;
     private Transform bg1;
     private Transform bg2;
     private bool getGrid = false;
@@ -31,6 +32,7 @@ public class AccountUI : MonoBehaviour
     void Awake()
     {
         playerHP = transform.parent.Find("PlayerHP").GetComponent<Animator>();
+        playerImage = transform.Find("PlayerImage").GetComponent<Animator>();
         bg1 = transform.Find("BG");
         bg2 = transform.Find("BG2");
     }
@@ -59,6 +61,7 @@ public class AccountUI : MonoBehaviour
     {
         collectionFX.sprite = collection[accountNum];
         gridFX.SetFloat("grid", accountNum);
+        playerImage.SetFloat("Edition", accountNum);
         foreach (var item in mapNum)
             item.text = (accountNum + 1).ToString();
     }
