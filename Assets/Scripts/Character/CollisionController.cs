@@ -107,6 +107,12 @@ public class CollisionController : MonoBehaviour
                     GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
                     BulletUI.bulletNum++;
                 }
+                else if (collision.gameObject.name == "Light(Clone)")
+                {
+                    GetComponent<AnimatorController>().GetBuff(3);
+                    BulletUI.light = true;
+                    StartCoroutine(Account());
+                }
                 break;
             case "Boundary":
                 if (anim.GetFloat("Edition") < 0.1f)

@@ -28,6 +28,9 @@ public class BossEnemyBullet : MonoBehaviour
     {
         if (skate)
             rb.velocity = CastLaser(direction) * speed;
+
+        if(!GameController.isBoss)
+            GetComponent<DestroyController>().enabled = true;
     }
 
     private Vector3 CastLaser(Vector3 other)
@@ -47,7 +50,10 @@ public class BossEnemyBullet : MonoBehaviour
         if (collision.gameObject != ColliNameManager.Instance.BossSkate || isBoss)
         {
             if (isBoss)
+            {
                 GetComponent<Animator>().SetTrigger("Dead");
+                Destroy(rb);
+            }
             else
                 GetComponent<DestroyController>().enabled = true;
         }

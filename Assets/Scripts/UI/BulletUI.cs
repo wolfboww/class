@@ -7,6 +7,7 @@ using DG.Tweening;
 public class BulletUI : MonoBehaviour
 {
     public static int bulletNum;
+    public static bool light;
 
     private GameObject IfUI;
     private GameObject ElseUI;
@@ -61,6 +62,7 @@ public class BulletUI : MonoBehaviour
 
         anim.SetBool("GetGun", player.GetComponent<Animator>().GetBool("GetGun"));
         anim.SetInteger("Bullet", Bullet());
+        transform.Find("LightUI").gameObject.SetActive(light);
     }
 
     private int Bullet()

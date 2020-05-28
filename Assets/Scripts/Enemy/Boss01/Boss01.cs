@@ -456,7 +456,8 @@ public class Boss01 : MonoBehaviour
     private void Dead()
     {
         GameController.isBoss = false;
-
+        GameObject child =Instantiate(ColliNameManager.Instance.Light, ColliNameManager.Instance.BossSkate.transform.position + Vector3.up, Quaternion.identity);
+        child.transform.SetParent(null);
     }
 
     private void Win()

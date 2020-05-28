@@ -176,6 +176,18 @@ public class MoveController : MonoBehaviour
             anim.SetFloat("Shoot", 0);
         }
 
+        if (Input.GetMouseButtonDown(1) && canShoot)
+        {
+            if (anim.GetBool("GetGun") && !IfBullet.bemask)
+            {
+                anim.SetFloat("Prop", 1);
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            anim.SetFloat("Prop", 0);
+        }
+
     }
 
     private void OnGUI()

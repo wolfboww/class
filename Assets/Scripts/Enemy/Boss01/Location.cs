@@ -48,6 +48,8 @@ public class Location : MonoBehaviour
 
         if (GameController.isBoss)
             DrawCurve(linePoint.position, boss.Find("LocationPoint").GetChild(0).position, boss.Find("LocationPoint").position, linePoint.GetComponent<LineRenderer>());
+        else
+            linePoint.GetComponent<LineRenderer>().enabled = false;
 
         if (life <= 0 || ThirdCamera.gameOver)
             anim.SetTrigger("Dead");

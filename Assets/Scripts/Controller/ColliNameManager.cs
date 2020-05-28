@@ -9,6 +9,7 @@ public class ColliNameManager : MonoBehaviour
     public GameObject GetCollection;
     public GameObject Gun;
     public GameObject Art;
+    public GameObject Light;
     public GameObject Hat;
     public GameObject MapPacMan;
     public GameObject HandleLand;
