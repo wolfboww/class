@@ -32,7 +32,7 @@ public class MouseUI : MonoBehaviour
         }
 
         timer += Time.deltaTime;
-        if (timer > 3)
+        if (timer > 4)
             Continue();
 
     }
