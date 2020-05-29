@@ -48,12 +48,24 @@ public class AccountUI : MonoBehaviour
     {
         Time.timeScale = 1;
         accountNum++;
-        getGrid = false;
+
+        if (getGrid)
+        {
+            deadText.rectTransform.localScale = Vector3.one * 1.5f;
+            timeText.rectTransform.localScale = Vector3.one * 2f;
+            getGrid = false;
+        }
         GameController.deadNum = 0;
         GameController.timeNum = 0;
         GameController.collectNum = 0;
         deadText.GetComponent<Outline>().enabled = false;
         timeText.GetComponent<Outline>().enabled = false;
+        for (int i = 0; i < bg1.childCount; i++)
+            bg1.GetChild(i).gameObject.SetActive(false);
+        for (int i = 0; i < bg2.childCount; i++)
+            bg2.GetChild(i).gameObject.SetActive(false);
+        bg1.GetComponent<Animator>().ResetTrigger("Account");
+        bg2.GetComponent<Animator>().ResetTrigger("Account");
     }
 
     // Update is called once per frame
@@ -62,12 +74,24 @@ public class AccountUI : MonoBehaviour
         collectionFX.sprite = collection[accountNum];
         gridFX.SetFloat("grid", accountNum);
         playerImage.SetFloat("Edition", accountNum);
+
         foreach (var item in mapNum)
-            item.text = (accountNum + 1).ToString();
+        {
+            string text = "";
+            if (accountNum.Equals(0))
+                text = "Beginning";
+            else if (accountNum.Equals(1))
+                text = "TourofFC";
+            else if (accountNum.Equals(2))
+                text = "GBinPalm";
+            item.text = text;
+        }
     }
 
     IEnumerator mapAccount()
     {
+        bg1.GetComponent<Animator>().SetTrigger("Account");
+        yield return new WaitUntil(() => bg1.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Account"));
         yield return new WaitUntil(() => bg1.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
         deadText.text = GameController.deadNum.ToString();
         collectionText.text = GameController.collectAccountNum.ToString();
@@ -90,7 +114,8 @@ public class AccountUI : MonoBehaviour
             getGrid = true;
         }
         yield return new WaitForSecondsRealtime(2f);
-        bg2.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
+        bg2.GetComponent<Animator>().SetTrigger("Account");
+        yield return new WaitUntil(() => bg2.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Account"));
         yield return new WaitUntil(() => bg2.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
         bg2.Find("ING").gameObject.SetActive(true);
         bg2.Find("Continue").gameObject.SetActive(true);

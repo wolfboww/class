@@ -218,6 +218,8 @@ public class Boss01 : MonoBehaviour
                     break;
                 case State.Skill4:
                 case State.Skill5:
+                    foreach (Transform item in TVButton)
+                        item.GetComponent<Animator>().SetTrigger("Broken");
                     goto skill;
                 case State.Idle:
                     bulletClone = null;
@@ -390,7 +392,7 @@ public class Boss01 : MonoBehaviour
                 break;
 
             Vector3 pos = device.transform.parent.Find("EnemySpawn").position;
-            yield return pos.x = Random.Range(limit[0].x, limit[1].x);
+            yield return pos.x = Random.Range(limit[0].x + 2, limit[1].x);
             GameObject summon = Instantiate(bossSummon, device.transform.parent.Find("EnemySpawn"));
             summon.transform.position = pos;
             summon.GetComponent<BossEnemy>().limitY =
@@ -456,7 +458,7 @@ public class Boss01 : MonoBehaviour
     private void Dead()
     {
         GameController.isBoss = false;
-        GameObject child =Instantiate(ColliNameManager.Instance.Light, ColliNameManager.Instance.BossSkate.transform.position + Vector3.up, Quaternion.identity);
+        GameObject child = Instantiate(ColliNameManager.Instance.Light, ColliNameManager.Instance.BossSkate.transform.position + Vector3.up, Quaternion.identity);
         child.transform.SetParent(null);
     }
 

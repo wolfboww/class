@@ -84,6 +84,7 @@ public class ThirdCamera : MonoBehaviour
 
     IEnumerator GameStart()
     {
+        GameController.Instance.player.transform.Find("WeaponPoint").GetComponent<AudioSource>().enabled = false;
         Boss.SetActive(true);
         player.transform.position = playerPos.position;
         player.transform.localScale = new Vector3(1, 1, 1);
@@ -97,6 +98,7 @@ public class ThirdCamera : MonoBehaviour
         GetComponent<StopControl>().PlayerStop(0);
         bossPos.GetComponent<BoxCollider2D>().isTrigger = false;
         async = null;
+        GameController.Instance.player.transform.Find("WeaponPoint").GetComponent<AudioSource>().enabled = true;
     }
 
     IEnumerator GameReturn()

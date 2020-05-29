@@ -42,6 +42,7 @@ public class ColliNameManager : MonoBehaviour
     [Header("UI")]
     public GameObject account;
     public GameObject Mouse;
+    public GameObject Loading;
 
     [Header("Enemy")]
     public GameObject Enemy1;

@@ -47,6 +47,7 @@ public class GameController : MonoBehaviour
     {
         bulletsList = transform.Find("BulletsList");
         player.transform.position = revivePoint.position;
+        ColliNameManager.Instance.Loading.SetActive(true);
         isBoss = false;
         isRevive = false;
     }
@@ -83,6 +84,9 @@ public class GameController : MonoBehaviour
 
         if (Maps[mapNumber].GetComponent<AudioSource>())
             Maps[mapNumber].GetComponent<AudioSource>().mute = !music;
+
+        if (ActiveCam() == ColliNameManager.Instance.MainCamera && !ColliNameManager.Instance.MainCamera.gameObject.activeInHierarchy)
+            ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
     }
 
     public void ChangeMap()
@@ -96,6 +100,7 @@ public class GameController : MonoBehaviour
             ActiveCam().GetComponent<CameraController>().boundary[i]
                 = Maps[mapNumber].transform.Find("Boundary").GetChild(i);
         revivePoint = Maps[mapNumber].transform.Find("StartPoint").GetChild(0);
+        ActiveCam().transform.position = revivePoint.position;
     }
 
     public void Mask(GameObject mask)

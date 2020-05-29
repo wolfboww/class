@@ -80,7 +80,7 @@ public class MoveController : MonoBehaviour
         if (!isForwardShoot && anim.GetFloat("Edition") > 0)
         {
             angletimer += Time.deltaTime;
-            if (angletimer > angleTime || Input.GetMouseButtonDown(1))
+            if (angletimer > angleTime /*|| Input.GetMouseButtonDown(1)*/)
             {
                 weaponPoint.localPosition = new Vector3(2f, 1.2f);
                 weaponPoint.localEulerAngles = Vector3.zero;
