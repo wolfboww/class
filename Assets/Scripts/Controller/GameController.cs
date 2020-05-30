@@ -110,7 +110,8 @@ public class GameController : MonoBehaviour
         {
             maskObj = mask;
             maskParent = mask.transform.parent;
-            mask.AddComponent<MaskControl>();
+            if (!mask.GetComponent<MaskControl>())
+                mask.AddComponent<MaskControl>();
         }
         else
         {
