@@ -60,12 +60,7 @@ public class CollisionController : MonoBehaviour
                 LoseHP();
                 break;
             case "Collection":
-                collision.gameObject.GetComponent<DestroyController>().enabled = true;
-                Instantiate(ColliNameManager.Instance.GetCollection, collision.transform.position, Quaternion.identity);
-                au.clip = ColliNameManager.Instance.getCollection;
-                au.Play();
-                GameController.collectNum++;
-                GameController.collectAccountNum++;
+                Collection(collision.gameObject);
                 break;
         }
     }
@@ -113,6 +108,8 @@ public class CollisionController : MonoBehaviour
                     BulletUI.light = true;
                     StartCoroutine(Account());
                 }
+                else
+                    Collection(collision.gameObject);
                 break;
             case "Boundary":
                 if (anim.GetFloat("Edition") < 0.1f)
@@ -143,6 +140,16 @@ public class CollisionController : MonoBehaviour
         }
     }
 
+    private void Collection(GameObject collision)
+    {
+        collision.GetComponent<DestroyController>().enabled = true;
+        Instantiate(ColliNameManager.Instance.GetCollection, collision.transform.position, Quaternion.identity);
+        au.clip = ColliNameManager.Instance.getCollection;
+        au.Play();
+        GameController.collectNum++;
+        GameController.collectAccountNum++;
+    }
+
     public IEnumerator Account()
     {
         ColliNameManager.Instance.account.SetActive(true);
@@ -158,6 +165,9 @@ public class CollisionController : MonoBehaviour
 
     private void LoseHP()
     {
+        if (IfBullet.bemask)
+            return;
+
         life--;
         if (life > 0)
         {
@@ -166,7 +176,6 @@ public class CollisionController : MonoBehaviour
             au.Play();
             return;
         }
-
         anim.speed = 1;
         anim.SetTrigger("Dead");
         au.clip = ColliNameManager.Instance.playerDead;

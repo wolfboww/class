@@ -96,7 +96,7 @@ public class RevivePoint : MonoBehaviour
             for (int i = 0; i < setActObj.Length; i++)
                 setActObj[i].obj.SetActive(setActObj[i].isActive);
 
-            if (GameController.Instance.player.GetComponent<Animator>().GetFloat("Edition") > 0.1f)
+            if (Mathf.Abs(GameController.Instance.player.GetComponent<Animator>().GetFloat("Edition") - 1) < 0.1f)
             {
                 if (GameController.Instance.ActiveCam().gameObject == ColliNameManager.Instance.ForthCamera)
                     return;

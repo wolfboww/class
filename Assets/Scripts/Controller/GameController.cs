@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
         {
             ChangeMap();
             player.transform.position = revivePoint.position;
-            //player.GetComponent<Animator>().SetFloat("Edition", player.GetComponent<Animator>().GetFloat("Edition") + 1);
+            player.GetComponent<Animator>().SetFloat("Edition", player.GetComponent<Animator>().GetFloat("Edition") + 1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
