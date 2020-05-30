@@ -183,7 +183,7 @@ public class MoveController : MonoBehaviour
                 anim.SetFloat("Prop", 1);
             }
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetMouseButtonUp(1))
         {
             anim.SetFloat("Prop", 0);
         }

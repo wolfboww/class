@@ -31,8 +31,11 @@ public class Loading : MonoBehaviour
 
     IEnumerator wait()
     {
+        Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(3f);
         loading = true;
+        yield return 1;
+        Time.timeScale = 1;
         gameObject.SetActive(false);
     }
 
