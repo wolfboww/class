@@ -43,9 +43,11 @@ GameObject:
   - component: {fileID: 2578688020589146152}
   - component: {fileID: 4237177171932312916}
   - component: {fileID: 6842073124079501959}
-  m_Layer: 0
+  - component: {fileID: 988374977}
+  - component: {fileID: 988374978}
+  m_Layer: 13
   m_Name: Enemy6
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,6 +182,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.9907227, y: 1.7084961}
   m_EdgeRadius: 0
+--- !u!114 &988374977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601826241498003045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbdc22a1b319cf48bbbabf1ba9df461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dir: 2
+  initialDir: 0
+  canPursue: 0
+  bullet: {fileID: 7797087935000820774, guid: e8dc9e74463080e4dac2ef38ca638c39, type: 3}
+  shootCD: 1.5
+  speed: 0
+  maxDis: 0
+  pursueDistance: 6
+  life: 999
+  isDead: 0
+--- !u!114 &988374978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601826241498003045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50af26123f1da694a8219be3097d6474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
 --- !u!1001 &6208736618552316294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187,6 +224,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7416936657904482631}
     m_Modifications:
+    - target: {fileID: 1667802522000915462, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
+        type: 3}
+      propertyPath: m_Name
+      value: Language
+      objectReference: {fileID: 0}
     - target: {fileID: 4414949902647584097, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -306,16 +348,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.030749999
-      objectReference: {fileID: 0}
-    - target: {fileID: 1667802522000915462, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
-        type: 3}
-      propertyPath: m_Name
-      value: Language
-      objectReference: {fileID: 0}
-    - target: {fileID: 652575189024683689, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
-        type: 3}
-      propertyPath: m_Text
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b3f9ed81ca22c41b8020fbfc479c72, type: 3}

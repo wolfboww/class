@@ -67,7 +67,8 @@ public class RevivePoint : MonoBehaviour
             revive = false;
             CollisionController.life = life;
             GameController.deadNum++;
-            GameController.collectNum = transform.root.Find("Collection").childCount == mapCollectionNum ? collectionNum : collectionNum + mapCollectionNum - transform.root.Find("Collection").childCount;
+            if (transform.root.Find("Collection"))
+                GameController.collectNum = transform.root.Find("Collection").childCount == mapCollectionNum ? collectionNum : collectionNum + mapCollectionNum - transform.root.Find("Collection").childCount;
 
             StartCoroutine(Revive());
             StartCoroutine(Reset(anim));
@@ -96,9 +97,9 @@ public class RevivePoint : MonoBehaviour
             for (int i = 0; i < setActObj.Length; i++)
                 setActObj[i].obj.SetActive(setActObj[i].isActive);
 
-            if (Mathf.Abs(GameController.Instance.player.GetComponent<Animator>().GetFloat("Edition") - 1) < 0.1f)
+            if (GameController.Instance.player.GetComponent<Animator>().GetFloat("Edition") >= 1f)
             {
-                if (GameController.Instance.ActiveCam().gameObject == ColliNameManager.Instance.ForthCamera)
+                if (GameController.Instance.ActiveCam().gameObject != ColliNameManager.Instance.MainCamera)
                     return;
                 GameController.Instance.ActiveCam().GetComponent<CameraController>().boundary[1] = transform.root.Find("Boundary").GetChild(1).GetChild(int.Parse(transform.parent.name));
             }

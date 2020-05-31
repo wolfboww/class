@@ -105,7 +105,7 @@ public class PacMan : MonoBehaviour
             case "Enemy":
                 if (!transform.GetChild(0).childCount.Equals(0))
                     return;
-                else
+                else if (collision.GetComponentInParent<Ghost>().ghostType != 2)
                     GhostManager.Instance.gameOver = true;
                 break;
         }

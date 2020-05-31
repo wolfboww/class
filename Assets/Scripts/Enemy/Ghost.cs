@@ -107,7 +107,7 @@ public class Ghost : MonoBehaviour
         yield return GetComponent<AIDestinationSetter>().target = EscapePos();
         life = GhostManager.ghostLife;
         status = Status.Attack;
-        yield return new WaitForSeconds(GhostManager.Instance.reBackTime * 2);
+        yield return new WaitForSeconds(GhostManager.Instance.reBackTime * 2.5f);
         yield return GetComponent<AIDestinationSetter>().target = target;
 
         GetComponentInChildren<GhostFX>().Revive();

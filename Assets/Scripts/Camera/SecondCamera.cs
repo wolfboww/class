@@ -21,7 +21,7 @@ public class SecondCamera : MonoBehaviour
         secondCamera = ColliNameManager.Instance.SecondCamera;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Player")
             StartCoroutine(SCamera());

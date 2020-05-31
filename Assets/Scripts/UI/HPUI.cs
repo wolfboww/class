@@ -33,9 +33,11 @@ public class HPUI : MonoBehaviour
     void Update()
     {
         anim.SetFloat("Edition", edition);
-        collectionFX.Find("FX").GetComponent<Image>().sprite = collection[(int)RevivePoint.edition];
+        collectionFX.Find("FX").GetComponent<Image>().sprite = collection[
+            (int)RevivePoint.edition >= collection.Length ? collection.Length - 1 : 
+            (int)RevivePoint.edition];
         collectionText.text = GameController.collectNum.ToString();
-        if (GameController.collectNum >= getHPCollectNum 
+        if (GameController.collectNum >= getHPCollectNum
             && HPchild[activeNum].activeInHierarchy)
         {
             GameController.collectNum -= getHPCollectNum;

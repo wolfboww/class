@@ -27,7 +27,8 @@ public class BossSkate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (childReady && Boss01.summonChildCount <= 0 || ThirdCamera.gameOver)
+        if (childReady && Boss01.summonChildCount <= 0 
+            || ThirdCamera.gameOver || !GameController.isBoss)
         {
             isCol = false;
             StartCoroutine(Return());

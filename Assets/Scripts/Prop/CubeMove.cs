@@ -6,9 +6,10 @@ using DG.Tweening;
 public class CubeMove : MonoBehaviour
 {
     public float moveSpeed;
+    public static int downIndex;
+
     private Transform[] child;
-    private Vector3[] childTarget;
-    private float timer = 0;
+    private float moveTimer = 0;
     private float H;
     private bool canMove = true;
     private bool down = false;
@@ -17,12 +18,9 @@ public class CubeMove : MonoBehaviour
     void Start()
     {
         child = new Transform[transform.childCount];
-        childTarget = new Vector3[child.Length];
         for (int i = 0; i < transform.childCount; i++)
-        {
             child[i] = transform.GetChild(i);
-            childTarget[i] = child[i].Find("Target").position;
-        }
+        downIndex = transform.childCount - 1;
     }
 
     // Update is called once per frame
@@ -31,14 +29,14 @@ public class CubeMove : MonoBehaviour
         if (GameController.isRevive)
         {
             down = false;
-            timer = 0;
+            moveTimer = 0;
         }
+
         if (down)
-            foreach (var item in child)
-            {
-                if (Vector3.Distance(item.position, childTarget[item.GetSiblingIndex()]) >= 0.05f)
-                    item.position = Vector3.MoveTowards(item.position, childTarget[item.GetSiblingIndex()], Time.deltaTime);
-            }
+        {
+            down = false;
+            child[downIndex].GetComponent<CubeManager>().enabled = true;
+        }
 
         if (!IfBullet.bemask)
             return;
@@ -58,13 +56,14 @@ public class CubeMove : MonoBehaviour
                     {
                         if (Rayhit(item.Find("Left").position))
                             return;
-                        if (item.Find("Middle") && Rayhit(item.Find("Middle").position))
+                        if (Rayhit(item.Find("Middle").position))
                             return;
                     }
                     if (canMove)
                     {
                         canMove = false;
                         item.Translate(Vector3.right * H * moveSpeed);
+                        item.GetComponent<CubeManager>().freezePos.x = item.position.x + H * moveSpeed;
                     }
                 }
             }
@@ -72,11 +71,11 @@ public class CubeMove : MonoBehaviour
 
         if (!canMove)
         {
-            timer += Time.deltaTime;
-            if (timer > 0.5f)
+            moveTimer += Time.deltaTime;
+            if (moveTimer > 0.5f)
             {
                 canMove = true;
-                timer = 0;
+                moveTimer = 0;
             }
         }
     }
@@ -93,5 +92,11 @@ public class CubeMove : MonoBehaviour
     {
         if (collision.tag == "Player")
             down = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag.Contains("Plane"))
+            collision.GetComponentInChildren<PolygonCollider2D>().isTrigger = false;
     }
 }

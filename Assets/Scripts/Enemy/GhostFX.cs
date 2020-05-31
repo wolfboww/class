@@ -16,7 +16,7 @@ public class GhostFX : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            if (!DOTween.IsTweening(transform))
+            //if (!DOTween.IsTweening(transform))
             {
                 GetComponentInParent<Ghost>().life--;
                 transform.DOScale(transform.localScale * 0.8f, 1);

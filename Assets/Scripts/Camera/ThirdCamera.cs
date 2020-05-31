@@ -72,6 +72,9 @@ public class ThirdCamera : MonoBehaviour
         player.GetComponent<AnimatorController>().bullet = ColliNameManager.Instance.IfBullet;
         player.GetComponent<AnimatorController>().Shoot();
         TVLight.GetComponent<Animator>().SetTrigger("Do");
+        yield return 1;
+        IfBullet.bemask = true;
+        GameController.Instance.Mask(TVLight);
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f);
         thirdCamera.GetComponent<CameraBlack>().enabled = true;
         yield return new WaitUntil(() => thirdCamera.GetComponent<BrightnessSaturationAndContrast>().brightness <= 0.1f);

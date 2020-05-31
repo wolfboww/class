@@ -172,20 +172,20 @@ public class MoveController : MonoBehaviour
             }
         }
         else if (Input.GetMouseButtonUp(0))
-        {
             anim.SetFloat("Shoot", 0);
-        }
 
-        if (Input.GetMouseButtonDown(1) && canShoot)
+        if (Input.GetMouseButtonDown(1) && anim.GetFloat("Edition") > 1.9f)     //道具
         {
             if (anim.GetBool("GetGun") && !IfBullet.bemask)
             {
                 anim.SetFloat("Prop", 1);
+                weaponPoint.Find("LightFX").gameObject.SetActive(true);
             }
         }
         else if (Input.GetMouseButtonUp(1))
         {
             anim.SetFloat("Prop", 0);
+            weaponPoint.Find("LightFX").gameObject.SetActive(false);
         }
 
     }

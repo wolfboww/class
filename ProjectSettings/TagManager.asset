@@ -17,6 +17,7 @@ TagManager:
   - Boss
   - RevivePoint
   - Account
+  - Sweat
   layers:
   - Default
   - TransparentFX
