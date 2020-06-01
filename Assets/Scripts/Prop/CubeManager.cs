@@ -30,11 +30,6 @@ public class CubeManager : MonoBehaviour
         moveSpeed = transform.GetComponentInParent<CubeMove>().moveSpeed;
     }
 
-    void OnEnable()
-    {
-        RayHitY();
-    }
-
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -44,12 +39,15 @@ public class CubeManager : MonoBehaviour
             canHit = true;
             if (transform.GetComponent<PolygonCollider2D>())
                 transform.GetComponent<PolygonCollider2D>().enabled = true;
-            transform.Find("Collision").GetComponent<PolygonCollider2D>().isTrigger = true;
             freezePos.x = initialX;
             bottom.localPosition = new Vector3(bottom.localPosition.x, initialBottomY);
-            RayHitY();
+            for (int i = 0; i < transform.Find("Sprite").childCount; i++)
+                transform.Find("Sprite").GetChild(i).gameObject.SetActive(true);
+
             this.enabled = false;
         }
+
+        RayHitY();
 
         if (!canHit)
             return;
@@ -88,7 +86,7 @@ public class CubeManager : MonoBehaviour
                         return;
 
                     canMove = false;
-                    transform.DOMoveX(transform.position.x + H * moveSpeed, 0.1f).OnComplete(() => RayHitY());
+                    transform.DOMoveX(transform.position.x + H * moveSpeed, 0.1f);
                     freezePos.x = transform.position.x + H * moveSpeed;
                 }
             }
@@ -112,14 +110,14 @@ public class CubeManager : MonoBehaviour
 
         return false;
     }
-    private void RayHitY()
+    public void RayHitY()
     {
         float bottomY = GetComponent<PolygonCollider2D>() ? GetComponent<PolygonCollider2D>().bounds.min.y :
             GetComponent<BoxCollider2D>().bounds.min.y;
 
-        if (Physics2D.Raycast(bottom.position, Vector3.down, (1 << 8) | (1 << 12)))
+        if (Physics2D.Raycast(bottom.position, Vector3.down, (1 << 8) | (1 << 12) | (1 << 17)))
         {
-            RaycastHit2D hit = Physics2D.Raycast(bottom.position, Vector3.down, (1 << 8) | (1 << 12));
+            RaycastHit2D hit = Physics2D.Raycast(bottom.position, Vector3.down, (1 << 8) | (1 << 12) | (1 << 17));
             rayhitY = hit.point.y + Mathf.Abs(bottomY - transform.position.y);
         }
     }

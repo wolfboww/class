@@ -37,7 +37,7 @@ public class CubeMove : MonoBehaviour
     IEnumerator Down()
     {
         down = false;
-        yield return 1;
+        yield return new WaitForSeconds(2);
         if (downIndex >= 0)
             child[downIndex].GetComponent<CubeManager>().enabled = true;
         yield return 1;
@@ -55,11 +55,12 @@ public class CubeMove : MonoBehaviour
     {
         if (collision.tag.Contains("Mask"))
         {
-            collision.transform.Find("Collision").GetComponent<PolygonCollider2D>().isTrigger = false;
-
             float minY = collision.GetComponent<PolygonCollider2D>() ? collision.GetComponent<PolygonCollider2D>().bounds.min.y :
                 collision.GetComponent<BoxCollider2D>().bounds.min.y;
             collision.transform.Find("Bottom").position = new Vector3(collision.transform.Find("Bottom").position.x, minY - 0.1f);
         }
+
+        if (collision.tag.Contains("Plane") && collision.transform.parent.parent.name == "Sprite")
+            collision.GetComponent<BoxCollider2D>().isTrigger = false;
     }
 }
