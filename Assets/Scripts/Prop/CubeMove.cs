@@ -5,14 +5,12 @@ using DG.Tweening;
 
 public class CubeMove : MonoBehaviour
 {
+    [HideInInspector]
+    public bool down = false;
     public float moveSpeed;
     public static int downIndex;
 
     private Transform[] child;
-    private float moveTimer = 0;
-    private float H;
-    private bool canMove = true;
-    private bool down = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,63 +27,22 @@ public class CubeMove : MonoBehaviour
         if (GameController.isRevive)
         {
             down = false;
-            moveTimer = 0;
+            downIndex = transform.childCount - 1;
         }
 
         if (down)
-        {
-            down = false;
-            child[downIndex].GetComponent<CubeManager>().enabled = true;
-        }
-
-        if (!IfBullet.bemask)
-            return;
-        foreach (Transform item in child)
-        {
-            if (item.Find("hatPos"))
-            {
-                H = Input.GetAxisRaw("Horizontal");
-                if (item.Find("hatPos").childCount > 0 && !H.Equals(0))
-                {
-                    if (H > 0)
-                    {
-                        if (Rayhit(item.Find("Right").position))
-                            return;
-                    }
-                    else
-                    {
-                        if (Rayhit(item.Find("Left").position))
-                            return;
-                        if (Rayhit(item.Find("Middle").position))
-                            return;
-                    }
-                    if (canMove)
-                    {
-                        canMove = false;
-                        item.Translate(Vector3.right * H * moveSpeed);
-                        item.GetComponent<CubeManager>().freezePos.x = item.position.x + H * moveSpeed;
-                    }
-                }
-            }
-        }
-
-        if (!canMove)
-        {
-            moveTimer += Time.deltaTime;
-            if (moveTimer > 0.5f)
-            {
-                canMove = true;
-                moveTimer = 0;
-            }
-        }
+            StartCoroutine(Down());
     }
 
-    private bool Rayhit(Vector3 start)
+    IEnumerator Down()
     {
-        if (Physics2D.Raycast(start, H > 0 ? Vector3.right : Vector3.left, H, (1 << 8) | (1 << 12)))
-            return true;
+        down = false;
+        yield return 1;
+        if (downIndex >= 0)
+            child[downIndex].GetComponent<CubeManager>().enabled = true;
+        yield return 1;
+        downIndex--;
 
-        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -96,7 +53,13 @@ public class CubeMove : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag.Contains("Plane"))
-            collision.GetComponentInChildren<PolygonCollider2D>().isTrigger = false;
+        if (collision.tag.Contains("Mask"))
+        {
+            collision.transform.Find("Collision").GetComponent<PolygonCollider2D>().isTrigger = false;
+
+            float minY = collision.GetComponent<PolygonCollider2D>() ? collision.GetComponent<PolygonCollider2D>().bounds.min.y :
+                collision.GetComponent<BoxCollider2D>().bounds.min.y;
+            collision.transform.Find("Bottom").position = new Vector3(collision.transform.Find("Bottom").position.x, minY - 0.1f);
+        }
     }
 }

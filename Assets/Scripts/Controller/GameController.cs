@@ -121,7 +121,7 @@ public class GameController : MonoBehaviour
 
         player.GetComponentInChildren<SpriteRenderer>().enabled = mask == null ? true : false;
         player.transform.position = mask == null ?
-            maskObj.transform.position : mask.transform.position;
+            maskObj.transform.Find("hatPos").position : mask.transform.position;
         if (ActiveCam().GetComponent<CameraController>())
             ActiveCam().GetComponent<CameraController>().follower =
                 mask == null ? ColliNameManager.Instance.Follower : mask;

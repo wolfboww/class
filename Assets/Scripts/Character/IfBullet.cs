@@ -9,6 +9,9 @@ public class IfBullet : MonoBehaviour
     {
         if (collision.gameObject.tag.Contains("Mask"))
         {
+            if (!collision.transform.Find("hatPos"))
+                return;
+
             bemask = true;
             GameController.Instance.Mask(collision.gameObject);
         }

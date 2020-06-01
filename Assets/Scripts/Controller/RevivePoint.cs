@@ -142,6 +142,8 @@ public class RevivePoint : MonoBehaviour
             if (!GameController.isRevive)
                 collectionNum = GameController.collectNum;
             life = life < CollisionController.life ? CollisionController.life : life;
+            if (GetComponent<SpriteRenderer>().enabled)
+                GetComponent<AudioSource>().Play();
         }
     }
 }
