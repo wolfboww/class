@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3614498850990293663}
   - component: {fileID: 5969706984966826710}
   - component: {fileID: 4967619884435092620}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wall (1)
-  m_TagString: Untagged
+  m_TagString: Plane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,9 +117,9 @@ GameObject:
   - component: {fileID: 2287417317838292608}
   - component: {fileID: 7850106758366623822}
   - component: {fileID: 2760699920492334012}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: Plane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,9 +223,9 @@ GameObject:
   - component: {fileID: 1799138544589687487}
   - component: {fileID: 4705668526493762777}
   - component: {fileID: 9125389294361179887}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wall (2)
-  m_TagString: Untagged
+  m_TagString: Plane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -941,7 +941,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: aa4e634108b9b784389a679794d1ec71, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5471,9 +5471,9 @@ GameObject:
   - component: {fileID: 4906410889197174614}
   - component: {fileID: 5987093018289816059}
   - component: {fileID: 7826407297536210738}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wall (3)
-  m_TagString: Untagged
+  m_TagString: Plane
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5669,6 +5669,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5738,11 +5743,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
@@ -5904,6 +5904,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5974,11 +5979,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean
-      objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -6004,6 +6004,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6074,11 +6079,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean
-      objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -6104,6 +6104,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6174,11 +6179,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean
-      objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -6204,6 +6204,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6274,11 +6279,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean
-      objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -6304,6 +6304,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6374,11 +6379,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean
-      objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -6404,6 +6404,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6473,11 +6478,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean
       objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
@@ -6589,6 +6589,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6659,11 +6664,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean
-      objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_SortingLayerID
@@ -6689,6 +6689,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6758,11 +6763,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean
       objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
@@ -6879,6 +6879,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2574152593665328153}
     m_Modifications:
+    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
+        type: 3}
+      propertyPath: m_Name
+      value: Bean (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 2822517992183575798, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6948,11 +6953,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7059063449868209373, guid: 10f36ea47cb8b1043beefa6b3d065621,
-        type: 3}
-      propertyPath: m_Name
-      value: Bean (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6534157164610095100, guid: 10f36ea47cb8b1043beefa6b3d065621,
         type: 3}
