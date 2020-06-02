@@ -11,6 +11,7 @@ public class CubeMove : MonoBehaviour
     public static int downIndex;
 
     private Transform[] child;
+    private Coroutine cubeDown = null;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,11 @@ public class CubeMove : MonoBehaviour
         }
 
         if (down)
-            StartCoroutine(Down());
+        {
+            if (cubeDown != null)
+                return;
+            cubeDown = StartCoroutine(Down());
+        }
     }
 
     IEnumerator Down()
@@ -42,22 +47,29 @@ public class CubeMove : MonoBehaviour
             child[downIndex].GetComponent<CubeManager>().enabled = true;
         yield return 1;
         downIndex--;
+        cubeDown = null;
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
+        {
             down = true;
+            ColliNameManager.Instance.MainCamera.gameObject.SetActive(false);
+            ColliNameManager.Instance.FifthCamera.gameObject.SetActive(true);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag.Contains("Mask"))
         {
+            if (collision.GetComponent<PolygonCollider2D>())
+                collision.GetComponent<PolygonCollider2D>().isTrigger = false;
             float minY = collision.GetComponent<PolygonCollider2D>() ? collision.GetComponent<PolygonCollider2D>().bounds.min.y :
                 collision.GetComponent<BoxCollider2D>().bounds.min.y;
-            collision.transform.Find("Bottom").position = new Vector3(collision.transform.Find("Bottom").position.x, minY - 0.1f);
+            collision.transform.Find("Bottom").position = new Vector3(collision.transform.Find("Bottom").position.x, minY - 0.05f);
         }
 
         if (collision.tag.Contains("Plane") && collision.transform.parent.parent.name == "Sprite")

@@ -7,6 +7,7 @@ public class Action : MonoBehaviour
 {
     public GameObject anim;
     public GameObject end;
+    public GameObject actionEnd;
     public AudioClip click;
     public Sprite[] buttonDown;
     public static bool isOver;
@@ -30,6 +31,7 @@ public class Action : MonoBehaviour
     // Update is called once per frame
     void OnEnable()
     {
+        end.SetActive(isOver);
         commonUse.SetActive(isOver);
         UncommonUse.SetActive(isOver);
         transform.Find("Tip").gameObject.SetActive(isOver);
@@ -45,7 +47,7 @@ public class Action : MonoBehaviour
             Icon.GetComponent<DragUI>().enabled = false;
         }
         else if (Vector2.Distance(Icon.position, UncommonUse.transform.position) < 10)
-            end.SetActive(true);
+            actionEnd.SetActive(true);
 
         setting.Find("Music").GetComponent<Image>().sprite = GameController.music ? buttonDown[0] : buttonDown[1];
         setting.Find("Sound").GetComponent<Image>().sprite = GameController.sound ? buttonDown[0] : buttonDown[1];

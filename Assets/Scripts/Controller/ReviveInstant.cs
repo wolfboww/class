@@ -21,6 +21,11 @@ public class ReviveInstant : MonoBehaviour
         {
             Destroy(oldPrefab);
             oldPrefab = Instantiate(newPrefab, transform.root);
+            if (GameController.Instance.ActiveCam() != ColliNameManager.Instance.MainCamera)
+            {
+                GameController.Instance.ActiveCam().gameObject.SetActive(false);
+                ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
+            }
         }
     }
 }

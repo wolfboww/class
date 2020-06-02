@@ -92,6 +92,8 @@ public class Boss01 : MonoBehaviour
         yield return StartCoroutine(SkillAndShow(State.Skill2));
         yield return StartCoroutine(SkillAndShow(State.Skill5));
         yield return StartCoroutine(SkillAndShow(State.Skill4));
+        yield return 1;
+        GameController.Instance.player.GetComponent<Animator>().SetTrigger("Dead");
     }
 
     IEnumerator SkillAndShow(State s)
@@ -417,8 +419,14 @@ public class Boss01 : MonoBehaviour
         anim.SetFloat("Angle", 0);
         yield return 1;
         skill = 3;
-        Shoot();
-        yield return new WaitUntil(() => isTrigger);
+        while (true)
+        {
+            if (isTrigger)
+                break;
+            Shoot();
+            yield return new WaitForSeconds(1);
+        }
+        // yield return new WaitUntil(() => isTrigger);
         if (state == State.Skill5)
             skill = 1;
         else

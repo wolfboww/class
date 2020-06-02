@@ -33,10 +33,13 @@ public class Lift : MonoBehaviour
         targetPos = isPlayerOn ? newPos : lastPos;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, lastPos) < 0.1f)
-            light.GetComponent<SpriteRenderer>().color = Color.white;
-        else if (!buttonController)
-            light.GetComponent<SpriteRenderer>().color = initialColor;
+        if (!buttonController)
+        {
+            if (Vector3.Distance(transform.position, lastPos) < 0.1f)
+                light.GetComponent<SpriteRenderer>().color = Color.white;
+            else
+                light.GetComponent<SpriteRenderer>().color = initialColor;
+        }
 
         if (!timer.Equals(-1) && isPlayerOn)
         {
@@ -54,6 +57,10 @@ public class Lift : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
+        if (light.GetComponent<SpriteRenderer>().color != Color.white 
+            && buttonController)
+            return;
+
         if (collision.gameObject.tag == "Player" && !isPlayerOn)
         {
             if (collision.gameObject.GetComponent<BoxCollider2D>().bounds.min.y >= GetComponent<BoxCollider2D>().bounds.max.y - offset)

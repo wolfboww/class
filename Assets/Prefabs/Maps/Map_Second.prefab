@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 362646010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.34, y: 0, z: 0}
+  m_LocalPosition: {x: 6.32, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1322732084}
@@ -1183,7 +1183,7 @@ GameObject:
   - component: {fileID: 2419328396587838133}
   m_Layer: 13
   m_Name: ball
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6494,9 +6494,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1850725259
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: -1079783493
+  m_SortingLayer: 4
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 28aa7416d24cdb34295801c7659c9d6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -9272,7 +9272,7 @@ GameObject:
   - component: {fileID: 1855976277616446073}
   m_Layer: 13
   m_Name: ball
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10515,9 +10515,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1850725259
-  m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingLayerID: -1079783493
+  m_SortingLayer: 4
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 28aa7416d24cdb34295801c7659c9d6e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -13134,7 +13134,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3360958990140385210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.017, y: 0.703, z: 0}
+  m_LocalPosition: {x: -0.017, y: 0.029, z: 0}
   m_LocalScale: {x: 0.3906576, y: 0.3906576, z: 0.3906576}
   m_Children: []
   m_Father: {fileID: 1799102680059606619}
@@ -15792,7 +15792,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6947596831641548147}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -15985,7 +15985,7 @@ EdgeCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7482051344835594348}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -17086,6 +17086,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2352388179742204979}
     m_Modifications:
+    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: m_Name
+      value: RevivePoint
+      objectReference: {fileID: 0}
     - target: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17140,11 +17145,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: m_Name
-      value: RevivePoint
       objectReference: {fileID: 0}
     - target: {fileID: 1695566068636026894, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
@@ -19459,22 +19459,22 @@ PrefabInstance:
     - target: {fileID: 561254998103142184, guid: ebc814332f83c6a4680eb4b97ac88b98,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.404
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 561254998103142184, guid: ebc814332f83c6a4680eb4b97ac88b98,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.704
+      value: 0.4814656
       objectReference: {fileID: 0}
     - target: {fileID: 561254998103142184, guid: ebc814332f83c6a4680eb4b97ac88b98,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.88
+      value: 0.601832
       objectReference: {fileID: 0}
     - target: {fileID: 561254998103142184, guid: ebc814332f83c6a4680eb4b97ac88b98,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.704
+      value: 0.4814656
       objectReference: {fileID: 0}
     - target: {fileID: 1283358388010565812, guid: ebc814332f83c6a4680eb4b97ac88b98,
         type: 3}
@@ -19593,6 +19593,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebc814332f83c6a4680eb4b97ac88b98, type: 3}
+--- !u!4 &1322732084 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4891739156444891976, guid: ebc814332f83c6a4680eb4b97ac88b98,
+    type: 3}
+  m_PrefabInstance: {fileID: 4891739155594412412}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5921553461462515161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1283358389873032357, guid: ebc814332f83c6a4680eb4b97ac88b98,
@@ -19614,12 +19620,6 @@ GameObject:
 --- !u!4 &4912029346313186900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 561254998103142184, guid: ebc814332f83c6a4680eb4b97ac88b98,
-    type: 3}
-  m_PrefabInstance: {fileID: 4891739155594412412}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1322732084 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4891739156444891976, guid: ebc814332f83c6a4680eb4b97ac88b98,
     type: 3}
   m_PrefabInstance: {fileID: 4891739155594412412}
   m_PrefabAsset: {fileID: 0}
@@ -20297,11 +20297,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2378744616283883186, guid: e1055052563413343a6f9a0a0eeb869b,
         type: 3}
-      propertyPath: dir
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2378744616283883186, guid: e1055052563413343a6f9a0a0eeb869b,
-        type: 3}
       propertyPath: shootCD
       value: 1.5
       objectReference: {fileID: 0}
@@ -20624,16 +20619,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.22
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291594784534369429, guid: 5bbed48a81a2a1b40ba7c92f92b4dd52,
-        type: 3}
-      propertyPath: dir
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4291594784534369429, guid: 5bbed48a81a2a1b40ba7c92f92b4dd52,
-        type: 3}
-      propertyPath: maxDis
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4291594784534369429, guid: 5bbed48a81a2a1b40ba7c92f92b4dd52,
         type: 3}
@@ -21990,6 +21975,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6895163217340385046}
     m_Modifications:
+    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: m_Name
+      value: RevivePoint
+      objectReference: {fileID: 0}
     - target: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22059,11 +22049,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: m_Name
-      value: RevivePoint
       objectReference: {fileID: 0}
     - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
@@ -22985,6 +22970,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6391327267813933586}
     m_Modifications:
+    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: m_Name
+      value: RevivePoint
+      objectReference: {fileID: 0}
     - target: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -23054,11 +23044,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: m_Name
-      value: RevivePoint
       objectReference: {fileID: 0}
     - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}

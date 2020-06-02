@@ -36,7 +36,7 @@ public class PendulunAnim : MonoBehaviour
 
         if (!anim.GetFloat("Distance").Equals(0))
         {
-            if (timer > 6)
+            if (timer > 5)
                 return;
             timer += Time.deltaTime;
             anim.SetFloat("Distance", timer);

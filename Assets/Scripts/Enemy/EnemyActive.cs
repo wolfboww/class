@@ -11,14 +11,18 @@ public class EnemyActive : MonoBehaviour
     public bool canShoot = true;
 
     private Animator anim;
+    private Transform shootPos;
+    private Transform player;
     private float timer = 0;
-    private float a;
+    private float shootCD;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        a = GetComponent<SpriteRenderer>().color.a;
+        shootPos = transform.Find("ShootPos");
+        player = GameController.Instance.player.transform;
+        shootCD = GetComponent<EnemyPatrol>().shootCD;
     }
 
     // Update is called once per frame
@@ -29,22 +33,35 @@ public class EnemyActive : MonoBehaviour
 
         if (active && !anim.GetCurrentAnimatorStateInfo(0).IsName("EnemyAppear"))
             anim.SetTrigger("Appear");
-        else if (!active && !anim.GetCurrentAnimatorStateInfo(0).IsName("EnemyDead"))
+        else if (!active && !anim.GetCurrentAnimatorStateInfo(0).IsName("EnemyDisappear"))
             anim.SetTrigger("Disappear");
-
 
         if (!canShoot)
         {
-            GetComponent<EnemyPatrol>().shootCD += 4;
+            GetComponent<EnemyPatrol>().shootCD = shootCD + 4;
             timer += Time.deltaTime;
             if (timer >= 3)
             {
-                GetComponent<EnemyPatrol>().shootCD -= 4;
+                GetComponent<EnemyPatrol>().shootCD = shootCD;
                 canShoot = true;
                 timer = 0;
             }
         }
+        BulletDir();
     }
+
+    public void BulletDir()
+    {
+        int dir = GetComponent<SpriteRenderer>().flipX ? 1 : -1;
+        RaycastHit2D hit45 = Physics2D.Raycast(shootPos.position, new Vector2(dir, -1), 1 << 8);
+        RaycastHit2D hit90 = Physics2D.Raycast(shootPos.position, Vector2.down, 1 << 8);
+
+        bool dis = Mathf.Abs(player.position.x - hit45.point.x) <= Mathf.Abs(player.position.x - hit90.point.x);
+
+        shootPos.localEulerAngles = 
+            (dis ? new Vector3(0, 0, -45) : new Vector3(0, 0, -90)) * dir;
+    }
+
 
     private void ResetAnim()
     {

@@ -17,6 +17,7 @@ public class AccountUI : MonoBehaviour
     public Animator gridFX;
     public GameObject keepTrying;
     public GameObject getHP;
+    public GameObject TheEnd;
 
     private Animator playerHP;
     private Animator playerImage;
@@ -99,21 +100,24 @@ public class AccountUI : MonoBehaviour
         yield return 1;
         foreach (Transform item in bg1)
             item.gameObject.SetActive(true);
-        if (GameController.deadNum < awardDeadNum)
+        if (!accountNum.Equals(2))
         {
-            Tweener tweener = deadText.rectTransform.DOScale(Vector3.one * 2.5f, 2);
-            tweener.SetUpdate(true);
-            deadText.GetComponent<Outline>().enabled = true;
-            getGrid = true;
+            if (GameController.deadNum < awardDeadNum)
+            {
+                Tweener tweener = deadText.rectTransform.DOScale(Vector3.one * 2.5f, 2);
+                tweener.SetUpdate(true);
+                deadText.GetComponent<Outline>().enabled = true;
+                getGrid = true;
+            }
+            if (GameController.timeNum < awardTime)
+            {
+                Tweener tweener = timeText.rectTransform.DOScale(Vector3.one * 2.5f, 2);
+                tweener.SetUpdate(true);
+                timeText.GetComponent<Outline>().enabled = true;
+                getGrid = true;
+            }
+            yield return new WaitForSecondsRealtime(2f);
         }
-        if (GameController.timeNum < awardTime)
-        {
-            Tweener tweener = timeText.rectTransform.DOScale(Vector3.one * 2.5f, 2);
-            tweener.SetUpdate(true);
-            timeText.GetComponent<Outline>().enabled = true;
-            getGrid = true;
-        }
-        yield return new WaitForSecondsRealtime(2f);
         bg2.GetComponent<Animator>().SetTrigger("Account");
         yield return new WaitUntil(() => bg2.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Account"));
         yield return new WaitUntil(() => bg2.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f);
@@ -124,9 +128,10 @@ public class AccountUI : MonoBehaviour
             getHP.SetActive(true);
             playerHP.SetFloat("grid", playerHP.GetFloat("grid") + 1);
         }
-        else
+        else if (!accountNum.Equals(2))
             keepTrying.SetActive(true);
-
+        else
+            TheEnd.SetActive(true);
     }
 
     private string TimeAccount()

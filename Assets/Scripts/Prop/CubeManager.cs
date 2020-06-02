@@ -7,11 +7,13 @@ public class CubeManager : MonoBehaviour
 {
     [HideInInspector]
     public Vector3 freezePos;
+    [HideInInspector]
+    public bool isOver;
 
     private Transform limit;
     private Transform bottom;
-    private bool canMove = true;
     private bool canHit = true;
+    private bool canMove = true;
 
     private float H;
     private float moveSpeed;
@@ -28,6 +30,7 @@ public class CubeManager : MonoBehaviour
         initialX = transform.position.x;
         initialBottomY = bottom.localPosition.y;
         moveSpeed = transform.GetComponentInParent<CubeMove>().moveSpeed;
+        isOver = false;
     }
 
     // Update is called once per frame
@@ -43,7 +46,7 @@ public class CubeManager : MonoBehaviour
             bottom.localPosition = new Vector3(bottom.localPosition.x, initialBottomY);
             for (int i = 0; i < transform.Find("Sprite").childCount; i++)
                 transform.Find("Sprite").GetChild(i).gameObject.SetActive(true);
-
+            isOver = false;
             this.enabled = false;
         }
 
@@ -80,7 +83,7 @@ public class CubeManager : MonoBehaviour
                     if (RayHitX(transform.Find("Middle").position))
                         return;
                 }
-                if (canMove)
+                if (canMove && !isOver)
                 {
                     if (Mathf.Abs(transform.Find("Left").position.x - limit.Find("Left").position.x) < 0.1f || Mathf.Abs(transform.Find("Right").position.x - limit.Find("Right").position.x) < 0.1f)
                         return;

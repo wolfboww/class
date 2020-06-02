@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 public class CollisionController : MonoBehaviour
 {
@@ -154,13 +155,21 @@ public class CollisionController : MonoBehaviour
     {
         ColliNameManager.Instance.account.SetActive(true);
         yield return new WaitUntil(() => AccountUI.go);
-        GameController.Instance.ChangeMap();
-        transform.position = GameController.Instance.revivePoint.position;
-        ColliNameManager.Instance.Loading.SetActive(true);
-        anim.SetFloat("Edition", anim.GetFloat("Edition") + 1);
-        yield return new WaitUntil(() => Loading.loading);
-        Loading.loading = false;
-        anim.SetTrigger("Show");
+        if (anim.GetFloat("Edition") <= 3)
+        {
+            GameController.Instance.ChangeMap();
+            transform.position = GameController.Instance.revivePoint.position;
+            ColliNameManager.Instance.Loading.SetActive(true);
+            anim.SetFloat("Edition", anim.GetFloat("Edition") + 1);
+            yield return new WaitUntil(() => Loading.loading);
+            Loading.loading = false;
+            anim.SetTrigger("Show");
+        }
+        else
+        {
+            SceneManager.LoadScene("Anim");
+            Action.isOver = true;
+        }
     }
 
     private void LoseHP()

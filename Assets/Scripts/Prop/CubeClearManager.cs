@@ -21,7 +21,7 @@ public class CubeClearManager : MonoBehaviour
                 col.parent.GetChild(j).position = newFK;
             }
             col.gameObject.SetActive(false);
-
+            col.parent.GetComponentInParent<CubeManager>().isOver = true;
         }
 
         gameObject.SetActive(false);

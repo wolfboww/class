@@ -77,15 +77,19 @@ public class MoveController : MonoBehaviour
         if (bullets.Count != 0)
             GetComponent<AnimatorController>().bullet = bullets[bulletIndex];
 
-        if (!isForwardShoot && anim.GetFloat("Edition") > 0)
+        if (anim.GetFloat("Edition") > 0)
         {
-            angletimer += Time.deltaTime;
-            if (angletimer > angleTime /*|| Input.GetMouseButtonDown(1)*/)
+            transform.Find("Highlight").gameObject.SetActive(false);
+            if (!isForwardShoot)
             {
-                weaponPoint.localPosition = new Vector3(2f, 1.2f);
-                weaponPoint.localEulerAngles = Vector3.zero;
-                anim.SetFloat("Angle", 0.5f);
-                isForwardShoot = true;
+                angletimer += Time.deltaTime;
+                if (angletimer > angleTime /*|| Input.GetMouseButtonDown(1)*/)
+                {
+                    weaponPoint.localPosition = new Vector3(2f, 1.2f);
+                    weaponPoint.localEulerAngles = Vector3.zero;
+                    anim.SetFloat("Angle", 0.5f);
+                    isForwardShoot = true;
+                }
             }
         }
 

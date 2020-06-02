@@ -5,7 +5,6 @@ using UnityEngine;
 public class End : MonoBehaviour
 {
     public bool lighting = false;
-    public GameObject action;
 
     private GameObject player;
     private GameObject playerNow;
@@ -60,8 +59,7 @@ public class End : MonoBehaviour
         playerNow.GetComponent<Animator>().SetInteger("Step", 1);
         yield return 1;
         playerNow.GetComponent<Animator>().SetInteger("Step", 0);
-        Action.isOver = true;
-        yield return new WaitForSeconds(1);
-        action.SetActive(true);
+        yield return new WaitForSecondsRealtime(1);
+        gameObject.SetActive(false);
     }
 }
