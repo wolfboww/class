@@ -126,7 +126,8 @@ public class AccountUI : MonoBehaviour
         if (getGrid)
         {
             getHP.SetActive(true);
-            playerHP.SetFloat("grid", playerHP.GetFloat("grid") + 1);
+            CollisionController.life++;
+            //playerHP.SetFloat("grid", playerHP.GetFloat("grid") + 1);
         }
         else if (!accountNum.Equals(2))
             keepTrying.SetActive(true);
@@ -147,6 +148,7 @@ public class AccountUI : MonoBehaviour
     public void Continue()
     {
         go = true;
+        HPUI.getHPCollectNum += 2;
         ColliNameManager.Instance.account.SetActive(false);
     }
 }

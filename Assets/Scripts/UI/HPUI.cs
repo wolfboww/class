@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class HPUI : MonoBehaviour
 {
     public static float edition;
+    public static int getHPCollectNum;
     public Sprite[] collection;
 
     private Transform HP;
     private Animator anim;
     private GameObject[] HPchild;
     private int activeNum;
-    private int getHPCollectNum = 4;
     private Transform collectionFX;
     private Text collectionText;
 
@@ -20,6 +20,7 @@ public class HPUI : MonoBehaviour
     void Awake()
     {
         edition = 0;
+        getHPCollectNum = 4;
         anim = GetComponent<Animator>();
         HP = transform.Find("HP");
         HPchild = new GameObject[HP.childCount];
@@ -67,8 +68,8 @@ public class HPUI : MonoBehaviour
     void activeAccount()
     {
         activeNum = 0;
-        HPchild[3].SetActive(anim.GetFloat("grid") > 0);
-        HPchild[4].SetActive(anim.GetFloat("grid") > 1);
+        //HPchild[3].SetActive(anim.GetFloat("grid") > 0);
+        //HPchild[4].SetActive(anim.GetFloat("grid") > 1);
 
         for (int i = 0; i < HPchild.Length; i++)
         {

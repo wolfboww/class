@@ -51,5 +51,9 @@ public class SecondCamera : MonoBehaviour
         ColliNameManager.Instance.Mouse.GetComponent<Animator>().SetFloat("Edition", 1);
         yield return new WaitUntil(() => mask.transform.GetChild(0).childCount > 0);
         yield return pacman.GetComponent<AIDestinationSetter>().target = transform.root.Find("EnemyPos").Find("PacmanPos");
+        yield return new WaitUntil(() => Vector2.Distance(pacman.position, transform.root.Find("EnemyPos").Find("PacmanPos").position) < 0.1f);
+        ColliNameManager.Instance.Mouse.SetActive(true);
+        ColliNameManager.Instance.Mouse.GetComponent<Animator>().SetFloat("Edition", 2);
+        yield return new WaitWhile(() => ColliNameManager.Instance.Mouse.activeInHierarchy);
     }
 }
