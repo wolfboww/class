@@ -12,7 +12,7 @@ public class HPUI : MonoBehaviour
     private Animator anim;
     private GameObject[] HPchild;
     private int activeNum;
-    private int getHPCollectNum = 6;
+    private int getHPCollectNum = 4;
     private Transform collectionFX;
     private Text collectionText;
 

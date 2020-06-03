@@ -24,7 +24,7 @@ public class MoveController : MonoBehaviour
     private Coroutine bubbleCor = null;
 
     private float masktimer = 0;
-    private float maskTime = 5;
+    private float maskTime = 10;
     private float checkRadius = 0.5f;
     private Vector3 Scale;
     private float scaleX;

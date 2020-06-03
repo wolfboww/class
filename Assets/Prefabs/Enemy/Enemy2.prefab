@@ -192,11 +192,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3455727562131264467}
     m_Modifications:
-    - target: {fileID: 1667802522000915462, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
-        type: 3}
-      propertyPath: m_Name
-      value: Language
-      objectReference: {fileID: 0}
     - target: {fileID: 4414949902647584097, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -317,6 +312,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.030746376
       objectReference: {fileID: 0}
+    - target: {fileID: 1667802522000915462, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
+        type: 3}
+      propertyPath: m_Name
+      value: Language
+      objectReference: {fileID: 0}
     - target: {fileID: 652575189024683689, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
         type: 3}
       propertyPath: m_FontData.m_MinSize
@@ -326,6 +326,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 652575189024683689, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b3f9ed81ca22c41b8020fbfc479c72, type: 3}
