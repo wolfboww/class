@@ -6203,6 +6203,26 @@ PrefabInstance:
       propertyPath: activeCam
       value: 
       objectReference: {fileID: 519420028}
+    - target: {fileID: 3634837927106994198, guid: 6fe12ec8698724333b47c4966622572d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3634837927106994198, guid: 6fe12ec8698724333b47c4966622572d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3634837927106994198, guid: 6fe12ec8698724333b47c4966622572d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3634837927106994198, guid: 6fe12ec8698724333b47c4966622572d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 387367869152268261, guid: 6fe12ec8698724333b47c4966622572d,
         type: 3}
       propertyPath: activeCam
