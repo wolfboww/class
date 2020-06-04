@@ -13,7 +13,8 @@ public class TriggerController : MonoBehaviour
     {
         if (collision.tag.Contains("Player"))
         {
-            target.GetComponent<PolygonCollider2D>().enabled = trigger;
+            if (target != null)
+                target.GetComponent<PolygonCollider2D>().enabled = trigger;
 
             GameController.Instance.ActiveCam().gameObject.SetActive(false);
             activeCam.SetActive(true);

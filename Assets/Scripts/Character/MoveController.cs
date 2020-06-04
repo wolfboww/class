@@ -13,6 +13,7 @@ public class MoveController : MonoBehaviour
     public bool isJump = false;
     [HideInInspector]
     public bool canMove = true;
+    public bool virtual3D = false;
     public static bool canShoot = true;
     private bool isDoubleJump = false;
 
@@ -123,17 +124,23 @@ public class MoveController : MonoBehaviour
         if (!canMove)
             return;
 
-        float H = Input.GetAxisRaw("Horizontal");
+        float h = Input.GetAxisRaw("Horizontal");
         if (!anim.GetCurrentAnimatorStateInfo(0).IsName("PlayerDead"))
-            anim.SetFloat("Speed", H);
+            anim.SetFloat("Speed", h);
         else
-            H = 0;
+            h = 0;
 
-        if (!H.Equals(0))
+        if (!h.Equals(0))
         {
-            Scale.x = (H > 0 ? 1 : -1) * scaleX;
+            Scale.x = (h > 0 ? 1 : -1) * scaleX;
             transform.localScale = Scale;
-            transform.Translate(new Vector2(H, 0) * Time.deltaTime * moveSpeed);
+            if (virtual3D)
+            {
+                float v = Input.GetAxisRaw("Vertical");
+                transform.Translate(new Vector3(h * Time.deltaTime * moveSpeed, 0f, v * Time.deltaTime * moveSpeed));
+            }
+            else
+                transform.Translate(new Vector2(h, 0) * Time.deltaTime * moveSpeed);
         }
     }
 

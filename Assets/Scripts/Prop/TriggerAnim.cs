@@ -22,6 +22,20 @@ public class TriggerAnim : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Contains("Player"))
-            GameController.Instance.ResetAnim(anim, animName);
+            anim.SetTrigger(animName);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            if (collision.gameObject.GetComponent<IfBullet>())
+                return;
+            if (!collision.gameObject.GetComponent<BulletController>())
+                return;
+            if (!collision.gameObject.GetComponent<BulletController>().playerBullet)
+                return;
+
+            anim.SetTrigger(animName);
+        }
     }
 }
