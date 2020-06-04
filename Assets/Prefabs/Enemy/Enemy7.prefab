@@ -138,7 +138,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08267617, y: -0.0751605}
+  m_Offset: {x: -0.08267617, y: 0.056810856}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -149,7 +149,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.281505, y: 3.016922}
+  m_Size: {x: 3.281505, y: 2.7529793}
   m_EdgeRadius: 0
 --- !u!114 &6271188893774157236
 MonoBehaviour:
@@ -192,11 +192,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8448167958199230812}
     m_Modifications:
-    - target: {fileID: 1667802522000915462, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
-        type: 3}
-      propertyPath: m_Name
-      value: Language
-      objectReference: {fileID: 0}
     - target: {fileID: 4414949902647584097, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -301,6 +296,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667802522000915462, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
+        type: 3}
+      propertyPath: m_Name
+      value: Language
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c3b3f9ed81ca22c41b8020fbfc479c72, type: 3}
