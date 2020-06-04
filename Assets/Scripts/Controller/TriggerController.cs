@@ -5,6 +5,8 @@ using UnityEngine;
 public class TriggerController : MonoBehaviour
 {
     public GameObject target;
+    public GameObject activeCam;
+
     public bool trigger;
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -13,8 +15,8 @@ public class TriggerController : MonoBehaviour
         {
             target.GetComponent<PolygonCollider2D>().enabled = trigger;
 
-            ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
-            ColliNameManager.Instance.FifthCamera.gameObject.SetActive(false);
+            GameController.Instance.ActiveCam().gameObject.SetActive(false);
+            activeCam.SetActive(true);
         }
     }
 }
