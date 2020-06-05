@@ -28,7 +28,6 @@ public class CollisionController : MonoBehaviour
         if (collision.gameObject == ColliNameManager.Instance.Princess)
             StartCoroutine(GameController.Instance.ResetAnim(collision.gameObject.GetComponentInParent<Animator>(), "Get"));
 
-
         switch (collision.transform.tag)
         {
             case "Enemy":

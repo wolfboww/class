@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3686072405786866096}
   m_Layer: 12
-  m_Name: hatpos
+  m_Name: hatPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,8 +24,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3686072405786866097}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.175, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.228, y: 0, z: 0}
+  m_LocalScale: {x: 0.17985784, y: 0.17985784, z: 0.17985784}
   m_Children: []
   m_Father: {fileID: 3686072405937443397}
   m_RootOrder: 0

@@ -26,6 +26,7 @@ public class MouseUI : MonoBehaviour
                     Continue();
                 break;
             case 2:
+            case 3:
                 if (Input.GetMouseButtonDown(1))
                     Continue();
                 break;

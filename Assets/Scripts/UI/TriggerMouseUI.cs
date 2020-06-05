@@ -9,7 +9,7 @@ public class TriggerMouseUI : MonoBehaviour
         if (collision.tag.Contains("Player"))
         {
             ColliNameManager.Instance.Mouse.SetActive(true);
-            ColliNameManager.Instance.Mouse.GetComponent<Animator>().SetFloat("Edition", 2);
+            ColliNameManager.Instance.Mouse.GetComponent<Animator>().SetFloat("Edition", 3);
             gameObject.SetActive(false);
         }
     }

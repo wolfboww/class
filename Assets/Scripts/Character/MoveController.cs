@@ -20,7 +20,7 @@ public class MoveController : MonoBehaviour
     private Transform groundCheck;
     private Transform weaponPoint;
     private Transform bubble;
-    private Rigidbody2D rig;
+    private Rigidbody2D rig2d;
     private Animator anim;
     private Coroutine bubbleCor = null;
 
@@ -37,6 +37,10 @@ public class MoveController : MonoBehaviour
     private Vector3 mousePos = Vector3.zero;
     private Vector3 mouseDir = Vector3.zero;
 
+    private Vector3 offset2d;
+    private Vector3 size2d;
+
+
     void Start()
     {
         groundCheck = transform.Find("GroundCheck");
@@ -45,15 +49,21 @@ public class MoveController : MonoBehaviour
         Scale = transform.localScale;
         scaleX = Scale.x;
 
-        rig = GetComponent<Rigidbody2D>();
+        if (GetComponent<Rigidbody2D>())
+            rig2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        offset2d = GetComponent<BoxCollider2D>().offset;
+        size2d = GetComponent<BoxCollider2D>().size;
     }
 
     // Update is called once per frame
     void Update()
     {
         MoveControl();
-        isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
+        if (!virtual3D)
+            isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
+        else
+            isJump = Physics.OverlapBox(groundCheck.position, Vector3.one * checkRadius, Quaternion.identity, 1 << 8).Length.Equals(0);
         anim.SetBool("Stand", !isJump);
         JumpControl();
 
@@ -91,6 +101,39 @@ public class MoveController : MonoBehaviour
                     anim.SetFloat("Angle", 0.5f);
                     isForwardShoot = true;
                 }
+            }
+        }
+
+        if (virtual3D)
+        {
+            if (GetComponent<BoxCollider2D>())
+                Destroy(GetComponent<BoxCollider2D>());
+            if (GetComponent<Rigidbody2D>())
+                Destroy(GetComponent<Rigidbody2D>());
+            if (!GetComponent<BoxCollider>())
+                gameObject.AddComponent<BoxCollider>();
+            if (!GetComponent<Rigidbody>())
+            {
+                gameObject.AddComponent<Rigidbody>();
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            }
+        }
+        else
+        {
+            if (GetComponent<BoxCollider>())
+                Destroy(GetComponent<BoxCollider>());
+            if (GetComponent<Rigidbody>())
+                Destroy(GetComponent<Rigidbody>());
+            if (!GetComponent<BoxCollider2D>())
+            {
+                gameObject.AddComponent<BoxCollider2D>();
+                GetComponent<BoxCollider2D>().offset = offset2d;
+                GetComponent<BoxCollider2D>().size = size2d;
+            }
+            if (!GetComponent<Rigidbody2D>())
+            {
+                gameObject.AddComponent<Rigidbody2D>();
+                GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
             }
         }
 
@@ -163,13 +206,19 @@ public class MoveController : MonoBehaviour
             if (!isJump)
             {
                 isJump = true;
-                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
+                if (!virtual3D)
+                    rig2d.velocity = new Vector2(rig2d.velocity.x, jumpForce);
+                else
+                    GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpForce, GetComponent<Rigidbody>().velocity.z);
             }
             else if (!isDoubleJump)
             {
                 isDoubleJump = true;
                 anim.SetTrigger("DoubleJump");
-                rig.velocity = new Vector2(rig.velocity.x, jumpForce);
+                if (!virtual3D)
+                    rig2d.velocity = new Vector2(rig2d.velocity.x, jumpForce);
+                else
+                    GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpForce, GetComponent<Rigidbody>().velocity.z);
             }
 
         }
