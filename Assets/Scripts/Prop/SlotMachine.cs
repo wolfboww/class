@@ -7,15 +7,20 @@ public class SlotMachine : MonoBehaviour
 {
     public int type;
     private Animator anim;
+    private int initialType;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        initialType = type;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameController.isRevive)
+            anim.SetFloat("Type", initialType);
+
         type = type > 2 ? type - 3 : type;
         anim.SetFloat("Type", type);
     }

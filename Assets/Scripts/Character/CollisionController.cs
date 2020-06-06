@@ -65,7 +65,7 @@ public class CollisionController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         switch (collision.transform.tag)
         {
@@ -92,15 +92,21 @@ public class CollisionController : MonoBehaviour
                 {
                     GetComponent<AnimatorController>().GetBuff(1);
                     GetComponent<Animator>().SetBool("GetGun", true);
-                    GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.ElseBullet);
-                    ColliNameManager.Instance.Mouse.SetActive(true);
-                    BulletUI.bulletNum++;
+                    if (!GetComponent<MoveController>().bullets.Contains(ColliNameManager.Instance.ElseBullet))
+                    {
+                        GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.ElseBullet);
+                        ColliNameManager.Instance.Mouse.SetActive(true);
+                        BulletUI.bulletNum++;
+                    }
                 }
                 else if (collision.gameObject == ColliNameManager.Instance.Art)
                 {
                     GetComponent<AnimatorController>().GetBuff(2);
-                    GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
-                    BulletUI.bulletNum++;
+                    if (!GetComponent<MoveController>().bullets.Contains(ColliNameManager.Instance.IfBullet))
+                    {
+                        GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
+                        BulletUI.bulletNum++;
+                    }
                 }
                 else if (collision.gameObject.name == "Light(Clone)")
                 {

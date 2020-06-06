@@ -17,18 +17,28 @@ public class TriggerAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (GameController.isRevive)
+        {
+            anim.SetTrigger("Revive");
+            anim.ResetTrigger(animName);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (light && collision.GetComponent<LightManager>())
-            anim.SetTrigger(animName);
+        if (light)
+        {
+            if (collision.GetComponent<LightManager>())
+                anim.SetTrigger(animName);
+        }
         else if (collision.tag.Contains("Player"))
             anim.SetTrigger(animName);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (light)
+            return;
+
         if (collision.gameObject.tag == "Bullet")
         {
             if (collision.gameObject.GetComponent<IfBullet>())

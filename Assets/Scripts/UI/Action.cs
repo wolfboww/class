@@ -26,6 +26,8 @@ public class Action : MonoBehaviour
         setting = transform.Find("Setting");
         Icon = transform.Find("Icon");
         isOver = false;
+        GameController.music = true;
+        GameController.sound = true;
     }
 
     // Update is called once per frame

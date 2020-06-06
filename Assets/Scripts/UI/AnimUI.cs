@@ -35,7 +35,7 @@ public class AnimUI : MonoBehaviour
         }
         yield return new WaitUntil(() => Mathf.Abs(enemy.transform.position.x - middle.position.x) < 1f * size);
         enemy.GetComponent<Animator>().SetInteger("Step", 1);
-        yield return new WaitForSeconds(enemy.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSecondsRealtime(enemy.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         while (player.transform.position.x < middle.position.x - 50 * size)
         {
             player.transform.Translate((middle.position - player.transform.position).normalized * 2 * size);
@@ -54,7 +54,7 @@ public class AnimUI : MonoBehaviour
 
         enemy.GetComponent<Animator>().SetInteger("Step", 2);
         player.GetComponent<Animator>().SetInteger("Step", 1);
-        yield return new WaitForSeconds(enemy.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSecondsRealtime(enemy.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         SceneManager.LoadScene("Game");
     }
 }

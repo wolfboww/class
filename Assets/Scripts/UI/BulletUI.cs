@@ -30,28 +30,6 @@ public class BulletUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (timer >= 0)
-        //{
-        //    if (timer >= 3)
-        //    {
-        //        GetComponent<Image>().DOFade(0.5f, 1);
-        //        foreach (Transform item in transform)
-        //        {
-        //            if (item.GetComponent<Image>().color.a <= 0.5f)
-        //                return;
-        //            item.GetComponent<Image>().DOFade(0.5f, 1);
-        //        }
-        //    }
-        //    else
-        //        timer += Time.deltaTime;
-        //}
-        //else
-        //{
-        //    GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        //    foreach (Transform item in transform)
-        //        item.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-        //}
-
         if (bulletNum <= 0)
             return;
         else
@@ -59,7 +37,6 @@ public class BulletUI : MonoBehaviour
             ElseUI.SetActive(true);
             IfUI.SetActive(bulletNum >= 2 ? true : false);
         }
-
         anim.SetBool("GetGun", player.GetComponent<Animator>().GetBool("GetGun"));
         anim.SetInteger("Bullet", Bullet());
         transform.Find("LightUI").gameObject.SetActive(light);

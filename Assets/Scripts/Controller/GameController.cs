@@ -38,8 +38,6 @@ public class GameController : MonoBehaviour
         deadNum = 0;
         collectNum = 0;
         collectAccountNum = 0;
-        music = true;
-        sound = true;
     }
 
     // Start is called before the first frame update
