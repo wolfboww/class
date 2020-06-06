@@ -4423,12 +4423,17 @@ PrefabInstance:
     - target: {fileID: 2125655051744160908, guid: 9c83cf233735eec4ea18c893ec248fb8,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 2125655051744160908, guid: 9c83cf233735eec4ea18c893ec248fb8,
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2125655051744160908, guid: 9c83cf233735eec4ea18c893ec248fb8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3344410657715418031, guid: 9c83cf233735eec4ea18c893ec248fb8,
         type: 3}
@@ -6411,21 +6416,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5960401215397173771, guid: 6fe12ec8698724333b47c4966622572d,
-        type: 3}
-      propertyPath: activeCam
-      value: 
-      objectReference: {fileID: 519420028}
     - target: {fileID: 4863283448909317893, guid: 6fe12ec8698724333b47c4966622572d,
         type: 3}
       propertyPath: m_Name
       value: Map_Third
       objectReference: {fileID: 0}
-    - target: {fileID: 4863283448909317893, guid: 6fe12ec8698724333b47c4966622572d,
+    - target: {fileID: 5960401215397173771, guid: 6fe12ec8698724333b47c4966622572d,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: activeCam
+      value: 
+      objectReference: {fileID: 519420028}
     - target: {fileID: 4863283448909317895, guid: 6fe12ec8698724333b47c4966622572d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6486,11 +6486,6 @@ PrefabInstance:
       propertyPath: activeCam
       value: 
       objectReference: {fileID: 519420028}
-    - target: {fileID: 387367869152268261, guid: 6fe12ec8698724333b47c4966622572d,
-        type: 3}
-      propertyPath: activeCam
-      value: 
-      objectReference: {fileID: 519420028}
     - target: {fileID: 2619170543022985121, guid: 6fe12ec8698724333b47c4966622572d,
         type: 3}
       propertyPath: activeCam
@@ -6500,16 +6495,6 @@ PrefabInstance:
       propertyPath: Target
       value: 
       objectReference: {fileID: 1044598211}
-    - target: {fileID: 3654263260249789207, guid: 6fe12ec8698724333b47c4966622572d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3654263259614089353, guid: 6fe12ec8698724333b47c4966622572d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe12ec8698724333b47c4966622572d, type: 3}
 --- !u!4 &4135601886523082574 stripped

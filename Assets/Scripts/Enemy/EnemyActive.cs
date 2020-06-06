@@ -38,9 +38,9 @@ public class EnemyActive : MonoBehaviour
 
         if (!canShoot)
         {
-            GetComponent<EnemyPatrol>().shootCD = shootCD + 4;
+            GetComponent<EnemyPatrol>().shootCD = shootCD + 6;
             timer += Time.deltaTime;
-            if (timer >= 3)
+            if (timer >= 5)
             {
                 GetComponent<EnemyPatrol>().shootCD = shootCD;
                 canShoot = true;
@@ -59,7 +59,7 @@ public class EnemyActive : MonoBehaviour
         bool dis = Mathf.Abs(player.position.x - hit45.point.x) <= Mathf.Abs(player.position.x - hit90.point.x);
 
         shootPos.localEulerAngles = 
-            (dis ? new Vector3(0, 0, -45) : new Vector3(0, 0, -90)) * dir;
+            (dis ? new Vector3(0, 0, -35) : new Vector3(0, 0, -70)) * dir;
     }
 
 

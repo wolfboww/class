@@ -33,7 +33,7 @@ public class MoveController : MonoBehaviour
 
     private bool isForwardShoot = false;
     private float angletimer = 0;
-    private float angleTime = 2;
+    private float angleTime = 1;
     private Vector3 mousePos = Vector3.zero;
     private Vector3 mouseDir = Vector3.zero;
 
