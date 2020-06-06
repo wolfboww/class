@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class End : MonoBehaviour
 {
-    public bool lighting = false;
-
+    //public bool lighting = false;
     private GameObject player;
     private GameObject playerNow;
     private GameObject enemy;
@@ -25,19 +24,24 @@ public class End : MonoBehaviour
     void OnEnable()
     {
         size = Mathf.Abs(target1.position.x - player.transform.position.x) / 268.5629f;
-        StartCoroutine(EndUI());
+        //StartCoroutine(EndUI());
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            lighting = true;
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //    lighting = true;
+    }
+
+    void AnimEnd()
+    {
+        transform.parent.parent.gameObject.SetActive(false);
     }
 
 
     IEnumerator EndUI()
     {
-        yield return new WaitUntil(() => lighting);
+        //yield return new WaitUntil(() => lighting);
         enemy.SetActive(true);
         enemy.GetComponent<Animator>().SetInteger("Step", 1);
         player.GetComponent<Animator>().SetInteger("Step", 1);

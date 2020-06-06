@@ -23,8 +23,14 @@ public class AnimUI : MonoBehaviour
     void OnEnable()
     {
         size = Mathf.Abs(middle.position.x - player.transform.position.x) / 268.5629f;
-        StartCoroutine(AnimStart());
+        //StartCoroutine(AnimStart());
     }
+
+    private void Animation()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
 
     IEnumerator AnimStart()
     {
