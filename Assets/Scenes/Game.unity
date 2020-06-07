@@ -1732,6 +1732,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8288659915804150806}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1016173968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1016173968, guid: 6fe12ec8698724333b47c4966622572d,
+    type: 3}
+  m_PrefabInstance: {fileID: 3634837927179918876}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ab9bcf06b842646a020db6bfe48a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1029370567
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,12 +1818,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029370567}
   m_CullTransparentMesh: 0
---- !u!1 &1044598211 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7047540631127143046, guid: 9c83cf233735eec4ea18c893ec248fb8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1610418232}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1053816620
 GameObject:
   m_ObjectHideFlags: 0
@@ -4445,6 +4451,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 714694038970076224, guid: 9c83cf233735eec4ea18c893ec248fb8,
+        type: 3}
+      propertyPath: cube
+      value: 
+      objectReference: {fileID: 8559165555672726604, guid: f909feb409db6614892f10eb655e7bc8,
+        type: 3}
+    - target: {fileID: 714694038970076224, guid: 9c83cf233735eec4ea18c893ec248fb8,
+        type: 3}
+      propertyPath: reviveInstant
+      value: 
+      objectReference: {fileID: 1016173968}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c83cf233735eec4ea18c893ec248fb8, type: 3}
 --- !u!1 &1673268079
@@ -5849,6 +5866,8 @@ MonoBehaviour:
   BossSkate: {fileID: 7329651213718807055}
   BossWinner: {fileID: 3532825880456604564, guid: 32f1f988a71aeb7498c0fd03e219670f,
     type: 3}
+  CubeAnim: {fileID: 3222178128375679421, guid: 6c4dc36fc9d1bad47acc7dc94f19ff5f,
+    type: 3}
   AnimBoundary:
   - {fileID: 883400908}
   - {fileID: 3414293481018851254}
@@ -5859,6 +5878,8 @@ MonoBehaviour:
   ElseBullet: {fileID: 1549626832037591205, guid: df1eb72b2aee6ed46b20e319380e18fb,
     type: 3}
   IfBullet: {fileID: 1549626832037591205, guid: bae5d070e8f533148ab0c09e3d49d40d,
+    type: 3}
+  ElseBullet3D: {fileID: 1549626832037591205, guid: b439f20e574afde4db3c0cc868c87449,
     type: 3}
   MainCamera: {fileID: 519420031}
   SecondCamera: {fileID: 1478099203}
@@ -6486,20 +6507,6 @@ PrefabInstance:
       propertyPath: activeCam
       value: 
       objectReference: {fileID: 519420028}
-    - target: {fileID: 2619170543022985121, guid: 6fe12ec8698724333b47c4966622572d,
-        type: 3}
-      propertyPath: activeCam
-      value: 
-      objectReference: {fileID: 519420028}
-    - target: {fileID: 269987271, guid: 6fe12ec8698724333b47c4966622572d, type: 3}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 1044598211}
-    - target: {fileID: 9200688579491164051, guid: 6fe12ec8698724333b47c4966622572d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe12ec8698724333b47c4966622572d, type: 3}
 --- !u!4 &4135601886523082574 stripped

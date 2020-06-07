@@ -20,7 +20,6 @@ public class MoveController : MonoBehaviour
     private Transform groundCheck;
     private Transform weaponPoint;
     private Transform bubble;
-    private Rigidbody2D rig2d;
     private Animator anim;
     private Coroutine bubbleCor = null;
 
@@ -34,6 +33,7 @@ public class MoveController : MonoBehaviour
     private bool isForwardShoot = false;
     private float angletimer = 0;
     private float angleTime = 1;
+    private float jumpForce3D = 7;
     private Vector3 mousePos = Vector3.zero;
     private Vector3 mouseDir = Vector3.zero;
 
@@ -49,8 +49,6 @@ public class MoveController : MonoBehaviour
         Scale = transform.localScale;
         scaleX = Scale.x;
 
-        if (GetComponent<Rigidbody2D>())
-            rig2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         offset2d = GetComponent<BoxCollider2D>().offset;
         size2d = GetComponent<BoxCollider2D>().size;
@@ -172,19 +170,21 @@ public class MoveController : MonoBehaviour
             anim.SetFloat("Speed", h);
         else
             h = 0;
-
         if (!h.Equals(0))
         {
             Scale.x = (h > 0 ? 1 : -1) * scaleX;
             transform.localScale = Scale;
-            if (virtual3D)
-            {
-                float v = Input.GetAxisRaw("Vertical");
-                transform.Translate(new Vector3(h * Time.deltaTime * moveSpeed, 0f, v * Time.deltaTime * moveSpeed));
-            }
-            else
-                transform.Translate(new Vector2(h, 0) * Time.deltaTime * moveSpeed);
         }
+
+        if (virtual3D)
+        {
+            float v = Input.GetAxisRaw("Vertical");
+            if (h.Equals(0))
+                anim.SetFloat("Speed", v);
+            transform.Translate(new Vector3(h, 0f, v) * Time.deltaTime * moveSpeed);
+        }
+        else if (!h.Equals(0))
+            transform.Translate(new Vector2(h, 0) * Time.deltaTime * moveSpeed);
     }
 
 
@@ -207,18 +207,18 @@ public class MoveController : MonoBehaviour
             {
                 isJump = true;
                 if (!virtual3D)
-                    rig2d.velocity = new Vector2(rig2d.velocity.x, jumpForce);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce);
                 else
-                    GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpForce, GetComponent<Rigidbody>().velocity.z);
+                    GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpForce3D, GetComponent<Rigidbody>().velocity.z);
             }
             else if (!isDoubleJump)
             {
                 isDoubleJump = true;
                 anim.SetTrigger("DoubleJump");
                 if (!virtual3D)
-                    rig2d.velocity = new Vector2(rig2d.velocity.x, jumpForce);
+                    GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce);
                 else
-                    GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpForce, GetComponent<Rigidbody>().velocity.z);
+                    GetComponent<Rigidbody>().velocity = new Vector3(GetComponent<Rigidbody>().velocity.x, jumpForce3D, GetComponent<Rigidbody>().velocity.z);
             }
 
         }

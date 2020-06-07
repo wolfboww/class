@@ -17,6 +17,7 @@ public class ColliNameManager : MonoBehaviour
     public GameObject Princess;
     public GameObject BossSkate;
     public GameObject BossWinner;
+    public GameObject CubeAnim;
     public GameObject[] AnimBoundary;
 
     [Header("Button")]
@@ -26,6 +27,7 @@ public class ColliNameManager : MonoBehaviour
     [Header("Bullet")]
     public GameObject ElseBullet;
     public GameObject IfBullet;
+    public GameObject ElseBullet3D;
 
     [Header("Camera")]
     public Camera MainCamera;

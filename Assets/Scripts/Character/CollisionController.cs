@@ -9,14 +9,13 @@ public class CollisionController : MonoBehaviour
 
     private Animator anim;
     private AudioSource au;
-    private Rigidbody2D rig;
     private MoveController ctr;
+    private Coroutine return2d;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         au = GetComponent<AudioSource>();
-        rig = GetComponent<Rigidbody2D>();
         ctr = GetComponent<MoveController>();
     }
 
@@ -36,8 +35,8 @@ public class CollisionController : MonoBehaviour
             case "Bounce":
                 if (!ctr.isJump)
                 {
-                    rig.velocity = (transform.localScale.x > 0 ? Vector2.right : Vector2.left) * ctr.bounceForce;
-                    rig.AddForce(Vector2.up * ctr.jumpForce);
+                    GetComponent<Rigidbody2D>().velocity = (transform.localScale.x > 0 ? Vector2.right : Vector2.left) * ctr.bounceForce;
+                    GetComponent<Rigidbody2D>().AddForce(Vector2.up * ctr.jumpForce);
                 }
                 break;
             case "Button":
@@ -77,7 +76,7 @@ public class CollisionController : MonoBehaviour
                     au.clip = ColliNameManager.Instance.enemy1;
                     au.Play();
 
-                    rig.velocity = Vector3.up * ctr.bounceForce;
+                    GetComponent<Rigidbody2D>().velocity = Vector3.up * ctr.bounceForce;
                     Animator eAnim = collision.gameObject.GetComponent<Animator>();
                     eAnim.SetTrigger("Dead");
 
@@ -177,7 +176,7 @@ public class CollisionController : MonoBehaviour
         }
     }
 
-    private void LoseHP()
+    public void LoseHP()
     {
         if (IfBullet.bemask)
             return;
@@ -190,11 +189,28 @@ public class CollisionController : MonoBehaviour
             au.Play();
             return;
         }
+
+        if (return2d != null)
+            return;
+        return2d = StartCoroutine(Return2D());
+    }
+
+    IEnumerator Return2D()
+    {
+        if (!GetComponent<Rigidbody2D>())
+        {
+            GetComponent<MoveController>().virtual3D = false;
+            transform.position =
+                new Vector3(transform.position.x, transform.position.y, 0);
+            yield return new WaitUntil(() => GetComponent<Rigidbody2D>());
+        }
+        yield return 1;
         anim.speed = 1;
         anim.SetTrigger("Dead");
         au.clip = ColliNameManager.Instance.playerDead;
         au.Play();
-        rig.constraints = RigidbodyConstraints2D.FreezeAll;
-        StartCoroutine(GameController.Instance.Language(transform, "-_-", "•︵•"));
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        yield return StartCoroutine(GameController.Instance.Language(transform, "-_-", "•︵•"));
+        return2d = null;
     }
 }

@@ -4,40 +4,63 @@ using System.Collections.Generic;
 
 public class Camera3D : MonoBehaviour
 {
-    public GameObject Target;
-    private List<Renderer> colliderObject;
+    public ReviveInstant reviveInstant;
+    private Transform cube;
+    private int index = 0;
+    private bool action = false;
+    private float desCubeY = 2.5f;
+    private float timer = 0;
 
-    void Start()
-    {
-        colliderObject = new List<Renderer>();
-    }
     void Update()
     {
-        if (!Target.GetComponent<Rigidbody>())
+        if (GameController.isRevive)
+        {
+            action = false;
+            desCubeY = 2.5f;
+            timer = 0;
+        }
+
+        if (!GetComponent<Rigidbody>())
             return;
 
-        Debug.DrawLine(Target.transform.position, transform.position, Color.red);
-        RaycastHit[] hit = Physics.RaycastAll(Target.transform.position, transform.position);
-        if (hit.Length > 0)
+        cube = reviveInstant.oldPrefab.transform;
+        for (int i = 0; i < index; i++)
         {
-            for (int i = 0; i < hit.Length; i++)
+            for (int j = 0; j < cube.GetChild(i).childCount; j++)
             {
-                if (!hit[i].collider.gameObject.GetComponent<Renderer>())
-                    return;
-                Renderer obj = hit[i].collider.gameObject.GetComponent<Renderer>();
-                colliderObject.Add(obj);
-                SetMaterialsColor(obj, 0.5f);
+                SetMaterialsColor(cube.GetChild(i).GetChild(j).GetComponent<Renderer>(), 0.5f);
             }
-        }//还原
-        else
+        }
+
+        for (int i = index; i < cube.childCount - 2; i++)
         {
-            for (int i = 0; i < colliderObject.Count; i++)
+            for (int j = 0; j < cube.GetChild(i).childCount; j++)
             {
-                Renderer obj = colliderObject[i];
-                SetMaterialsColor(obj, 1f);
+                SetMaterialsColor(cube.GetChild(i).GetChild(j).GetComponent<Renderer>(), 1f);
+            }
+        }
+
+        if (action)
+        {
+            cube.Find("Trigger").Find("Dead").gameObject.SetActive(true);
+            for (int i = 0; i < cube.childCount - 2; i++)
+            {
+                foreach (Transform item in cube.GetChild(i))
+                {
+                    if (item.localPosition.y < desCubeY)
+                        Destroy(item.gameObject);
+                }
+            }
+
+            timer += Time.deltaTime;
+            if (timer >= 5)
+            {
+                desCubeY += 1;
+                timer = 0;
             }
         }
     }
+
     /// <summary>
     /// 修改遮挡物体所有材质
     /// </summary>
@@ -61,5 +84,29 @@ public class Camera3D : MonoBehaviour
             //置当前材质球颜色
             _renderer.materials[i].SetColor("_Color", color);
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform.parent.name != "Trigger")
+            return;
+        if (other.tag == "Injurant")
+            return;
+
+        if (int.Parse(other.name) < 3)
+        {
+            if (other.GetComponent<BoxCollider>().bounds.max.z < transform.position.z)
+                index = int.Parse(other.name);
+            else if (other.GetComponent<BoxCollider>().bounds.min.z > transform.position.z)
+                index = int.Parse(other.name) - 1;
+        }
+        else
+            action = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Injurant")
+            GetComponent<CollisionController>().LoseHP();
     }
 }

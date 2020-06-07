@@ -85,12 +85,15 @@ public class EnemyPatrol : MonoBehaviour
         start.x = enemyDir == Vector3.left ? GetComponent<BoxCollider2D>().bounds.min.x - 0.5f : GetComponent<BoxCollider2D>().bounds.max.x + 0.5f;
 
         int layermask = ~((1 << 10) | (1 << 12) | (1 << 18));   //射线无视bullet和mask层
-        RaycastHit2D hit = Physics2D.Raycast(start, (player.GetComponent<BoxCollider2D>().bounds.center - start).normalized, 10, layermask);
-
-        if (hit.collider != null)
+        if (player.GetComponent<BoxCollider2D>())
         {
-            if (hit.collider.tag.Contains("Player"))
-                return true;
+            RaycastHit2D hit = Physics2D.Raycast(start, (player.GetComponent<BoxCollider2D>().bounds.center - start).normalized, 10, layermask);
+
+            if (hit.collider != null)
+            {
+                if (hit.collider.tag.Contains("Player"))
+                    return true;
+            }
         }
 
         return false;

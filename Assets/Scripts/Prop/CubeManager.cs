@@ -16,7 +16,8 @@ public class CubeManager : MonoBehaviour
     private bool canMove = true;
 
     private float H;
-    private float moveSpeed;
+    private float moveSpeedX;
+    private float moveSpeedY = 0.05f;
     private float moveTimer = 0;
     private float rayhitY;
     private float initialX;
@@ -29,7 +30,7 @@ public class CubeManager : MonoBehaviour
         freezePos = transform.position;
         initialX = transform.position.x;
         initialBottomY = bottom.localPosition.y;
-        moveSpeed = transform.GetComponentInParent<CubeMove>().moveSpeed;
+        moveSpeedX = transform.GetComponentInParent<CubeMove>().moveSpeed;
         isOver = false;
     }
 
@@ -55,7 +56,7 @@ public class CubeManager : MonoBehaviour
         if (!canHit)
             return;
         if (Mathf.Abs(transform.position.y - rayhitY) > 0.1f)
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(freezePos.x, rayhitY), 0.05f);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(freezePos.x, rayhitY), moveSpeedY);
         else
         {
             canHit = false;
@@ -65,7 +66,11 @@ public class CubeManager : MonoBehaviour
         }
 
         if (!IfBullet.bemask)
+        {
+            moveSpeedY = 0.05f;
             return;
+        }
+
         if (transform.Find("hatPos"))
         {
             H = Input.GetAxisRaw("Horizontal");
@@ -89,8 +94,9 @@ public class CubeManager : MonoBehaviour
                         return;
 
                     canMove = false;
-                    transform.DOMoveX(transform.position.x + H * moveSpeed, 0.1f);
-                    freezePos.x = transform.position.x + H * moveSpeed;
+                    transform.DOMoveX(transform.position.x + H * moveSpeedX, 0.1f);
+                    freezePos.x = transform.position.x + H * moveSpeedX;
+                    moveSpeedY = 0.025f;
                 }
             }
         }

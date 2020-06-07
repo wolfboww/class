@@ -5,8 +5,8 @@ using UnityEngine;
 public class ReviveInstant : MonoBehaviour
 {
     public GameObject newPrefab;
-
-    private GameObject oldPrefab;
+    [HideInInspector]
+    public GameObject oldPrefab;
 
     // Start is called before the first frame update
     void Start()

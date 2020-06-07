@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 7047540631127143054}
   - component: {fileID: 7047540631127143042}
   - component: {fileID: 3968031623740604268}
+  - component: {fileID: 714694038970076224}
   - component: {fileID: 3440767849871770040}
   m_Layer: 11
   m_Name: Player
@@ -843,6 +844,7 @@ MonoBehaviour:
   bullets: []
   isJump: 0
   canMove: 1
+  virtual3D: 0
 --- !u!114 &7047540631127143054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -880,6 +882,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707abf07c9e5c844686deed380cba047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &714694038970076224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047540631127143046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfa0562cc1c1ae4d832fe7d5b9f45f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
 --- !u!82 &3440767849871770040
 AudioSource:
   m_ObjectHideFlags: 0

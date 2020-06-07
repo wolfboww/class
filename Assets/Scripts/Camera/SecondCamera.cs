@@ -23,7 +23,7 @@ public class SecondCamera : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && collision.transform.position.x >= GetComponent<EdgeCollider2D>().bounds.min.x)
             StartCoroutine(SCamera());
     }
 
