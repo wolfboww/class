@@ -25,7 +25,6 @@ public class Action : MonoBehaviour
         UncommonUse = transform.Find("UncommonUse").gameObject;
         setting = transform.Find("Setting");
         Icon = transform.Find("Icon");
-        isOver = false;
         GameController.music = true;
         GameController.sound = true;
     }
@@ -33,7 +32,8 @@ public class Action : MonoBehaviour
     // Update is called once per frame
     void OnEnable()
     {
-        end.SetActive(isOver);
+        if (isOver)
+            StartCoroutine(EndAnim());
         commonUse.SetActive(isOver);
         UncommonUse.SetActive(isOver);
         transform.Find("Tip").gameObject.SetActive(isOver);
@@ -47,6 +47,7 @@ public class Action : MonoBehaviour
             transform.Find("Common").gameObject.SetActive(true);
             Icon.GetComponent<RectTransform>().position = transform.Find("Common").Find("Point").position;
             Icon.GetComponent<DragUI>().enabled = false;
+            Icon.SetParent(transform.Find("Common"));
         }
         else if (Vector2.Distance(Icon.position, UncommonUse.transform.position) < 10)
             actionEnd.SetActive(true);
@@ -54,6 +55,13 @@ public class Action : MonoBehaviour
         setting.Find("Music").GetComponent<Image>().sprite = GameController.music ? buttonDown[0] : buttonDown[1];
         setting.Find("Sound").GetComponent<Image>().sprite = GameController.sound ? buttonDown[0] : buttonDown[1];
     }
+
+    IEnumerator EndAnim()
+    {
+        yield return new WaitUntil(() => CollisionController.async.isDone);
+        end.SetActive(true);
+    }
+
 
     public void play()
     {

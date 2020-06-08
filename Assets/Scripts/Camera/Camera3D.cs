@@ -48,7 +48,11 @@ public class Camera3D : MonoBehaviour
                 foreach (Transform item in cube.GetChild(i))
                 {
                     if (item.localPosition.y < desCubeY)
+                    {
+                        GameObject child = Instantiate(ColliNameManager.Instance.CubeAnim, item.position, Quaternion.identity);
+                        Destroy(child, 2);
                         Destroy(item.gameObject);
+                    }
                 }
             }
 
@@ -90,7 +94,7 @@ public class Camera3D : MonoBehaviour
     {
         if (other.transform.parent.name != "Trigger")
             return;
-        if (other.tag == "Injurant")
+        if (other.tag != "Plane")
             return;
 
         if (int.Parse(other.name) < 3)
@@ -107,6 +111,17 @@ public class Camera3D : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Injurant")
-            GetComponent<CollisionController>().LoseHP();
+        {
+            if (GetComponent<CollisionController>().return2d != null)
+                return;
+            GetComponent<CollisionController>().return2d = StartCoroutine(GetComponent<CollisionController>().Return2D());
+        }
+
+        if (other.name == "Leave")
+        {
+            GameController.Instance.ActiveCam().gameObject.SetActive(false);
+            ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
+            GetComponent<MoveController>().virtual3D = false;
+        }
     }
 }

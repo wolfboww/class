@@ -4683,6 +4683,7 @@ Transform:
   - {fileID: 1041687256970540382}
   - {fileID: 1123042680173802027}
   - {fileID: 2983432476936007866}
+  - {fileID: 2138064346270352035}
   m_Father: {fileID: 8559165555672726604}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5974,8 +5975,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.41561127, z: 1}
-  m_Center: {x: 0, y: -0.29219437, z: 0}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4001489968880688302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8186,8 +8187,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7413069802212702512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.4299927, y: 1.99, z: 1.2493}
-  m_LocalScale: {x: 1.295, y: 1, z: 0.38070613}
+  m_LocalPosition: {x: 7.4299927, y: 2.106, z: 1.2493}
+  m_LocalScale: {x: 1.295, y: 4.75, z: 0.38070613}
   m_Children: []
   m_Father: {fileID: 2690224151491952920}
   m_RootOrder: 3
@@ -9128,6 +9129,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8575836276293312039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2138064346270352035}
+  - component: {fileID: 494706004368233639}
+  m_Layer: 16
+  m_Name: Leave
+  m_TagString: Plane
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2138064346270352035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575836276293312039}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.1185, y: 9.44, z: 1.2493}
+  m_LocalScale: {x: 0.16098468, y: 1, z: 0.38070613}
+  m_Children: []
+  m_Father: {fileID: 2690224151491952920}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &494706004368233639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8575836276293312039}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.879722, y: 0.12710935, z: 10.255012}
+  m_Center: {x: -0.030168513, y: 0.00000047683716, z: 0.15279624}
 --- !u!1 &8591143790598255092
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class Loading : MonoBehaviour
     private Animator computer;
     private Animator play;
     private float edition;
+    private bool music;
 
     // Start is called before the first frame update
     void Awake()
@@ -16,6 +17,7 @@ public class Loading : MonoBehaviour
         loading = false;
         computer = transform.Find("Computer").GetComponent<Animator>();
         play = transform.Find("Play").GetComponent<Animator>();
+        music = GameController.music;
     }
 
     void Update()
@@ -32,10 +34,13 @@ public class Loading : MonoBehaviour
     IEnumerator wait()
     {
         Time.timeScale = 0;
+        GameController.music = false;
         yield return new WaitForSecondsRealtime(3f);
         loading = true;
         yield return 1;
         Time.timeScale = 1;
+        GameController.music = music;
+        yield return 1;
         gameObject.SetActive(false);
     }
 

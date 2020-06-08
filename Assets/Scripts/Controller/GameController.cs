@@ -56,7 +56,6 @@ public class GameController : MonoBehaviour
         ObjAudio();
         EnemyActive();
         timeNum += Time.deltaTime;
-
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
         {
             if (bullet.transform.parent != bulletsList)
@@ -73,7 +72,7 @@ public class GameController : MonoBehaviour
         {
             ChangeMap();
             player.transform.position = revivePoint.position;
-            player.GetComponent<Animator>().SetFloat("Edition", player.GetComponent<Animator>().GetFloat("Edition") + 1);
+            //player.GetComponent<Animator>().SetFloat("Edition", player.GetComponent<Animator>().GetFloat("Edition") + 1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
@@ -134,7 +133,7 @@ public class GameController : MonoBehaviour
             {
                 if (!sound)
                 {
-                    child.GetComponent<AudioSource>().mute = false;
+                    child.GetComponent<AudioSource>().mute = true;
                     return;
                 }
 

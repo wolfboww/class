@@ -6,11 +6,17 @@ using DG.Tweening;
 public class CollisionController : MonoBehaviour
 {
     public static int life;
+    public static AsyncOperation async;
+    [HideInInspector]
+    public Coroutine return2d;
+    private Coroutine account;
 
     private Animator anim;
     private AudioSource au;
     private MoveController ctr;
-    private Coroutine return2d;
+
+    private bool canLoseHP = true;
+    private float timer = 0;
 
     void Start()
     {
@@ -18,6 +24,20 @@ public class CollisionController : MonoBehaviour
         au = GetComponent<AudioSource>();
         ctr = GetComponent<MoveController>();
     }
+
+    private void Update()
+    {
+        if (!canLoseHP && life > 0)
+        {
+            timer += Time.deltaTime;
+            if (timer > 1)
+            {
+                canLoseHP = true;
+                timer = 0;
+            }
+        }
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -30,7 +50,7 @@ public class CollisionController : MonoBehaviour
         switch (collision.transform.tag)
         {
             case "Enemy":
-                LoseHP();
+                StartCoroutine(LoseHP());
                 break;
             case "Bounce":
                 if (!ctr.isJump)
@@ -56,7 +76,8 @@ public class CollisionController : MonoBehaviour
                 }
                 else
                     collision.gameObject.GetComponent<DestroyController>().enabled = true;
-                LoseHP();
+
+                StartCoroutine(LoseHP());
                 break;
             case "Collection":
                 Collection(collision.gameObject);
@@ -70,7 +91,9 @@ public class CollisionController : MonoBehaviour
         {
             case "Trap":
                 if (!ctr.isJump)
-                    LoseHP();
+                {
+                    StartCoroutine(LoseHP());
+                }
                 else    //被踩蘑菇
                 {
                     au.clip = ColliNameManager.Instance.enemy1;
@@ -83,9 +106,12 @@ public class CollisionController : MonoBehaviour
                 }
                 break;
             case "Injurant":
-                LoseHP();
+                StartCoroutine(LoseHP());
                 break;
             case "Collection":
+                if (!collision.gameObject.GetComponent<DestroyController>())
+                    return;
+
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 if (collision.gameObject == ColliNameManager.Instance.Gun)
                 {
@@ -140,7 +166,9 @@ public class CollisionController : MonoBehaviour
                 }
                 break;
             case "Account":
-                StartCoroutine(Account());
+                if (account != null)
+                    return;
+                account = StartCoroutine(Account());
                 break;
         }
     }
@@ -159,43 +187,48 @@ public class CollisionController : MonoBehaviour
     {
         ColliNameManager.Instance.account.SetActive(true);
         yield return new WaitUntil(() => AccountUI.go);
-        if (anim.GetFloat("Edition") <= 3)
+        anim.SetFloat("Edition", anim.GetFloat("Edition") + 1);
+        if (anim.GetFloat("Edition") <= 2)
         {
             GameController.Instance.ChangeMap();
             transform.position = GameController.Instance.revivePoint.position;
             ColliNameManager.Instance.Loading.SetActive(true);
-            anim.SetFloat("Edition", anim.GetFloat("Edition") + 1);
             yield return new WaitUntil(() => Loading.loading);
             Loading.loading = false;
             anim.SetTrigger("Show");
         }
         else
         {
-            SceneManager.LoadScene("Anim");
+            async = SceneManager.LoadSceneAsync("Anim");
             Action.isOver = true;
         }
+        yield return 1;
+        account = null;
     }
 
-    public void LoseHP()
+    IEnumerator LoseHP()
     {
         if (IfBullet.bemask)
-            return;
+            yield break;
+        if (!canLoseHP)
+            yield break;
 
         life--;
+        canLoseHP = false;
         if (life > 0)
         {
             anim.SetTrigger("LoseHP");
             au.clip = ColliNameManager.Instance.loseHP;
             au.Play();
-            return;
+            yield break;
         }
 
         if (return2d != null)
-            return;
+            yield break;
         return2d = StartCoroutine(Return2D());
     }
 
-    IEnumerator Return2D()
+    public IEnumerator Return2D()
     {
         if (!GetComponent<Rigidbody2D>())
         {
