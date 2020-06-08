@@ -13,6 +13,7 @@ public class TriggerController : MonoBehaviour
     {
         if (activeCam == null)
             activeCam = ColliNameManager.Instance.MainCamera.gameObject;
+
     }
 
 
@@ -22,9 +23,11 @@ public class TriggerController : MonoBehaviour
         {
             if (target != null)
                 target.GetComponent<PolygonCollider2D>().enabled = trigger;
-            
+
             GameController.Instance.ActiveCam().gameObject.SetActive(false);
             activeCam.SetActive(true);
+            if (activeCam.GetComponent<MusicController>())
+                activeCam.GetComponent<MusicController>().enabled = true;
         }
     }
 }

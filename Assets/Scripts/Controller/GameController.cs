@@ -80,11 +80,15 @@ public class GameController : MonoBehaviour
                 CollisionController.life++;
         }
 
-        if (Maps[mapNumber].GetComponent<AudioSource>())
-            Maps[mapNumber].GetComponent<AudioSource>().mute = !music;
+        for (int i = 0; i < Maps.Length; i++)
+            if (Maps[i].GetComponent<AudioSource>())
+                Maps[i].GetComponent<AudioSource>().mute = !music;
 
         if (ActiveCam() == ColliNameManager.Instance.MainCamera && !ColliNameManager.Instance.MainCamera.gameObject.activeInHierarchy)
             ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
+
+        if (mapNumber == 4 && isRevive)
+            ColliNameManager.Instance.MainCamera.GetComponent<MusicController>().enabled = true;
     }
 
     public void ChangeMap()

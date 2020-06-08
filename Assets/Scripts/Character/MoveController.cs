@@ -57,6 +57,7 @@ public class MoveController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Change3D();
         MoveControl();
         if (!virtual3D)
             isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
@@ -102,6 +103,23 @@ public class MoveController : MonoBehaviour
             }
         }
 
+
+
+        if (bubble.gameObject.activeInHierarchy)
+        {
+            if (bubbleCor != null)
+                return;
+            bubbleCor = StartCoroutine(Bubble());
+        }
+        else
+        {
+            StopCoroutine(Bubble());
+            bubbleCor = null;
+        }
+    }
+
+    private void Change3D()
+    {
         if (virtual3D)
         {
             if (GetComponent<BoxCollider2D>())
@@ -109,7 +127,9 @@ public class MoveController : MonoBehaviour
             if (GetComponent<Rigidbody2D>())
                 Destroy(GetComponent<Rigidbody2D>());
             if (!GetComponent<BoxCollider>())
+            {
                 gameObject.AddComponent<BoxCollider>();
+            }
             if (!GetComponent<Rigidbody>())
             {
                 gameObject.AddComponent<Rigidbody>();
@@ -132,22 +152,11 @@ public class MoveController : MonoBehaviour
             {
                 gameObject.AddComponent<Rigidbody2D>();
                 GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+                GetComponent<Rigidbody2D>().gravityScale = 3;
             }
         }
-
-
-        if (bubble.gameObject.activeInHierarchy)
-        {
-            if (bubbleCor != null)
-                return;
-            bubbleCor = StartCoroutine(Bubble());
-        }
-        else
-        {
-            StopCoroutine(Bubble());
-            bubbleCor = null;
-        }
     }
+
 
     IEnumerator Bubble()
     {

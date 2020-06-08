@@ -64,7 +64,7 @@ AudioSource:
   m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 73309078399636328}
   - component: {fileID: 73309078399636311}
   - component: {fileID: 73309078399636309}
-  - component: {fileID: 4079003692771636328}
   m_Layer: 2
   m_Name: Ball
   m_TagString: Enemy
@@ -308,15 +307,3 @@ MonoBehaviour:
   desTime: 0
   prefabpartical: {fileID: 1000012820763552, guid: 4dadae33774dfbb42ac44805a8405f53,
     type: 3}
---- !u!114 &4079003692771636328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73309078399636306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9189b5e4d8b58464f89ff10ae3327ded, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

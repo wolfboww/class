@@ -87,6 +87,7 @@ public class ThirdCamera : MonoBehaviour
 
     IEnumerator GameStart()
     {
+        GetComponent<MusicController>().enabled = true;
         GameController.Instance.player.transform.Find("WeaponPoint").GetComponent<AudioSource>().enabled = false;
         Boss.SetActive(true);
         player.transform.position = playerPos.position;
@@ -134,6 +135,8 @@ public class ThirdCamera : MonoBehaviour
         Boss.transform.parent.Find("SkatePos").localPosition = Vector3.zero;
         ColliNameManager.Instance.BossSkate.GetComponent<Rigidbody2D>().mass = 100;
         yield return forthCamera.GetComponent<CameraBlack>().targetBrightness = 1;
+        transform.root.GetComponent<MusicController>().waitForLength = false;
+        transform.root.GetComponent<MusicController>().enabled = true;
         yield return new WaitForSeconds(2);
         //yield return StartCoroutine(GameStart());
         //yield return 1;

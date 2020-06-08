@@ -121,6 +121,7 @@ public class Camera3D : MonoBehaviour
         {
             GameController.Instance.ActiveCam().gameObject.SetActive(false);
             ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
+            ColliNameManager.Instance.MainCamera.GetComponent<MusicController>().enabled = true;
             GetComponent<MoveController>().virtual3D = false;
         }
     }
