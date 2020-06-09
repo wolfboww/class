@@ -4403,6 +4403,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3440767849871770040, guid: 9c83cf233735eec4ea18c893ec248fb8,
+        type: 3}
+      propertyPath: Mute
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c83cf233735eec4ea18c893ec248fb8, type: 3}
 --- !u!1 &1673268079
@@ -6031,6 +6036,16 @@ PrefabInstance:
       propertyPath: m_Pitch
       value: 1.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7158094088378433165, guid: 96dda02f332dc1a45b1bfa34babb5dd6,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 7158094088378433165, guid: 96dda02f332dc1a45b1bfa34babb5dd6,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 3.28
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96dda02f332dc1a45b1bfa34babb5dd6, type: 3}
 --- !u!20 &2188536721120330082 stripped
@@ -6184,11 +6199,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map_Third
       objectReference: {fileID: 0}
-    - target: {fileID: 4863283448909317893, guid: 6fe12ec8698724333b47c4966622572d,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5960401215397173771, guid: 6fe12ec8698724333b47c4966622572d,
         type: 3}
       propertyPath: activeCam
@@ -6254,11 +6264,6 @@ PrefabInstance:
       propertyPath: activeCam
       value: 
       objectReference: {fileID: 519420028}
-    - target: {fileID: 8877156693490030845, guid: 6fe12ec8698724333b47c4966622572d,
-        type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe12ec8698724333b47c4966622572d, type: 3}
 --- !u!4 &4135601886523082574 stripped
@@ -6284,6 +6289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Map_Second
+      objectReference: {fileID: 0}
+    - target: {fileID: 1799102679844077356, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1799102679844077358, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
         type: 3}
@@ -6344,6 +6354,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Volume
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769683032486078136, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769683032486078136, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4769683032486078136, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 315467009306734146, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 797647630725640952, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 797647630725640952, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.21
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}

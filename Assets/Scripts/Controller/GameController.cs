@@ -53,7 +53,6 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ObjAudio();
         EnemyActive();
         timeNum += Time.deltaTime;
         foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
@@ -89,6 +88,9 @@ public class GameController : MonoBehaviour
 
         if (mapNumber == 4 && isRevive)
             ColliNameManager.Instance.MainCamera.GetComponent<MusicController>().enabled = true;
+
+        if (!Maps[mapNumber].GetComponent<SoundController>())
+            Maps[mapNumber].AddComponent<SoundController>();
     }
 
     public void ChangeMap()
@@ -128,27 +130,6 @@ public class GameController : MonoBehaviour
                 mask == null ? ColliNameManager.Instance.Follower : mask;
     }
 
-    public void ObjAudio()
-    {
-        GameObject[] obj = FindObjectsOfType(typeof(GameObject)) as GameObject[];
-        foreach (GameObject child in obj)
-        {
-            if (child.GetComponent<AudioSource>())
-            {
-                if (!sound)
-                {
-                    child.GetComponent<AudioSource>().mute = true;
-                    return;
-                }
-
-                if (InCamera(child.transform))
-                    child.GetComponent<AudioSource>().mute = false;
-                else
-                    child.GetComponent<AudioSource>().mute = true;
-            }
-        }
-    }
-
     public void EnemyActive()
     {
         Transform enemy = Maps[mapNumber].transform.Find("Enemy");
@@ -170,7 +151,7 @@ public class GameController : MonoBehaviour
         return ColliNameManager.Instance.MainCamera;
     }
 
-    private bool InCamera(Transform child)
+    public bool InCamera(Transform child)
     {
         float height = ActiveCam().orthographicSize;
         float width = height * ActiveCam().aspect;
@@ -193,8 +174,9 @@ public class GameController : MonoBehaviour
 
     public IEnumerator ResetAnim(Animator anim, string name)
     {
+        yield return 1;
         anim.SetTrigger(name);
-        yield return 2;
+        yield return 1;
         anim.ResetTrigger(name);
     }
 

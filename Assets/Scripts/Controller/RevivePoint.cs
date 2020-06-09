@@ -103,6 +103,7 @@ public class RevivePoint : MonoBehaviour
                     return;
                 GameController.Instance.ActiveCam().GetComponent<CameraController>().boundary[1] = transform.root.Find("Boundary").GetChild(1).GetChild(int.Parse(transform.parent.name));
             }
+
         }
     }
 

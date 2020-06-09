@@ -13,6 +13,7 @@ public class ThirdCamera : MonoBehaviour
     public Transform device;
     public static bool gameOver;
     public int bossLife = 150;
+    public float blackTime = 3;
     public float maskCD;
 
     private Transform thirdCamera;
@@ -80,8 +81,10 @@ public class ThirdCamera : MonoBehaviour
         yield return new WaitUntil(() => thirdCamera.GetComponent<BrightnessSaturationAndContrast>().brightness <= 0.1f);
         thirdCamera.gameObject.SetActive(false);
         forthCamera.gameObject.SetActive(true);
-        yield return new WaitUntil(() => player.GetComponentInChildren<SpriteRenderer>().enabled);
+        yield return new WaitForSecondsRealtime(blackTime);
+        //yield return new WaitUntil(() => player.GetComponentInChildren<SpriteRenderer>().enabled);
         anim.SetFloat("Shoot", 0);
+        player.GetComponent<MoveController>().BeNotMask();
         yield return StartCoroutine(GameStart());
     }
 

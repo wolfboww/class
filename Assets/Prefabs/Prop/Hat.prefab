@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4560963472110942402}
   - component: {fileID: 7034588615304254844}
   - component: {fileID: 5007324155071726799}
-  - component: {fileID: 8735610992115762935}
   m_Layer: 0
   m_Name: Hat
   m_TagString: Untagged
@@ -100,17 +99,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8735610992115762935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 824664425469824345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b9b02bb54388ca458f1690283e22957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  desTime: 3.5
-  prefabpartical: {fileID: 0}

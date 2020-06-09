@@ -59,6 +59,7 @@ public class EnemyPatrol : MonoBehaviour
             return;
         else if (Vector3.Distance(player.position, transform.position) < pursueDistance && RayHit())
         {
+            StartCoroutine(GameController.Instance.Language(transform, "!!!", "!!!"));
             if (canPursue)
                 Pursue();
             else
@@ -132,10 +133,8 @@ public class EnemyPatrol : MonoBehaviour
             }
             GameObject child = Instantiate(bullet, transform.Find("ShootPos"));
             child.GetComponent<BulletController>().dir = GetComponent<SpriteRenderer>().flipX ? Vector3.right : Vector3.left;
-            StartCoroutine(GameController.Instance.Language(transform, "!!!", "%$^"));
+            StartCoroutine(GameController.Instance.Language(transform, "***", "%$^"));
         }
-
-
     }
 
     private void Patrol()

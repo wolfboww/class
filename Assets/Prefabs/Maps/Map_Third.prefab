@@ -22345,7 +22345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4863283448909317895
 Transform:
   m_ObjectHideFlags: 0
@@ -22450,7 +22450,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e2d6a2a57c04451498350a7ce28b5cf0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -39729,14 +39729,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6264144725692351989, guid: d7f0efac07d7c01448acd1c7c57ee88d,
         type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
+        type: 3}
+      propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -41639,14 +41639,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6264144725692351989, guid: d7f0efac07d7c01448acd1c7c57ee88d,
         type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
+        type: 3}
+      propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -45131,14 +45131,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6264144725692351989, guid: d7f0efac07d7c01448acd1c7c57ee88d,
         type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
+        type: 3}
+      propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -46336,14 +46336,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6264144725692351989, guid: d7f0efac07d7c01448acd1c7c57ee88d,
         type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
+        type: 3}
+      propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -46531,15 +46531,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u6536\u96C6-\u5E3D\u5B50"
       objectReference: {fileID: 0}
-    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6264144725692351989, guid: d7f0efac07d7c01448acd1c7c57ee88d,
         type: 3}
       propertyPath: m_MaskInteraction
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7f0efac07d7c01448acd1c7c57ee88d, type: 3}
@@ -48862,15 +48862,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u6536\u96C6-\u5E3D\u5B50"
       objectReference: {fileID: 0}
-    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6264144725692351989, guid: d7f0efac07d7c01448acd1c7c57ee88d,
         type: 3}
       propertyPath: m_MaskInteraction
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 56018763585720552, guid: d7f0efac07d7c01448acd1c7c57ee88d,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7f0efac07d7c01448acd1c7c57ee88d, type: 3}

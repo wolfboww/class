@@ -27,6 +27,7 @@ public class AccountUI : MonoBehaviour
     private int accountNum = 0;
     private int awardDeadNum = 6;
     private int awardTime = 600;
+    private int mapLife = 1;
 
 
     // Start is called before the first frame update
@@ -126,8 +127,7 @@ public class AccountUI : MonoBehaviour
         if (getGrid)
         {
             getHP.SetActive(true);
-            CollisionController.life++;
-            //playerHP.SetFloat("grid", playerHP.GetFloat("grid") + 1);
+            mapLife += 1;
         }
         else if (!accountNum.Equals(2))
             keepTrying.SetActive(true);
@@ -149,6 +149,7 @@ public class AccountUI : MonoBehaviour
     {
         go = true;
         HPUI.getHPCollectNum += 2;
+        CollisionController.life = mapLife;
         ColliNameManager.Instance.account.SetActive(false);
     }
 }

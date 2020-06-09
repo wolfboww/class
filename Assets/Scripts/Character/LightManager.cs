@@ -34,10 +34,9 @@ public class LightManager : MonoBehaviour
 
         if (collision.gameObject.tag.Contains("Collection"))
         {
-            if (collision.gameObject.GetComponentInParent<Sweat>())
-                return;
-            collision.transform.parent.gameObject.AddComponent<Sweat>();
-            collision.transform.parent.GetComponent<PolygonCollider2D>().enabled = true;
+            collision.GetComponentInParent<PolygonCollider2D>().enabled = true;
+            if (collision.GetComponentInParent<SpriteRenderer>().color.a < 1)
+                collision.GetComponentInParent<SpriteRenderer>().DOFade(1, 1);
         }
     }
 
@@ -45,8 +44,5 @@ public class LightManager : MonoBehaviour
     {
         if (collision.gameObject.tag.Contains("Sweat"))
             collision.GetComponent<Sweat>().fade = true;
-
-        //if (collision.gameObject.tag.Contains("Collection"))
-        //    collision.GetComponentInParent<Sweat>().fade = true;
     }
 }

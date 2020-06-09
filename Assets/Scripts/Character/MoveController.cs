@@ -52,6 +52,16 @@ public class MoveController : MonoBehaviour
         anim = GetComponent<Animator>();
         offset2d = GetComponent<BoxCollider2D>().offset;
         size2d = GetComponent<BoxCollider2D>().size;
+
+        Transform[] father = GetComponentsInChildren<Transform>(true);
+        foreach (Transform child in father)
+        {
+            if (child.GetComponent<AudioSource>())
+            {
+                if (!GameController.sound)
+                    child.GetComponent<AudioSource>().mute = true;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -70,7 +80,6 @@ public class MoveController : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))//取消伪装
                 BeNotMask();
-
             masktimer += Time.deltaTime;
             if (masktimer >= maskTime)
                 BeNotMask();
@@ -102,8 +111,6 @@ public class MoveController : MonoBehaviour
                 }
             }
         }
-
-
 
         if (bubble.gameObject.activeInHierarchy)
         {

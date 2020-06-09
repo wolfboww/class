@@ -6,6 +6,7 @@ public class Bean : MonoBehaviour
 {
     private PacMan pacMan;
     private GameObject[] beans;
+    private Coroutine next;
 
     void Start()
     {
@@ -20,11 +21,15 @@ public class Bean : MonoBehaviour
     void Update()
     {
         if (ActiveBean())
-            NextMap();
+        {
+            if (next == null)
+                next = StartCoroutine(NextMap());
+        }
     }
 
-    public void NextMap()
+    public IEnumerator NextMap()
     {
+        yield return new WaitForSecondsRealtime(2);
         ColliNameManager.Instance.MainCamera.gameObject.SetActive(true);
         GameController.Instance.ChangeMap();
         GameController.Instance.player.transform.SetParent(null);
