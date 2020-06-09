@@ -2354,7 +2354,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The End
+  m_Text: The End!
 --- !u!222 &1178655552
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4398,6 +4398,11 @@ PrefabInstance:
       propertyPath: reviveInstant
       value: 
       objectReference: {fileID: 1016173968}
+    - target: {fileID: 2291496820893346149, guid: 9c83cf233735eec4ea18c893ec248fb8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c83cf233735eec4ea18c893ec248fb8, type: 3}
 --- !u!1 &1673268079
@@ -6011,6 +6016,21 @@ PrefabInstance:
       propertyPath: Sprites.Array.data[1]
       value: 
       objectReference: {fileID: 333076371}
+    - target: {fileID: 4940513735955001335, guid: 96dda02f332dc1a45b1bfa34babb5dd6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2916017844081885512, guid: 96dda02f332dc1a45b1bfa34babb5dd6,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2916017844081885512, guid: 96dda02f332dc1a45b1bfa34babb5dd6,
+        type: 3}
+      propertyPath: m_Pitch
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96dda02f332dc1a45b1bfa34babb5dd6, type: 3}
 --- !u!20 &2188536721120330082 stripped
@@ -6085,6 +6105,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1801422543, guid: 671974e498a91a94cb9d24d7edb8093f, type: 3}
+      propertyPath: m_Volume
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 671974e498a91a94cb9d24d7edb8093f, type: 3}
@@ -6230,6 +6254,11 @@ PrefabInstance:
       propertyPath: activeCam
       value: 
       objectReference: {fileID: 519420028}
+    - target: {fileID: 8877156693490030845, guid: 6fe12ec8698724333b47c4966622572d,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe12ec8698724333b47c4966622572d, type: 3}
 --- !u!4 &4135601886523082574 stripped
@@ -6310,6 +6339,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3414293480880827844, guid: 25e77bf870a9f064a9094cd58d8e2fc9,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25e77bf870a9f064a9094cd58d8e2fc9, type: 3}
@@ -6403,6 +6437,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7734132895363658289, guid: 2f215754799bd624f966b37773f8b2c8,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f215754799bd624f966b37773f8b2c8, type: 3}
