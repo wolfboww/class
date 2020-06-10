@@ -22345,7 +22345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4863283448909317895
 Transform:
   m_ObjectHideFlags: 0
@@ -29666,97 +29666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
---- !u!1 &5765049812398405698
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9217171016085217509}
-  - component: {fileID: 830416999727493254}
-  - component: {fileID: 4335718962051104772}
-  - component: {fileID: 1736655921661977369}
-  m_Layer: 8
-  m_Name: Cube (33)
-  m_TagString: Plane
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9217171016085217509
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5765049812398405698}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.6, y: 8.299999, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6905119917891549802}
-  m_RootOrder: 26
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &830416999727493254
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5765049812398405698}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4335718962051104772
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5765049812398405698}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b96a30ab79b6b4af19b94f79b02f0c30, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!65 &1736655921661977369
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5765049812398405698}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5859417414590030770
 GameObject:
   m_ObjectHideFlags: 0
@@ -38539,11 +38448,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1306837220962192186}
     m_Modifications:
-    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: m_Name
-      value: RevivePoint
-      objectReference: {fileID: 0}
     - target: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -38613,6 +38517,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.833005
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: m_Name
+      value: RevivePoint
       objectReference: {fileID: 0}
     - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
@@ -42644,11 +42553,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3634837928234488501}
     m_Modifications:
-    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: m_Name
-      value: RevivePoint
-      objectReference: {fileID: 0}
     - target: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -42719,17 +42623,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.833005
       objectReference: {fileID: 0}
+    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: m_Name
+      value: RevivePoint
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffe549735d2ac784bb8a439f0858ba3a, type: 3}
---- !u!4 &8297490651838984223 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3634837928404473871}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8260325986451333603 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3634837928404473871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8297490651838984223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
     type: 3}
   m_PrefabInstance: {fileID: 3634837928404473871}
   m_PrefabAsset: {fileID: 0}
@@ -42980,14 +42889,13 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 03c74513231884d6c823404a52de6a6d, type: 2}
+    - target: {fileID: 2737995906509669282, guid: f909feb409db6614892f10eb655e7bc8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03c74513231884d6c823404a52de6a6d, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f909feb409db6614892f10eb655e7bc8, type: 3}
---- !u!4 &6905119917891549802 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7519828404835314223, guid: f909feb409db6614892f10eb655e7bc8,
-    type: 3}
-  m_PrefabInstance: {fileID: 4001489970224140357}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4701870522489515017 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8559165555672726604, guid: f909feb409db6614892f10eb655e7bc8,
@@ -43911,11 +43819,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3634837928530892119}
     m_Modifications:
-    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: m_Name
-      value: RevivePoint
-      objectReference: {fileID: 0}
     - target: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -43985,6 +43888,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.8330054
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: m_Name
+      value: RevivePoint
       objectReference: {fileID: 0}
     - target: {fileID: 1695566068636026894, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
@@ -48336,11 +48244,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7940247266489162449}
     m_Modifications:
-    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
-        type: 3}
-      propertyPath: m_Name
-      value: RevivePoint
-      objectReference: {fileID: 0}
     - target: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -48411,6 +48314,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.833005
       objectReference: {fileID: 0}
+    - target: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+        type: 3}
+      propertyPath: m_Name
+      value: RevivePoint
+      objectReference: {fileID: 0}
     - target: {fileID: 6033567613312417195, guid: ffe549735d2ac784bb8a439f0858ba3a,
         type: 3}
       propertyPath: ActiveObj.Array.size
@@ -48423,15 +48331,15 @@ PrefabInstance:
       objectReference: {fileID: 1149472940}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffe549735d2ac784bb8a439f0858ba3a, type: 3}
---- !u!4 &3657864419627318129 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
-    type: 3}
-  m_PrefabInstance: {fileID: 8328363320104702817}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3695011346594507405 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4671107398947469804, guid: ffe549735d2ac784bb8a439f0858ba3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 8328363320104702817}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3657864419627318129 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4708251861391960080, guid: ffe549735d2ac784bb8a439f0858ba3a,
     type: 3}
   m_PrefabInstance: {fileID: 8328363320104702817}
   m_PrefabAsset: {fileID: 0}
