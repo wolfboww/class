@@ -6274,6 +6274,11 @@ PrefabInstance:
       propertyPath: activeCam
       value: 
       objectReference: {fileID: 519420028}
+    - target: {fileID: 9200688579491164051, guid: 6fe12ec8698724333b47c4966622572d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe12ec8698724333b47c4966622572d, type: 3}
 --- !u!4 &4135601886523082574 stripped
@@ -6433,11 +6438,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Map_Handle2
       objectReference: {fileID: 0}
-    - target: {fileID: 3425364982532121797, guid: 2f215754799bd624f966b37773f8b2c8,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3425364982532121799, guid: 2f215754799bd624f966b37773f8b2c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6492,11 +6492,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7734132895363658289, guid: 2f215754799bd624f966b37773f8b2c8,
-        type: 3}
-      propertyPath: m_Volume
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f215754799bd624f966b37773f8b2c8, type: 3}
