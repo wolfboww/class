@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class AnimatorController : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class AnimatorController : MonoBehaviour
     {
         if (bullet)
         {
+            GameController.Instance.ActiveCam().DOShakePosition(0.3f, 0.2f, 20, 50, false);
             if (GetComponent<Rigidbody>())
                 Instantiate(bullet == ColliNameManager.Instance.ElseBullet ? ColliNameManager.Instance.ElseBullet3D : bullet, weaponPoint);
             else
@@ -36,6 +38,8 @@ public class AnimatorController : MonoBehaviour
     {
         anim.ResetTrigger("Dead");
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        if (IfBullet.bemask)
+            GetComponent<MoveController>().BeNotMask();
         transform.position = GameController.Instance.revivePoint.position;
         GameController.isRevive = true;
         if (GameController.isBoss)

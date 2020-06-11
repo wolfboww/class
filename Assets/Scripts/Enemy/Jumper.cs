@@ -12,6 +12,7 @@ public class Jumper : MonoBehaviour
 
     private bool isJump;
     private bool OnLand;
+    private bool isRight;
     private int life = 1;
     private float speed = 1.5f;
     private float checkRadius = 0.9f;
@@ -27,6 +28,7 @@ public class Jumper : MonoBehaviour
         if (fromSpawn)
         {
             destroyHeight = transform.parent.GetComponent<JumperSpawn>().destroyHeight.position.y;
+            isRight = GameController.Instance.player.transform.position.x > transform.position.x ? true : false;
         }
     }
 
@@ -71,7 +73,6 @@ public class Jumper : MonoBehaviour
 
     private void AttackDir()
     {
-        bool isRight = GameController.Instance.player.transform.position.x > transform.position.x ? true : false;
         GetComponent<SpriteRenderer>().flipX = isRight;
 
         Vector3 dir = isRight ? Vector3.right : Vector3.left;

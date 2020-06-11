@@ -77,7 +77,7 @@ public class EnemyPatrol : MonoBehaviour
         anim.SetFloat("Shoot", life);
     }
 
-    private bool RayHit()
+    public bool RayHit()
     {
         if (IfBullet.bemask)
             return false;
@@ -89,7 +89,6 @@ public class EnemyPatrol : MonoBehaviour
         if (player.GetComponent<BoxCollider2D>())
         {
             RaycastHit2D hit = Physics2D.Raycast(start, (player.GetComponent<BoxCollider2D>().bounds.center - start).normalized, 10, layermask);
-
             if (hit.collider != null)
             {
                 if (hit.collider.tag.Contains("Player"))
