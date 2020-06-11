@@ -91,6 +91,9 @@ public class GameController : MonoBehaviour
 
         if (!Maps[mapNumber].GetComponent<SoundController>())
             Maps[mapNumber].AddComponent<SoundController>();
+
+        ColliNameManager.Instance.MaskUI.SetActive(IfBullet.bemask);
+
     }
 
     public void ChangeMap()
@@ -190,7 +193,18 @@ public class GameController : MonoBehaviour
         target.Find("Language").GetComponentInChildren<Text>().text = "";
     }
 
-
+    public void MuteControl(GameObject target)
+    {
+        Transform[] father = target.GetComponentsInChildren<Transform>(true);
+        foreach (Transform child in father)
+        {
+            if (child.GetComponent<AudioSource>())
+            {
+                if (!GameController.sound)
+                    child.GetComponent<AudioSource>().mute = true;
+            }
+        }
+    }
 
     public static GameController _instance;
     public static GameController Instance

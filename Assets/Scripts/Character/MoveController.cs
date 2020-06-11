@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MoveController : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class MoveController : MonoBehaviour
     private float scaleX;
     private int bulletIndex;
 
+    private bool lateJump = false;
     private bool isForwardShoot = false;
     private float angletimer = 0;
     private float angleTime = 1;
@@ -52,20 +54,11 @@ public class MoveController : MonoBehaviour
         anim = GetComponent<Animator>();
         offset2d = GetComponent<BoxCollider2D>().offset;
         size2d = GetComponent<BoxCollider2D>().size;
-
-        Transform[] father = GetComponentsInChildren<Transform>(true);
-        foreach (Transform child in father)
-        {
-            if (child.GetComponent<AudioSource>())
-            {
-                if (!GameController.sound)
-                    child.GetComponent<AudioSource>().mute = true;
-            }
-        }
+        GameController.Instance.MuteControl(gameObject);
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Change3D();
         MoveControl();
@@ -73,8 +66,9 @@ public class MoveController : MonoBehaviour
             isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
         else
             isJump = Physics.OverlapBox(groundCheck.position, Vector3.one * checkRadius, Quaternion.identity, 1 << 8).Length.Equals(0);
-        anim.SetBool("Stand", !isJump);
-        JumpControl();
+
+        if (!isJump && lateJump)
+            GameController.Instance.ActiveCam().DOShakePosition(0.2f, 0.06f, 30, 0, false);
 
         if (IfBullet.bemask)
         {
@@ -87,7 +81,8 @@ public class MoveController : MonoBehaviour
 
         if (!Input.GetAxis("Mouse ScrollWheel").Equals(0))
         {
-            bulletIndex = Input.GetAxis("Mouse ScrollWheel") > 0 ? bulletIndex + 1 : bulletIndex - 1;
+            bulletIndex = Input.GetAxis("Mouse ScrollWheel") > 0 ?
+                bulletIndex + 1 : bulletIndex - 1;
             if (bulletIndex > bullets.Count - 1)
                 bulletIndex = 0;
             if (bulletIndex < 0)
@@ -123,6 +118,13 @@ public class MoveController : MonoBehaviour
             StopCoroutine(Bubble());
             bubbleCor = null;
         }
+    }
+
+    private void LateUpdate()
+    {
+        lateJump = isJump;
+        anim.SetBool("Stand", !isJump);
+        JumpControl();
     }
 
     private void Change3D()

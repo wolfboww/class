@@ -25,7 +25,7 @@ public class AnimatorController : MonoBehaviour
     {
         if (bullet)
         {
-            GameController.Instance.ActiveCam().DOShakePosition(0.3f, 0.2f, 20, 50, false);
+            GameController.Instance.ActiveCam().DOShakePosition(0.2f, 0.1f, 30, 90, false);
             if (GetComponent<Rigidbody>())
                 Instantiate(bullet == ColliNameManager.Instance.ElseBullet ? ColliNameManager.Instance.ElseBullet3D : bullet, weaponPoint);
             else

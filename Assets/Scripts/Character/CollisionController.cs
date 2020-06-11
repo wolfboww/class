@@ -115,6 +115,8 @@ public class CollisionController : MonoBehaviour
                 collision.gameObject.GetComponent<DestroyController>().enabled = true;
                 if (collision.gameObject == ColliNameManager.Instance.Gun)
                 {
+                    au.clip = ColliNameManager.Instance.getProp;
+                    au.Play();
                     GetComponent<AnimatorController>().GetBuff(1);
                     GetComponent<Animator>().SetBool("GetGun", true);
                     if (!GetComponent<MoveController>().bullets.Contains(ColliNameManager.Instance.ElseBullet))
@@ -126,6 +128,8 @@ public class CollisionController : MonoBehaviour
                 }
                 else if (collision.gameObject == ColliNameManager.Instance.Art)
                 {
+                    au.clip = ColliNameManager.Instance.getProp;
+                    au.Play();
                     GetComponent<AnimatorController>().GetBuff(2);
                     if (!GetComponent<MoveController>().bullets.Contains(ColliNameManager.Instance.IfBullet))
                     {
@@ -135,6 +139,8 @@ public class CollisionController : MonoBehaviour
                 }
                 else if (collision.gameObject.name == "Light(Clone)")
                 {
+                    au.clip = ColliNameManager.Instance.getProp;
+                    au.Play();
                     GetComponent<AnimatorController>().GetBuff(3);
                     BulletUI.light = true;
                     StartCoroutine(Account());

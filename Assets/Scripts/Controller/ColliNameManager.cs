@@ -41,11 +41,14 @@ public class ColliNameManager : MonoBehaviour
     public AudioClip getCollection;
     public AudioClip loseHP;
     public AudioClip playerDead;
+    public AudioClip getProp;
+    public AudioClip click;
 
     [Header("UI")]
     public GameObject account;
     public GameObject Mouse;
     public GameObject Loading;
+    public GameObject MaskUI;
 
     [Header("Enemy")]
     public GameObject Enemy1;

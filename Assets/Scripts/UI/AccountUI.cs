@@ -37,6 +37,7 @@ public class AccountUI : MonoBehaviour
         playerImage = transform.Find("PlayerImage").GetComponent<Animator>();
         bg1 = transform.Find("BG");
         bg2 = transform.Find("BG2");
+        GameController.Instance.MuteControl(gameObject);
     }
 
     private void OnEnable()
@@ -73,6 +74,7 @@ public class AccountUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        accountNum = accountNum > collection.Length ? collection.Length : accountNum;
         collectionFX.sprite = collection[accountNum];
         gridFX.SetFloat("grid", accountNum);
         playerImage.SetFloat("Edition", accountNum);
@@ -150,6 +152,8 @@ public class AccountUI : MonoBehaviour
         go = true;
         HPUI.getHPCollectNum += 2;
         CollisionController.life = mapLife;
+        GameController.Instance.player.GetComponent<AudioSource>().clip = ColliNameManager.Instance.click;
+        GameController.Instance.player.GetComponent<AudioSource>().Play();
         ColliNameManager.Instance.account.SetActive(false);
     }
 }
