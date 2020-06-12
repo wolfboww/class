@@ -49,6 +49,19 @@ public class CollisionController : MonoBehaviour
 
         switch (collision.transform.tag)
         {
+            case "Trap":
+                if (ctr.enemy != null || ctr.isJump)    //被踩蘑菇
+                {
+                    au.clip = ColliNameManager.Instance.enemy1;
+                    au.Play();
+
+                    GetComponent<Rigidbody2D>().velocity = Vector3.up * ctr.bounceForce;
+                    Animator eAnim = collision.gameObject.GetComponent<Animator>();
+                    eAnim.SetTrigger("Dead");
+                }
+                else
+                    StartCoroutine(LoseHP());
+                break;
             case "Enemy":
                 StartCoroutine(LoseHP());
                 break;
@@ -90,11 +103,7 @@ public class CollisionController : MonoBehaviour
         switch (collision.transform.tag)
         {
             case "Trap":
-                if (!ctr.isJump)
-                {
-                    StartCoroutine(LoseHP());
-                }
-                else    //被踩蘑菇
+                if (ctr.enemy != null)    //被踩蘑菇
                 {
                     au.clip = ColliNameManager.Instance.enemy1;
                     au.Play();
@@ -102,8 +111,9 @@ public class CollisionController : MonoBehaviour
                     GetComponent<Rigidbody2D>().velocity = Vector3.up * ctr.bounceForce;
                     Animator eAnim = collision.gameObject.GetComponent<Animator>();
                     eAnim.SetTrigger("Dead");
-
                 }
+                else
+                    StartCoroutine(LoseHP());
                 break;
             case "Injurant":
                 StartCoroutine(LoseHP());
@@ -119,9 +129,9 @@ public class CollisionController : MonoBehaviour
                     au.Play();
                     GetComponent<AnimatorController>().GetBuff(1);
                     GetComponent<Animator>().SetBool("GetGun", true);
-                    if (!GetComponent<MoveController>().bullets.Contains(ColliNameManager.Instance.ElseBullet))
+                    if (!ctr.bullets.Contains(ColliNameManager.Instance.ElseBullet))
                     {
-                        GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.ElseBullet);
+                        ctr.bullets.Add(ColliNameManager.Instance.ElseBullet);
                         ColliNameManager.Instance.Mouse.SetActive(true);
                         BulletUI.bulletNum++;
                     }
@@ -131,9 +141,9 @@ public class CollisionController : MonoBehaviour
                     au.clip = ColliNameManager.Instance.getProp;
                     au.Play();
                     GetComponent<AnimatorController>().GetBuff(2);
-                    if (!GetComponent<MoveController>().bullets.Contains(ColliNameManager.Instance.IfBullet))
+                    if (!ctr.bullets.Contains(ColliNameManager.Instance.IfBullet))
                     {
-                        GetComponent<MoveController>().bullets.Add(ColliNameManager.Instance.IfBullet);
+                        ctr.bullets.Add(ColliNameManager.Instance.IfBullet);
                         BulletUI.bulletNum++;
                     }
                 }
@@ -238,7 +248,7 @@ public class CollisionController : MonoBehaviour
     {
         if (!GetComponent<Rigidbody2D>())
         {
-            GetComponent<MoveController>().virtual3D = false;
+            ctr.virtual3D = false;
             transform.position =
                 new Vector3(transform.position.x, transform.position.y, 0);
             yield return new WaitUntil(() => GetComponent<Rigidbody2D>());

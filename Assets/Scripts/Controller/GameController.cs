@@ -93,7 +93,6 @@ public class GameController : MonoBehaviour
             Maps[mapNumber].AddComponent<SoundController>();
 
         ColliNameManager.Instance.MaskUI.SetActive(IfBullet.bemask);
-
     }
 
     public void ChangeMap()
@@ -101,6 +100,8 @@ public class GameController : MonoBehaviour
         mapNumber++;
         HPUI.edition++;
         RevivePoint.edition++;
+        if (IfBullet.bemask)
+            player.GetComponent<MoveController>().BeNotMask();
         Maps[mapNumber].SetActive(true);
         Maps[mapNumber - 1].SetActive(false);
         for (int i = 0; i < Maps[mapNumber].transform.Find("Boundary").childCount; i++)

@@ -34,4 +34,10 @@ public class Velocity : MonoBehaviour
 
         GetComponent<Rigidbody2D>().velocity = moveDir * velocity;
     }
+
+    private void Update()
+    {
+        if(GameController.isRevive)
+            GetComponent<Rigidbody2D>().velocity = moveDir * velocity;
+    }
 }

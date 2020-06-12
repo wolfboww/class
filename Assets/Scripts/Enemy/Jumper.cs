@@ -79,7 +79,7 @@ public class Jumper : MonoBehaviour
         transform.Translate(dir * 0.05f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         OnLand = collision.gameObject == ColliNameManager.Instance.HandleLand ? true : false;
 

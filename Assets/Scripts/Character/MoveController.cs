@@ -14,6 +14,8 @@ public class MoveController : MonoBehaviour
     public bool isJump = false;
     [HideInInspector]
     public bool canMove = true;
+    [HideInInspector]
+    public Collider2D enemy;
     public bool virtual3D = false;
     public static bool canShoot = true;
     private bool isDoubleJump = false;
@@ -63,7 +65,10 @@ public class MoveController : MonoBehaviour
         Change3D();
         MoveControl();
         if (!virtual3D)
+        {
             isJump = !Physics2D.OverlapCircle(groundCheck.position, checkRadius, 1 << LayerMask.NameToLayer("Plane"));
+            enemy = Physics2D.OverlapCircle(groundCheck.position, checkRadius, LayerMask.GetMask("Enemy"));
+        }
         else
             isJump = Physics.OverlapBox(groundCheck.position, Vector3.one * checkRadius, Quaternion.identity, 1 << 8).Length.Equals(0);
 
