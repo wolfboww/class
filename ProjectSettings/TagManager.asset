@@ -18,6 +18,7 @@ TagManager:
   - RevivePoint
   - Account
   - Sweat
+  - Dead
   layers:
   - Default
   - TransparentFX

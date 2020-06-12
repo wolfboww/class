@@ -52,6 +52,7 @@ public class HPUI : MonoBehaviour
         }
 
         activeAccount();
+        Debug.Log(activeNum+"  "+ CollisionController.life);
     }
 
     void activeAccount()

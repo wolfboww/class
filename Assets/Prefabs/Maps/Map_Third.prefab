@@ -28677,7 +28677,7 @@ GameObject:
   - component: {fileID: 439523942091638288}
   m_Layer: 0
   m_Name: venom10
-  m_TagString: Injurant
+  m_TagString: Dead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -36381,8 +36381,8 @@ PolygonCollider2D:
       - {x: 1.3477824, y: -16.36147}
       - {x: 3.176098, y: -16.350937}
       - {x: 3.20422, y: -20.03592}
-      - {x: 2.3925288, y: -20.034431}
-      - {x: 2.3972437, y: -20.313824}
+      - {x: 2.4147608, y: -20.040493}
+      - {x: 2.4154475, y: -20.31989}
       - {x: 3.1998255, y: -20.320728}
       - {x: 3.18948, y: -21.738731}
       - {x: 15.598248, y: -21.69157}

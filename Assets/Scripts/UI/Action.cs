@@ -44,9 +44,9 @@ public class Action : MonoBehaviour
     {
         if (Vector2.Distance(Icon.position, commonUse.transform.position) < 10)
         {
-            transform.Find("Common").gameObject.SetActive(true);
+            //transform.Find("Common").gameObject.SetActive(true);
             Icon.GetComponent<RectTransform>().position = transform.Find("Common").Find("Point").position;
-            Icon.GetComponent<DragUI>().enabled = false;
+            //Icon.GetComponent<DragUI>().enabled = false;
             Icon.SetParent(transform.Find("Common"));
         }
         else if (Vector2.Distance(Icon.position, UncommonUse.transform.position) < 10)
@@ -80,5 +80,10 @@ public class Action : MonoBehaviour
     public void Click()
     {
         GetComponent<AudioSource>().Play();
+    }
+
+    public void CommonUse()
+    {
+        transform.Find("Common").gameObject.SetActive(true);
     }
 }

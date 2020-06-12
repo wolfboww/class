@@ -117,6 +117,10 @@ public class CollisionController : MonoBehaviour
             case "Injurant":
                 StartCoroutine(LoseHP());
                 break;
+            case "Dead":
+                life = 0;
+                StartCoroutine(LoseHP());
+                break;
             case "Collection":
                 if (!collision.gameObject.GetComponent<DestroyController>())
                     return;
