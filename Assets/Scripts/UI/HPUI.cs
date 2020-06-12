@@ -35,7 +35,7 @@ public class HPUI : MonoBehaviour
     {
         anim.SetFloat("Edition", edition);
         collectionFX.Find("FX").GetComponent<Image>().sprite = collection[
-            (int)RevivePoint.edition >= collection.Length ? collection.Length - 1 : 
+            (int)RevivePoint.edition >= collection.Length ? collection.Length - 1 :
             (int)RevivePoint.edition];
         collectionText.text = GameController.collectNum.ToString();
         if (GameController.collectNum >= getHPCollectNum
@@ -52,25 +52,11 @@ public class HPUI : MonoBehaviour
         }
 
         activeAccount();
-
-        if (activeNum == CollisionController.life)
-            return;
-        if (activeNum > CollisionController.life)
-        {
-            if (activeNum <= 0)
-                return;
-            HPchild[activeNum - 1].GetComponent<Animator>().SetTrigger("LoseHP");
-        }
-        else
-            HPchild[activeNum].GetComponent<Image>().enabled = true;
     }
 
     void activeAccount()
     {
         activeNum = 0;
-        //HPchild[3].SetActive(anim.GetFloat("grid") > 0);
-        //HPchild[4].SetActive(anim.GetFloat("grid") > 1);
-
         for (int i = 0; i < HPchild.Length; i++)
         {
             if (!HPchild[i].activeInHierarchy)
@@ -78,5 +64,15 @@ public class HPUI : MonoBehaviour
             if (HPchild[i].GetComponent<Image>().enabled)
                 activeNum++;
         }
+
+        if (activeNum == CollisionController.life)
+            return;
+        if (activeNum > CollisionController.life)
+        {
+            if (activeNum > 0)
+                HPchild[activeNum - 1].GetComponent<Animator>().SetTrigger("LoseHP");
+        }
+        else
+            HPchild[activeNum].GetComponent<Image>().enabled = true;
     }
 }

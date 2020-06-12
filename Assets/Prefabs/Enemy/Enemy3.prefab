@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fromSpawn: 0
+  moveSpeed: 0.1
 --- !u!114 &3023913021487377244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +269,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2976028200158447369}
     m_Modifications:
+    - target: {fileID: 1667802522000915462, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
+        type: 3}
+      propertyPath: m_Name
+      value: Language
+      objectReference: {fileID: 0}
     - target: {fileID: 4414949902647584097, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -372,11 +378,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1667802522000915462, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
-        type: 3}
-      propertyPath: m_Name
-      value: Language
       objectReference: {fileID: 0}
     - target: {fileID: 652575189024683689, guid: c3b3f9ed81ca22c41b8020fbfc479c72,
         type: 3}

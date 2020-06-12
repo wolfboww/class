@@ -5,6 +5,7 @@ using UnityEngine;
 public class Jumper : MonoBehaviour
 {
     public bool fromSpawn;
+    public float moveSpeed;
 
     private Animator anim;
     private Rigidbody2D rb;
@@ -76,7 +77,7 @@ public class Jumper : MonoBehaviour
         GetComponent<SpriteRenderer>().flipX = isRight;
 
         Vector3 dir = isRight ? Vector3.right : Vector3.left;
-        transform.Translate(dir * 0.05f);
+        transform.Translate(dir * moveSpeed);
     }
 
     private void OnCollisionStay2D(Collision2D collision)

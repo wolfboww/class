@@ -109,8 +109,7 @@ public class CollisionController : MonoBehaviour
                     au.Play();
 
                     GetComponent<Rigidbody2D>().velocity = Vector3.up * ctr.bounceForce;
-                    Animator eAnim = collision.gameObject.GetComponent<Animator>();
-                    eAnim.SetTrigger("Dead");
+                    GameController.Instance.ResetAnim(collision.GetComponent<Animator>(), "Dead");
                 }
                 else
                     StartCoroutine(LoseHP());
@@ -178,7 +177,7 @@ public class CollisionController : MonoBehaviour
                 foreach (var item in ColliNameManager.Instance.AnimBoundary)
                 {
                     if (collision.gameObject == item)
-                        collision.gameObject.GetComponent<Animator>().SetTrigger("Do");
+                        GameController.Instance.ResetAnim(collision.GetComponent<Animator>(), "Do");
                 }
                 break;
             case "Account":
