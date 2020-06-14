@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class End : MonoBehaviour
 {
+    public GameObject actionEnd;
+
     void AnimEnd()
     {
-        transform.parent.parent.gameObject.SetActive(false);
+        actionEnd.SetActive(true);
     }
 }

@@ -42,15 +42,15 @@ public class Action : MonoBehaviour
 
     void Update()
     {
-        if (Vector2.Distance(Icon.position, commonUse.transform.position) < 10)
-        {
-            //transform.Find("Common").gameObject.SetActive(true);
-            Icon.GetComponent<RectTransform>().position = transform.Find("Common").Find("Point").position;
-            //Icon.GetComponent<DragUI>().enabled = false;
-            Icon.SetParent(transform.Find("Common"));
-        }
-        else if (Vector2.Distance(Icon.position, UncommonUse.transform.position) < 10)
-            actionEnd.SetActive(true);
+        //if (Vector2.Distance(Icon.position, commonUse.transform.position) < 10)
+        //{
+        //    //transform.Find("Common").gameObject.SetActive(true);
+        //    Icon.GetComponent<RectTransform>().position = transform.Find("Common").Find("Point").position;
+        //    //Icon.GetComponent<DragUI>().enabled = false;
+        //    Icon.SetParent(transform.Find("Common"));
+        //}
+        //else if (Vector2.Distance(Icon.position, UncommonUse.transform.position) < 10)
+        //    actionEnd.SetActive(true);
 
         setting.Find("Music").GetComponent<Image>().sprite = GameController.music ? buttonDown[0] : buttonDown[1];
         setting.Find("Sound").GetComponent<Image>().sprite = GameController.sound ? buttonDown[0] : buttonDown[1];
@@ -58,10 +58,10 @@ public class Action : MonoBehaviour
 
     IEnumerator EndAnim()
     {
+        transform.Find("Front").gameObject.SetActive(true);
         yield return new WaitUntil(() => CollisionController.async.isDone);
         end.SetActive(true);
     }
-
 
     public void play()
     {
