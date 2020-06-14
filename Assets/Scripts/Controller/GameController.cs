@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
     {
         _instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
-        CollisionController.life = 1;
+        //CollisionController.life = 1;
         RevivePoint.edition = 0;
         timeNum = 0;
         deadNum = 0;

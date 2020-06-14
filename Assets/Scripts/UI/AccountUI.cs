@@ -27,7 +27,7 @@ public class AccountUI : MonoBehaviour
     private int accountNum = 0;
     private int awardDeadNum = 6;
     private int awardTime = 600;
-    private int mapLife = 1;
+    private int mapLife;
 
 
     // Start is called before the first frame update
@@ -37,6 +37,7 @@ public class AccountUI : MonoBehaviour
         playerImage = transform.Find("PlayerImage").GetComponent<Animator>();
         bg1 = transform.Find("BG");
         bg2 = transform.Find("BG2");
+        mapLife = CollisionController.life;
         GameController.Instance.MuteControl(gameObject);
     }
 
@@ -129,7 +130,7 @@ public class AccountUI : MonoBehaviour
         if (getGrid)
         {
             getHP.SetActive(true);
-            mapLife += 1;
+            mapLife = mapLife < 3 ? mapLife + 1 : 3;
         }
         else if (!accountNum.Equals(2))
             keepTrying.SetActive(true);
