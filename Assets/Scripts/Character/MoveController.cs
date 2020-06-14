@@ -73,7 +73,7 @@ public class MoveController : MonoBehaviour
             isJump = Physics.OverlapBox(groundCheck.position, Vector3.one * checkRadius, Quaternion.identity, 1 << 8).Length.Equals(0);
 
         if (!isJump && lateJump)
-            GameController.Instance.ActiveCam().DOShakePosition(0.2f, 0.06f, 30, 0, false);
+            GameController.Instance.ActiveCam().DOShakePosition(0.2f, 0.01f, 10, 0, false);
 
         if (IfBullet.bemask)
         {
